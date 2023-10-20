@@ -92,9 +92,9 @@ myApp.controller("dashboardController", [
       var body = $scope.text;
 
       var formData = new FormData();
-      console.log(files);
-      for(let i=0;i<files.length;i++){
-        formData.append("file", files[i]);
+      console.log($scope.files);
+      for(let i=0;i<$scope.files.length;i++){
+        formData.append("file", $scope.files[i]);
       }
       formData.append("email", email);
       formData.append("subject", subject);
@@ -114,24 +114,31 @@ myApp.controller("dashboardController", [
           $scope.email = "";
           $scope.subject = "";
           $scope.text = "";
+          $scope.file = "";
+          $scope.files.pop();
+          $scope.multiple = [];
+          console.log($scope.files)
         })
         .catch(function (error) {
           console.log(error);
         });
     };
 
-    let file = "";
-    let files = [];
+    $scope.file = "";
+    $scope.files = [];
     $scope.multiple = [];
+
     $scope.submitFile = function () {
-      file = $scope.myFile;
-      files.push(file);
-      console.log(files);
-      $scope.myFile = "";
+      $scope.file = $scope.myFile;
+      if($scope.file !== ""){
+      $scope.files.push($scope.file);
+      console.log($scope.files);
       $scope.multiple.push({
-        file: file,
+       file: $scope.file,
       });
       console.log($scope.multiple);
+      $scope.myFile = ""
+    }
     };
     // $scope.add = function(){
     //   console.log(file)

@@ -55,6 +55,16 @@ myApp.config([
         templateUrl: "/pages/login/pass.html",
         controller: "passController",
       })
+      .state("login.forgotPass", {
+        url: "/forgotPass",
+        templateUrl: "/pages/login/forgotPass.html",
+        controller: "forgotPassController",
+      })
+      .state("login.confirmPass", {
+        url: "/confirmPass",
+        templateUrl: "/pages/login/confirmPass.html",
+        controller: "confirmPassController",
+      })
       .state("dashboard", {
         url: "/dashboard",
         templateUrl: "/pages/dashboard/dashboard.html",

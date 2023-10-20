@@ -4,7 +4,8 @@ myApp.controller("recEmailController", [
   "sharedDataFactory",
   function ($scope, $state, sharedDataFactory) {
     $scope.recEmailSkipped = function () {
-      $scope.step = "Phone";
+
+      $state.go('registration.recPhone')
     };
     $scope.submitForm = function () {
       let data = {

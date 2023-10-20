@@ -46,14 +46,24 @@
             </div>
           </div>
           <form name="registrationForm" class="p-3" ng-submit="submitForm()">
-            <div>
-              <input
-                required
-                type="text"
-                class="form-control p-3"
-                id="firstName"
-                ng-model="user.firstname"
-                placeholder="First name" />
+            <div class="d-flex">
+                <div class="col-md-2">
+                  <select required class="form-control p-3"
+                  id="title"
+                  ng-model="user.title"
+                  ng-options="title.id as title.value for title in titles">
+                  <option value="">Title</option>
+                </select>
+                </div>
+                <div class="col-md-10">
+                  <input
+                  required
+                  type="text"
+                  class="form-control p-3"
+                  id="firstName"
+                  ng-model="user.firstname"
+                  placeholder="First name" />
+              </div>
             </div>
             <div class="mt-3">
               <input

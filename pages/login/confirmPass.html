@@ -1,0 +1,66 @@
+<div>
+    <div class="d-flex justify-content-center align-items-center">
+      <div>
+        <p
+          style="
+            font-family: 'Geologica', sans-serif;
+            font-family: 'Nunito Sans', sans-serif;
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.8;
+            margin-bottom: 0;
+            margin-top: 0;
+            word-break: break-word;
+          "
+          class="fw-bold">
+          Create a strong password
+        </p>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="col-md-10">
+        <div style="font-size: 12px; font-weight: 400; text-align: center">
+          Create a strong password with a mixture of letters, numbers and symbols
+        </div>
+      </div>
+    </div>
+  
+    <form name="passwordForm" class="p-3" ng-submit="submitForm()">
+      <div class="row mb-3">
+        <div class="col">
+          <input
+            required
+            type="password"
+            class="form-control p-3"
+            id="password"
+            ng-model="password"
+            placeholder="Password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col">
+          <input
+            required
+            type="password"
+            class="form-control p-3"
+            id="confirmPassword"
+            ng-model="confirmpassword"
+            placeholder="Confirm Password" />
+        </div>
+      </div>
+      <div class="row mb-3 ms-1">
+        <div class="col">
+          <input type="checkbox" ng-click="showPass()" />&nbsp; &nbsp; Show
+          Password
+        </div>
+      </div>
+      <div class="mt-4 p-2">
+        <div class="float-end">
+          <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

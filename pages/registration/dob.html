@@ -40,11 +40,9 @@
     </div>
     <div class="row mb-3">
       <div class="col">
-        <select required class="form-select p-3" id="gender" ng-model="gender">
+        <select required class="form-select p-3" id="gender" ng-model="gender" 
+        ng-options="gender.id as gender.value for gender in genders">
           <option value="" disabled>Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
         </select>
       </div>
     </div>

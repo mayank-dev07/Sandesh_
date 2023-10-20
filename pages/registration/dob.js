@@ -1,8 +1,20 @@
 myApp.controller("dobController", [
+  "$http",
   "$scope",
   "sharedDataFactory",
   "$state",
-  function ($scope, sharedDataFactory, $state) {
+  function ($http,$scope, sharedDataFactory, $state) {
+    $http.get(apiUrl + '/dropdown/dropdown/',{
+      params:{value:"gender"}
+    })
+    .then(function(response){
+      console.log(response.data)
+      $scope.genders = response.data
+    })
+    .catch(function(error){
+      console.log(error)
+    })
+
     $scope.submitForm = function () {
       var date = formatDate($scope.dob);
       var data = {

@@ -4,15 +4,20 @@ myApp.controller("recPhoneController", [
   "sharedDataFactory",
   function ($scope, $state, sharedDataFactory) {
     $scope.recPhoneSkipped = () => {
-      $scope.step = "Privacy";
+      $state.go("registration.submit");
     };
     $scope.submitForm = function () {
       let data = {
         phoneno: $scope.phoneno,
-      };
-      console.log(data);
-      sharedDataFactory.setData(data);
-      $state.go("registration.submit");
+      }
+      console.log(data)
+      Swal.fire(
+        'Good job!',
+        'You clicked the button!',
+        'success'
+      )
+      // sharedDataFactory.setData(data);
+      // $state.go("registration.submit");
     };
   },
 ]);

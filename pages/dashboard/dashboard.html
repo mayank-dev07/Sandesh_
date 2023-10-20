@@ -113,10 +113,13 @@
             </div>
           </li>
         </ul>
+        <div class="d-flex justify-content-evenly align-items-center">
+          <span style="font-size: 18px;">Labels</span>
+      <span ng-show="showDiv"><i class="bi bi-plus px-2" style="font-size: 22px;" ng-click="labels()"></i></span>
+    </div>
       </div>
     </div>
     <div class="d-flex col-md-11">
-      <div></div>
       <div ui-view class="col-md-12 overflow-scroll">
         <table class="table table-hover">
           <tbody>
@@ -254,7 +257,10 @@
           rows="8"
           style="border-style: none"></textarea>
       </div>
-      <div ng-if="file != '' "></div>
+      <!-- <div ng-repeat="file in $scope.files">
+       {{file.name}}
+      </div> -->
+
       <div>
         <div class="d-flex justify-content-between align-items-center">
           <div class="d-flex">
@@ -262,7 +268,7 @@
               class="btn btn-primary rounded-pill"
               style="background-color: #0b57d0"
               type="submit"
-              data-bs-dismiss="offcanvas">
+              >
               send
             </button>
             <div>
@@ -303,12 +309,13 @@
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label for="formFile" class="form-label">Attach File</label>
+            <label for="formFile" class="form-label"></label>
             <input
               class="form-control"
               type="file"
               id="formFile"
               file-model="myFile"
+              placeholder="atashgd"
               required />
           </div>
           <!-- <button class="btn btn-outline-primary" type="button" ng-click="add()">Add</button> -->
@@ -320,7 +327,7 @@
         </div>
         <div class="modal-footer">
           <div class="d-flex">
-            <button type="submit" class="btn btn-outline-primary">Send</button>
+            <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Send</button>
           </div>
         </div>
       </form>

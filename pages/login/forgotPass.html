@@ -1,0 +1,36 @@
+<form name="myForm" class="p-3" ng-submit="submitForm()" ng-show="rec">
+              <div>
+        <label for="RecEmail" class="form-label"></label>
+        <input
+          type="email"
+          class="form-control p-3"
+          id="RecEmail"
+          ng-model="RecEmail"
+          placeholder="Recovery email"
+          required />
+          </div>
+          <div class="d-flex mt-5 p-2">
+            <div class="ms-auto">
+              <button type="submit" class="btn btn-primary">Next</button>
+            </div>
+          </div>
+        </form>
+
+        <form name="myForm" class="p-3" ng-submit="submitotp()" ng-show="recConfirm">
+            <div>
+      <label for="otp" class="form-label"></label>
+      <input
+        type="text"
+        class="form-control p-3"
+        id="otp"
+        ng-model="otp"
+        placeholder="Enter otp"
+        required />
+        </div>
+        <div class="d-flex mt-5 p-2">
+          <div class="ms-auto">
+            <button type="submit" class="btn btn-primary">Next</button>
+          </div>
+        </div>
+      </form>
+  
