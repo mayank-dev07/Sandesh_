@@ -1,5 +1,5 @@
 <div class="overflow-hidden">
-  <nav class="navbar navbar-expand-lg col-md-12 d-flex" >
+  <nav class="navbar navbar-expand-lg col-md-12 d-flex">
     <div class="col-md-2">
       <div class="d-flex">
         <i
@@ -40,7 +40,7 @@
       <div class="col-md-1">
         <div class="d-flex justify-content-evenly align-items-center">
           <div>
-            <i class="bi bi-question-circle" style="font-size: 20px"></i>
+          <a href="https://support.google.com/mail/answer/9238280?hl=en&sjid=12750361572797075547-AP#null" style="text-decoration: none;" class="text-black" ><i class="bi bi-question-circle" style="font-size: 20px"></i></a>  
           </div>
           <div>
             <div class="dropdown">
@@ -63,7 +63,7 @@
     </div>
   </nav>
 
-  <div class="col-md-12 rounded-5 d-flex">
+  <div class="col-md-12 d-flex">
     <div class="d-flex vh-100">
       <div class="side-panel">
         <button
@@ -158,7 +158,10 @@
                   </div>
                   <div
                     class="d-flex justify-content-evenly align-items-center me-5"
-                    ng-show="row == mail.id">
+                    ng-if="row == mail.id || mail.select">
+                    <div class="px-2" ng-click="Archive(mail.id)">
+                      <i class="bi bi-archive"></i>
+                    </div>
                     <div class="px-2" ng-click="delete(mail.id)">
                       <i class="bi bi-trash"></i>
                     </div>
@@ -304,13 +307,14 @@
           </div>
           <!-- <button class="btn btn-outline-primary" type="button" ng-click="add()">Add</button> -->
         </div>
-        <div ng-repeat="i in multiple">
+        <div
+          ng-repeat="i in multiple"
+          class="d-flex justify-content-center align-items-center">
           <div class="mb-3">{{i.file.name}}</div>
         </div>
         <div class="modal-footer">
           <div class="d-flex">
             <button type="submit" class="btn btn-outline-primary">Send</button>
-            <!-- <button type="button" class="btn btn-outline-primary" ng-click="incCount()">Add file</button> -->
           </div>
         </div>
       </form>

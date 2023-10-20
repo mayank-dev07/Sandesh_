@@ -18,3 +18,13 @@
   box-shadow: none !important;
   border-color: inherit !important;
 }
+
+.border {
+  border: 1px solid;
+  padding: 1px;
+  box-shadow: 1px 1px 1px 1px #dfdede;
+} 
+
+.white {
+  background: white;
+}

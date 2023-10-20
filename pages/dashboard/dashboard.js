@@ -47,6 +47,24 @@ myApp.controller("dashboardController", [
       panel.isHover = false;
     };
 
+    // let selectAll = false; 
+
+    // $scope.selectAll = function (){
+    //   angular.forEach($scope.Mails,function(all){
+    //     console.log(all.select)
+    //     all.select = true;
+    //     selectAll = false; 
+    //   })
+    // }
+
+    // $scope.unSelectAll = function (){
+    //   angular.forEach($scope.Mails,function(all){
+    //     console.log(all.select)
+    //     all.select = false;
+    //     selectAll = true; 
+    //   })
+    // }
+
     $scope.leftPanel = [];
     $scope.Profile = [];
 
@@ -233,6 +251,22 @@ myApp.controller("dashboardController", [
     $scope.toggleDiv = function () {
       $scope.showDiv = !$scope.showDiv;
     };
+
+    $scope.Archive = function(id){
+      console.log(id);
+      let data = {
+        id:id
+      }
+      $http.put(apiUrl + '/mail/archive/',data,{
+        withCredentials:true
+      })
+      .then(function(response){
+        console.log(response)
+      })
+      .catch(function(error){
+        console.log(error)
+      })
+    }
 
     $scope.delete = function (id) {
       console.log(id);

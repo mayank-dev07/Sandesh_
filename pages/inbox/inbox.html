@@ -35,7 +35,6 @@
                   </button>
                 </form>
               </div>
-        
               <div class="col-md-4"></div>
               <div class="col-md-1">
                 <div class="d-flex justify-content-evenly align-items-center">
@@ -63,4 +62,53 @@
             </div>
           </nav>
     </div>
+
+    <div class="col-md-12 d-flex">
+        <div class="d-flex vh-100">
+          <div class="side-panel">
+            <button
+              class="btn m-2 normal
+            {{shadow}}
+            {{normal}}"
+              ng-mouseover="hoverIn()"
+              ng-mouseleave="hoverOut()"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasScrolling"
+              aria-controls="offcanvasScrolling">
+              <i class="bi bi-pencil px-2"></i>
+              <span ng-show="showDiv">Compose</span>
+            </button>
+            <ul style="list-style: none" class="p-3">
+              <li
+                ng-repeat="panel in leftPanel"
+                class="mb-2 px-2"
+                ng-mouseover="hover(panel)"
+                ng-mouseleave="leave(panel)"
+                ng-click="click(panel)"
+                ng-class="{ 'click':panel.isClicked , 'hover': panel.isHover }">
+                <div class="d-flex">
+                  <div>
+                    <a ui-sref="{{panel.url_link}}" style="text-decoration: none">
+                      <i
+                        class="{{ panel.icons }} text-black"
+                        style="font-size: 16px"></i>
+                    </a>
+                  </div>
+                  <div>
+                    <a ui-sref="{{panel.url_link}}" style="text-decoration: none">
+                      <span
+                        ng-show="showDiv"
+                        style="font-size: 16px"
+                        class="ms-4 text-black">
+                        {{ panel.panel_heading }}
+                        <span class="ms-5">{{ panel.count}}</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
 <link rel="stylesheet" href="/pages/inbox/inbox.css ">

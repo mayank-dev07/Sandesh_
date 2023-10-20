@@ -74,6 +74,11 @@ myApp.config([
         url: "/sent",
         templateUrl: "/pages/sent/sent.html",
         controller: "sentMailController",
+      })
+      .state("dashboard.archive", {
+        url: "/archive",
+        templateUrl: "/pages/archive/archive.html",
+        controller: "archiveMailController",
       });
 
     $urlRouterProvider.otherwise("/login");
