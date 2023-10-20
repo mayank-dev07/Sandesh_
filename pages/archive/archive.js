@@ -9,7 +9,13 @@ myApp.controller("archiveMailController", [
           })
           .then(function (response) {
             console.log(response.data);
-            $scope.archives = response.data;
+            $scope.archives = response.data[0].concat(response.data[1].concat(response.data[2]));
+            if($scope.archives.length == 0){
+                Swal.fire({
+                  icon: 'error',
+                  title: 'No mails to show',
+                })
+              }
           })
           .catch(function (error) {
             console.log(error);
@@ -67,6 +73,22 @@ myApp.controller("archiveMailController", [
           .catch(function(error){
             console.log(error)
           })
+        }
+
+        $scope.unArchive = function(id){
+            let data = {
+                id : id
+            }
+            $http.put(apiUrl + '/mail/unarchive/',data,{
+                withCredentials:true
+            })
+            .then(function(response){
+                console.log(response)
+                archiveMail($http,$scope);
+            })
+            .catch(function(error){
+                console.log(error)
+            })
         }
     
         $scope.read = function(id){
@@ -133,4 +155,6 @@ myApp.controller("archiveMailController", [
         };
     },
   ]);
+
+  
   

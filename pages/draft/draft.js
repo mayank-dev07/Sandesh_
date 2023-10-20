@@ -10,6 +10,12 @@ myApp.controller("draftMailController", [
         .then(function (response) {
           console.log(response.data);
           $scope.drafts = response.data;
+          if($scope.drafts.length == 0){
+            Swal.fire({
+              icon: 'error',
+              title: 'No mails to show',
+            })
+          }
         })
         .catch(function (error) {
           console.log(error);
@@ -58,6 +64,22 @@ myApp.controller("draftMailController", [
           id :id
         }
         $http.put(apiUrl + "/mail/delete/",data,{
+          withCredentials:true
+        })
+        .then(function(response){
+          console.log(response)
+          draftMail($http,$scope);
+        })
+        .catch(function(error){
+          console.log(error)
+        })
+      }
+      $scope.Archive = function(id){
+        console.log(id);
+        let data = {
+          id:id
+        }
+        $http.put(apiUrl + '/mail/archive/',data,{
           withCredentials:true
         })
         .then(function(response){

@@ -13,6 +13,12 @@ myApp.controller("starredMailController", [
           $scope.starred = response.data[0]
             .concat(response.data[1])
             .concat(response.data[2]);
+            if($scope.starred.length == 0){
+              Swal.fire({
+                icon: 'error',
+                title: 'No mails to show',
+              })
+            }
         })
         .catch(function (error) {
           console.log(error);
@@ -67,6 +73,21 @@ myApp.controller("starredMailController", [
         .then(function(response){
           console.log(response)
           starredMail($http,$scope);
+        })
+        .catch(function(error){
+          console.log(error)
+        })
+      }
+      $scope.Archive = function(id){
+        console.log(id);
+        let data = {
+          id:id
+        }
+        $http.put(apiUrl + '/mail/archive/',data,{
+          withCredentials:true
+        })
+        .then(function(response){
+          console.log(response)
         })
         .catch(function(error){
           console.log(error)

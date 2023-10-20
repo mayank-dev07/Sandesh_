@@ -205,6 +205,12 @@ myApp.controller("dashboardController", [
         .then(function (response) {
           console.log(response.data);
           $scope.Mails = response.data;
+          if($scope.Mails.length == 0){
+            Swal.fire({
+              icon: 'error',
+              title: 'No mails to show',
+            })
+          }
         })
         .catch(function (error) {
           console.log(error);
@@ -262,6 +268,7 @@ myApp.controller("dashboardController", [
       })
       .then(function(response){
         console.log(response)
+        showMails($scope, $http);
       })
       .catch(function(error){
         console.log(error)

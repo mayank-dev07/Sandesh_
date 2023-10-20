@@ -10,6 +10,12 @@ myApp.controller("sentMailController", [
         .then(function (response) {
           console.log(response.data);
           $scope.sents = response.data;
+          if ($scope.sents.length == 0) {
+            Swal.fire({
+              icon: "error",
+              title: "No mails to show",
+            });
+          }
         })
         .catch(function (error) {
           console.log(error);
@@ -59,6 +65,24 @@ myApp.controller("sentMailController", [
       };
       $http
         .put(apiUrl + "/mail/delete/", data, {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          sentMail($http, $scope);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+
+    $scope.Archive = function (id) {
+      console.log(id);
+      let data = {
+        id: id,
+      };
+      $http
+        .put(apiUrl + "/mail/archive/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -124,7 +148,7 @@ myApp.controller("sentMailController", [
             })
             .then(function (response) {
               console.log(response);
-              sentMail($http,$scope);
+              sentMail($http, $scope);
             })
             .catch(function (error) {
               console.log(error);

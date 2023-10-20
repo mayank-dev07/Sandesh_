@@ -52,7 +52,10 @@ rows="3">
               </div>
               </div>
             </div>
-            <div class="d-flex justify-content-evenly align-items-center me-5" ng-show="row == sent.id"> 
+            <div class="d-flex justify-content-evenly align-items-center me-5" ng-show="row == sent.id || sent.select"> 
+              <div class="px-2" ng-click="Archive(sent.id)">
+                <i class="bi bi-archive"></i>
+              </div>
                 <div class="px-2" ng-click="delete(sent.id)">
                   <i class="bi bi-trash"></i>
                 </div>
