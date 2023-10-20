@@ -1,0 +1,61 @@
+<div>
+  <div class="d-flex justify-content-center align-items-center">
+    <div>
+      <p
+        style="
+          font-family: 'Geologica', sans-serif;
+          font-family: 'Nunito Sans', sans-serif;
+          font-family: 'Roboto', sans-serif;
+          font-size: 24px;
+          font-weight: 400;
+          line-height: 1.8;
+          margin-bottom: 0;
+          margin-top: 0;
+          word-break: break-word;
+        "
+        class="fw-bold">
+        Add phone number
+      </p>
+    </div>
+  </div>
+
+  <form name="phoneForm" class="p-3" ng-submit="submitForm()">
+    <div class="row mb-3">
+      <div class="col">
+        <input
+          required
+          type="tel"
+          class="form-control p-3"
+          id="phone"
+          ng-model="phoneno"
+          placeholder="Phone"
+          pattern="[1-9]{1}[0-9]{9}" />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="col-md-11">
+        <div style="font-size: 12px; font-weight: 400">
+          Google will use this number only for account security. Your number
+          won’t be visible to others. You can choose later whether to use it for
+          other purposes.
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="d-grid gap-1 col-6 mt-4">
+        <button class="p-1 mt-1 border bg-white text-primary" type="submit">
+          Next
+        </button>
+      </div>
+      <div class="d-grid gap-1 col-6 mt-4">
+        <button
+          class="p-1 mt-1 border bg-white text-primary"
+          type="button"
+          ng-click="recPhoneSkipped()">
+          Skip
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

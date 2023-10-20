@@ -1,0 +1,89 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Geologica:wght@200;600&family=Nunito+Sans:opsz,wght@6..12,300&family=Roboto:wght@300&display=swap");
+
+  @media only screen and (max-width: 600px) {
+    img {
+      width: 90px;
+    }
+  }
+</style>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-3">
+    <div class="card bg-trasparent shadow-sm p-3 rounded">
+      <div class="row">
+        <div class="d-flex justify-content-center align-items-center">
+          <img
+            id="logo"
+            src="/images/png-transparent-google-logo-google-doodle-google-search-google-company-text-logo-thumbnail-removebg-preview.png"
+            alt=""
+            class="col-md-2" />
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <div>
+            <p
+              style="
+                font-family: 'Geologica', sans-serif;
+                font-family: 'Nunito Sans', sans-serif;
+                font-family: 'Roboto', sans-serif;
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 1.8;
+                margin-bottom: 0;
+                margin-top: 0;
+                word-break: break-word;
+              "
+              class="fw-bold">
+              Sign in
+            </p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <div>
+            <span
+              style="font-size: 16px; font-weight: 400; letter-spacing: 0.1px">
+              Use your Google Account</span
+            >
+          </div>
+        </div>
+        <div class="card-body" ui-view>
+          <div>
+            <form name="myForm" class="p-3" ng-submit="submitForm()">
+              <div>
+                <label for="email" class="form-label"></label>
+                <input
+                  type="email"
+                  class="form-control p-3"
+                  id="email"
+                  ng-model="user.email"
+                  placeholder="Email or Phone"
+                  required />
+                <span class="text-primary m-2">Forget email?</span>
+                <div class="mt-4 p-2">
+                  <div>
+                    <span style="font-size: 13px"
+                      >Not your computer? Use Guest mode to sign in
+                      privately.</span
+                    >
+                    <a
+                      href="https://support.google.com/chrome/answer/6130773?hl=en-GB"
+                      style="text-decoration: none"
+                      >Learn more</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex mt-4 p-2">
+                <a ui-sref="registration" style="text-decoration: none"
+                  >create account</a
+                >
+                <div class="ms-auto">
+                  <button type="submit" class="btn btn-primary">Next</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

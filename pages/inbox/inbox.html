@@ -1,0 +1,66 @@
+    <div>
+        <nav class="navbar navbar-expand-lg col-md-12 d-flex" >
+            <div class="col-md-2">
+              <div class="d-flex">
+                <i
+                  class="bi bi-list px-3"
+                  style="font-size: 22px"
+                  ng-click="toggleDiv()"></i>
+                <img
+                  src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png"
+                  alt=""
+                  class="img-fluid" />
+              </div>
+            </div>
+            <div class="col-md-10 d-flex justify-content-between">
+              <div class="col-md-5">
+                <form class="d-flex">
+                  <button
+                    class="col-md-12 
+                    border-0
+                    rounded-pill
+                    d-flex 
+                    align-items-center 
+                    search-form 
+                    {{ bgColor }} 
+                    {{ border }}">
+                    <i class="p-2 bi bi-search" id="searchIcon"></i>
+                    <input
+                      id="inputField"
+                      class="form-control border-0 p-2 search-form no-focus-border"
+                      placeholder="Search mail"
+                      ng-focus="Focus()"
+                      ng-blur="Blur()" />
+                    <i class="p-2 bi bi-sliders2" id="slidersIcon"></i>
+                  </button>
+                </form>
+              </div>
+        
+              <div class="col-md-4"></div>
+              <div class="col-md-1">
+                <div class="d-flex justify-content-evenly align-items-center">
+                  <div>
+                    <i class="bi bi-question-circle" style="font-size: 20px"></i>
+                  </div>
+                  <div>
+                    <div class="dropdown">
+                      <i
+                        class="bi bi-gear"
+                        style="font-size: 20px"
+                        data-bs-toggle="dropdown"></i>
+                      <ul class="dropdown-menu col-md-1"></ul>
+                    </div>
+                  </div>
+                  <div>
+                    <i
+                      class="bi bi-person-circle"
+                      style="font-size: 24px"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+    </div>
+<link rel="stylesheet" href="/pages/inbox/inbox.css ">

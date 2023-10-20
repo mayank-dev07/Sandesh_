@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="/node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/bootstrap-icons/font/bootstrap-icons.css" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/@fortawesome/fontawesome-free/css/fontawesome.css" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/@fortawesome/fontawesome-free/css/brands.css" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/@fortawesome/fontawesome-free/css/solid.css" />
+  </head>
+  <body ng-app="myModule">
+    <div ui-view>
+      <!-- <div ng-show="loader">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </body>
+  <script src="rout.js"></script>
+  <script src="/pages/inbox/inbox.js"></script>
+  <script src="/pages/registration/registration.js"></script>
+  <script src="/pages/registration/dob.js"></script>
+  <script src="/pages/registration/email.js"></script>
+  <script src="/pages/registration/password.js"></script>
+  <script src="/pages/registration/recEmail.js"></script>
+  <script src="/pages/registration/recPhone.js"></script>
+  <script src="/pages/registration/submit.js"></script>
+  <script src="/pages/login/login.js"></script>
+  <script src="/pages/login/pass.js"></script>
+  <script src="/pages/dashboard/dashboard.js"></script>
+  <script src="/pages/starred/starred.js"></script>
+  <script src="/pages/draft/draft.js"></script>
+  <script src="/pages/sent/sent.js"></script>
+</html>

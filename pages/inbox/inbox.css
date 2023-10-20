@@ -1,0 +1,20 @@
+.navbar {
+  background-color: #f6f8fc;
+}
+
+.search-form {
+  background-color: #eaf1fb;
+}
+
+.main-content {
+  background-color: white;
+}
+
+.side-panel {
+  background-color: #f6f8fc;
+}
+
+.no-focus-border:focus {
+  box-shadow: none !important;
+  border-color: inherit !important;
+}

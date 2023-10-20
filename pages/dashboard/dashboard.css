@@ -1,0 +1,52 @@
+.navbar {
+    background-color: #f6f8fc;
+}
+
+.search-form {
+    background-color: #eaf1fb;
+}
+
+.main-content {
+    background-color: white;
+}
+
+.side-panel {
+    background-color: #f6f8fc;
+}
+
+.no-focus-border:focus {
+    box-shadow: none !important;
+    border-color: inherit !important;
+}
+
+.border {
+    border: 1px solid;
+    padding: 1px;
+    box-shadow: 1px 1px 1px 1px #dfdede;
+} 
+
+.white {
+    background: white;
+}
+
+.hover {
+    border: 1px ;
+    border-radius: 15px;
+    background-color: #dee0e3
+}
+
+.normal {
+  background-color: #c2e7ff !important
+}
+
+.compose {
+    border: 1px;
+    background-color: #c2e7ff;
+    box-shadow: 1px 1px 1px 1px rgb(42, 41, 41);
+}
+
+.click {
+    border: 1px;
+    border-radius: 15px;
+    background-color: #d3e3fd !important
+}
