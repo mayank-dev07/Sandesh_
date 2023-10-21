@@ -189,9 +189,7 @@
               ng-mouseover="row = mail.id"
               ng-mouseleave="row = -1">
               <td>
-                <div class="d-flex justify-content-between px-2"  ng-click="show(mail.id)"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal2">
+                <div class="d-flex justify-content-between px-2">
                   <div class="d-flex justify-content-center">
                     <div id="square-icons" ng-click="select(mail.id)">
                       <div ng-if="!mail.select">
@@ -214,7 +212,9 @@
                     </div>
                     <div
                       class="d-flex"
-                     >
+                      ng-click="show(mail.id)"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal2">
                       <div>{{mail.sendername}}</div>
                       <div class="d-flex ms-4">
                         <div class="px-2">{{ mail.subject}} -</div>

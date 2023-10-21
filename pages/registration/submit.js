@@ -14,6 +14,9 @@ myApp.controller("submitController", [
         .then(function (response) {
           console.log(response);
           $location.path("/login");
+           Swal.fire(
+          'Registration completed',
+          )
         })
         .catch(function (error) {
           console.log(error);

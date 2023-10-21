@@ -4,7 +4,7 @@ myApp.controller("passwordController", [
   "sharedDataFactory",
   function ($scope, $state, sharedDataFactory) {
     $scope.showPass = () => {
-      var x = document.getElementById("confirmPassword");
+      var x = document.getElementById("password");
       if (x.type === "password") {
         x.type = "text";
       } else {

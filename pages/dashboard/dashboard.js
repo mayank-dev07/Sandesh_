@@ -213,7 +213,7 @@ myApp.controller("dashboardController", [
           withCredentials: true,
         })
         .then(function (response) {
-          console.log(response.data);
+          console.log(response.data[0].body);
           $scope.Mails = response.data;
           if ($scope.Mails.length == 0) {
             // Swal.fire({
