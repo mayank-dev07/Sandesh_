@@ -4,7 +4,7 @@ myApp.controller("passController", [
   "sharedDataFactory",
   "$http",
   "$state",
-  function ($scope, $location, $sharedDataFactory, $http,$state) {
+  function ($scope, $location, sharedDataFactory, $http,$state) {
 
     $http.get(apiUrl + '/users/authentication/',{
       withCredentials:true
@@ -33,7 +33,7 @@ myApp.controller("passController", [
         password: $scope.user.password,
       };
 
-      $sharedDataFactory.setData(data);
+      sharedDataFactory.setData(data);
       $scope.showData = $sharedDataFactory.getData();
       console.log($scope.showData);
 

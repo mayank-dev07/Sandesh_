@@ -108,3 +108,15 @@ myApp.factory("sharedDataFactory", function () {
     },
   };
 });
+
+myApp.factory("sharedDataReset", function () {
+  var sharedData = {};
+  return {
+    getData: function () {
+      return sharedData;
+    },
+    setData: function (newData) {
+      angular.extend(sharedData, newData);
+    },
+  };
+});

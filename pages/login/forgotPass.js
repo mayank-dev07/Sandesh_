@@ -1,10 +1,10 @@
 myApp.controller("forgotPassController", [
     "$scope",
     "$location",
-    "sharedDataFactory",
+    "sharedDataReset",
     "$http",
     "$state",
-    function ($scope, $location, $sharedDataFactory, $http,$state) {
+    function ($scope, $location, sharedDataReset, $http,$state) {
         $scope.recConfirm = false;
         $scope.rec = true;
         $scope.email = "";
@@ -34,11 +34,11 @@ myApp.controller("forgotPassController", [
             $http.post(apiUrl + '/users/otpvalidation/',data,)
             .then((response)=>{
                 console.log(response)
+                sharedDataReset.setData(data)
+                console.log(sharedDataReset)
+                $state.go('login.confirmPass')
                 $scope.recConfirm = true;
                 $scope.rec = false;
-                if(response.status == 200){
-                    $state.go('login.confirmPass')
-                }
             })
             .catch((error)=>{
                 console.log(error)
