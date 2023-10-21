@@ -148,8 +148,7 @@
                     </i>
                   <ul class="dropdown-menu" style="background-color: #f6f8fc;">
                     <li class="d-flex justify-content-center align-items-center navbar" ng-click="deleteLabel(label.id)">Delete Label</li>
-                    <li class="d-flex justify-content-center align-items-center navbar" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal4">Edit Label</li>
+                    <li class="d-flex justify-content-center align-items-center navbar" ng-click="EditLabels(label.id)">Edit Label</li>
                   </ul>
                 </div>
               </div>
@@ -169,8 +168,8 @@
                     style="font-size: 18px">
                   </i>
                 <ul class="dropdown-menu" style="background-color: #f6f8fc;">
-                  <li class="d-flex justify-content-center align-items-center navbar" ng-click="deleteLabel(label.id)">Delete Label</li>
-                  <li class="d-flex justify-content-center align-items-center navbar">Edit Label</li>
+                  <li class="d-flex justify-content-center align-items-center navbar" ng-click="deleteLabel(child.id)">Delete Label</li>
+                  <li class="d-flex justify-content-center align-items-center navbar" ng-click="EditLabels(child.id)">Edit Label</li>
                 </ul>
               </div>
               </div>
@@ -424,13 +423,13 @@
       </div>
       <div class="modal-footer navbar">
         <div class="d-flex col-md-12 justify-content-evenly">
-          <div
+          <!-- <div
             class="col-md-4 d-flex justify-content-evenly align-items-center bg-white border rounded-pill p-2"
             data-bs-dismiss="modal"
             ng-click="add()">
             <i class="bi bi-plus-circle"></i>
             <div class="">Add account</div>
-          </div>
+          </div> -->
           <div
             class="col-md-4 d-flex justify-content-evenly align-items-center bg-white border rounded-pill"
             data-bs-dismiss="modal"
@@ -530,44 +529,6 @@
             ng-options="nest.id as nest.value for nest in parentLabel">
             <option value="" disabled>Select labels</option>
           </select>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
-            Add
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal fade"
-  id="exampleModal4"
-  tabindex="-1"
-  aria-labelledby="exampleModal4Label"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <form action="" ng-submit="EditLabels()">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModal4Label">Edit label</h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <label for="label">Edit label name:</label>
-          <input
-            type="text"
-            id="label"
-            class="form-control"
-            required
-            ng-model="label"
-            placeholder="{{label.value}}"
-             />
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">

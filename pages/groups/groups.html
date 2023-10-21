@@ -1,0 +1,47 @@
+<div class="overflow-scroll vh-100">
+  <form action="" ng-submit="createGroup()">
+    <div class="d-flex ms-4 mb-4 mt-4">
+      <div class="d-flex col-md-7">
+        <label for="email" class="form-label"></label>
+        <input
+        type="email"
+        class="form-control p-3"
+        id="email"
+        ng-model="email"
+        placeholder="Email for the group"
+        required />
+        <button class="btn border" type="submit">Create group</button>
+      </div>
+    </div>
+  </form>
+  <table class="table table-hover">
+    <tbody>
+      <tr>
+        <th>S.no</th>
+        <th>User Name</th>
+        <th>User email</th>
+        <th>Add to group</th>
+      </tr>
+      <tr
+        ng-repeat="user in users | filter: { subject:searchname }"
+        ng-class="{ 'table-primary': user.read}"
+        ng-mouseover="row = user.id"
+        ng-mouseleave="row = -1">
+        <td >
+          <div>{{$index + 1}}</div>
+        </td>
+        <td>
+          <div>{{ user.first_name}} {{ user.last_name}}</div>
+        </td>
+        <td>
+          <div>{{ user.email}}</div>
+        </td>
+        <td>
+          <div>
+            <button class="btn btn-outline-secondary" ng-click="addUser(user.id)">Add to group</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

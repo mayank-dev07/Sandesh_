@@ -85,6 +85,11 @@ myApp.config([
         templateUrl: "/pages/sent/sent.html",
         controller: "sentMailController",
       })
+      .state("dashboard.groups", {
+        url: "/groups",
+        templateUrl: "/pages/groups/groups.html",
+        controller: "groupsMailController",
+      })
       .state("dashboard.archive", {
         url: "/archive",
         templateUrl: "/pages/archive/archive.html",

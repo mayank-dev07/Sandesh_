@@ -98,19 +98,20 @@ myApp.controller("dashboardController", [
           console.log(error);
         });
     }
-    $scope.sendLabel = function(id){
-      $http.get(apiUrl + '/mail/childlabel/',{
-        withCredentials:true,
-        params:{id:id}
-      })
-      .then(function (response) {
-              console.log(response.data);
-              $scope.childLabel = response.data;
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-    }
+    $scope.sendLabel = function (id) {
+      $http
+        .get(apiUrl + "/mail/childlabel/", {
+          withCredentials: true,
+          params: { id: id },
+        })
+        .then(function (response) {
+          console.log(response.data);
+          $scope.childLabel = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
 
     $scope.sendMail = function () {
       var email = $scope.email;
@@ -162,21 +163,13 @@ myApp.controller("dashboardController", [
         $scope.myFile = "";
       }
     };
-    // $scope.add = function(){
-    //   console.log(file)
-    //   if (
-    //     file != ""
-    //   ) {
-    // }
-    // }
 
     $scope.draftMail = function () {
       var email = $scope.email;
       var subject = $scope.subject;
       var body = $scope.text;
 
-      // if (email) {
-      //   console.log(email);
+      if (email || subject || body) {
       var formData = new FormData();
       formData.append("email", email);
       formData.append("subject", subject);
@@ -199,7 +192,7 @@ myApp.controller("dashboardController", [
       $scope.email = "";
       $scope.subject = "";
       $scope.text = "";
-      // }
+      }
     };
 
     $scope.deleteMail = () => {
@@ -223,10 +216,10 @@ myApp.controller("dashboardController", [
           console.log(response.data);
           $scope.Mails = response.data;
           if ($scope.Mails.length == 0) {
-            Swal.fire({
-              icon: "error",
-              title: "No mails to show",
-            });
+            // Swal.fire({
+            //   icon: "error",
+            //   title: "No mails to show",
+            // });
           }
         })
         .catch(function (error) {
@@ -409,21 +402,90 @@ myApp.controller("dashboardController", [
           console.log(error);
         });
     };
-    $scope.deleteLabel = function(id){
+    $scope.deleteLabel = function (id) {
       let data = {
-        id: id
-      }
-      $http.put(apiUrl + '/mail/deletelabel/',data,{
-        withCredentials:true
-      })
-      .then(function(response){
-        console.log(response)
-        showlabel();
-
-      })
-      .catch(function(error){
-        console.log(error)
-      })
+        id: id,
+      };
+      $http
+        .put(apiUrl + "/mail/deletelabel/", data, {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          showlabel();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+    $scope.EditLabels = function (id) {
+      console.log(id);
+      const data = $scope.parentLabel.find((label) => label.id == id);
+      console.log(data);
+      if(data){
+        Swal.fire({
+          title: data.value,
+          html: '<input id="name" type="text" class="swal2-input" placeholder="edit name" >',
+          focusConfirm: false,
+          preConfirm: () => {
+            const name = Swal.getPopup().querySelector("#name").value;
+            return{name:name}
+          },
+        })
+          .then((result) => {
+            if(result.isConfirmed){
+              let name = result.value.name;
+              let edit={
+                name:name,
+                id:id
+              }
+              console.log(edit)
+              $http.put(apiUrl + '/mail/updatelabel/',edit,{
+                withCredentials:true
+              })
+              .then(function(response){
+                console.log(response)
+                showlabel();
+              })
+              .catch(function(error){
+                console.log(error)
+              })
+            }
+          })
+        }
+        else{
+          const data = $scope.childLabel.find((label) => label.id == id);
+        console.log(data);
+        Swal.fire({
+          title: data.value,
+          html: '<input id="name" type="text" class="swal2-input" placeholder="edit name">',
+          focusConfirm: false,
+          preConfirm: () => {
+            const name = Swal.getPopup().querySelector("#name").value;
+            return{name:name}
+          },
+        })
+          .then((result) => {
+            if(result.isConfirmed){
+              let name = result.value.name;
+              let edit={
+                name:name,
+                id:id
+              }
+              console.log(edit)
+              $http.put(apiUrl + '/mail/updatelabel/',edit,{
+                withCredentials:true
+              })
+              .then(function(response){
+                console.log(response)
+                showlabel();
+              })
+              .catch(function(error){
+                console.log(error)
+              })
+            }
+          })
+        }
     }
   },
 ]);
