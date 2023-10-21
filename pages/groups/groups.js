@@ -1,6 +1,4 @@
-myApp.controller("groupsMailController", [
-  "$http",
-  "$scope", 
+myApp.controller("groupsMailController",
   function ($http,$scope) {
     $http.get(apiUrl + '/admin/users/',{
       withCredentials:true
@@ -47,4 +45,4 @@ myApp.controller("groupsMailController", [
         })
       }
   }
-  }])
+  })

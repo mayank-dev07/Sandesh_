@@ -90,6 +90,11 @@ myApp.config([
         templateUrl: "/pages/groups/groups.html",
         controller: "groupsMailController",
       })
+      .state("dashboard.Email", {
+        url: "/Email",
+        templateUrl: "/pages/Email/Email.html",
+        controller: "EmailMailController",
+      })
       .state("dashboard.archive", {
         url: "/archive",
         templateUrl: "/pages/archive/archive.html",
@@ -122,6 +127,18 @@ myApp.factory("sharedDataReset", function () {
     },
     setData: function (newData) {
       angular.extend(sharedData, newData);
+    },
+  };
+});
+
+myApp.service("sharedDataService", function () {
+  var id = null;
+  return {
+    getId: function () {
+      return id;
+    },
+    setId: function (newId) {
+      id = newId;
     },
   };
 });

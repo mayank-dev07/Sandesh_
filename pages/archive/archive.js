@@ -1,7 +1,5 @@
-myApp.controller("archiveMailController", [
-    "$http",
-    "$scope",
-    function ($http, $scope) {
+myApp.controller("archiveMailController",
+    function ($http, $scope,sharedDataService,$state) {
       function archiveMail($http, $scope) {
         $http
           .get(apiUrl + "/mail/archiveemail/", {
@@ -125,14 +123,8 @@ myApp.controller("archiveMailController", [
           })
         }
         $scope.show = function (id) {
-          $http
-            .get(apiUrl + "/mail/details/", {
-              params: { id: id },
-              withCredentials: true,
-            })
-            .then(function (response) {
-              console.log(response.data);
-              $scope.emailDetails = response.data;
+          sharedDataService.setId(id)
+          $state.go('dashboard.Email')
               console.log(id);
               let data = {
                 id: id,
@@ -147,14 +139,10 @@ myApp.controller("archiveMailController", [
                 })
                 .catch(function (error) {
                   console.log(error);
-                });
-            })
-            .catch(function (error) {
-              console.log(error);
             });
         };
     },
-  ]);
+);
 
   
   

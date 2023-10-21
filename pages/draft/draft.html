@@ -27,9 +27,7 @@
               </div>
               <div
                 class="d-flex"
-                ng-click="show(draft.id)"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal2">
+                ng-click="show(draft.id)">
                 <div>
                   <p style="color: red">Draft</p>
                 </div>
@@ -71,63 +69,4 @@
       </tr>
     </tbody>
   </table>
-</div>
-
-<div
-  class="modal fade"
-  id="exampleModal2"
-  tabindex="-1"
-  aria-labelledby="exampleModal2Label"
-  aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content" ng-repeat="details in emailDetails">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModal2Label">
-          {{details.receiver}}
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div
-          class="d-flex justify-content-center align-items-center"
-          ng-if="details.subject != 'undefined'">
-          {{ details.subject }}
-        </div>
-        <div
-          class="d-flex justify-content-center align-items-center"
-          ng-if="details.body != 'undefined'">
-          {{ details.body}}
-        </div>
-        <div
-          ng-if="details.image"
-          class="d-flex justify-content-center align-items-center mt-5">
-          <img
-            src="https://10.21.82.60:8000/mail/media/{{ details.image }}"
-            alt="" />
-        </div>
-        <div
-          class="d-flex justify-content-center align-items-center col-md-5 mt-5">
-          <div class="card" ng-if="details.file">
-            <div class="card-body">
-              <a
-                ng-href="https://10.21.82.60:8000/mail/media/{{details.file}}"
-                download="file"
-                ng-click="download()"
-                >{{details.file}}</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
 </div>

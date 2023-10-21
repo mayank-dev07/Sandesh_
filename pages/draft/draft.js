@@ -1,7 +1,5 @@
-myApp.controller("draftMailController", [
-  "$http",
-  "$scope",
-  function ($http, $scope) {
+myApp.controller("draftMailController",
+  function ($http, $scope,sharedDataService,$state) {
     function draftMail($http, $scope) {
       $http
         .get(apiUrl + "/mail/draftemail/", {
@@ -125,15 +123,8 @@ myApp.controller("draftMailController", [
         })
       }
       $scope.show = function (id) {
-        $http
-          .get(apiUrl + "/mail/details/", {
-            params: { id: id },
-            withCredentials: true,
-          })
-          .then(function (response) {
-            console.log(response.data);
-            $scope.emailDetails = response.data;
-            console.log(id);
+        sharedDataService.setId(id)
+        $state.go('dashboard.Email')
             let data = {
               id: id,
             };
@@ -148,10 +139,6 @@ myApp.controller("draftMailController", [
               .catch(function (error) {
                 console.log(error);
               });
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
       };
   },
-]);
+);

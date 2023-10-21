@@ -1,9 +1,5 @@
-myApp.controller("dashboardController", [
-  "$scope",
-  "$http",
-  "$location",
-  "$rootScope",
-  function ($scope, $http, $location, $rootScope) {
+myApp.controller("dashboardController", 
+  function ($scope, $http, $location, $rootScope,sharedDataService,$state) {
     $scope.leftPanel = [];
     $scope.Profile = [];
     $scope.file = "";
@@ -354,15 +350,8 @@ myApp.controller("dashboardController", [
         });
     };
     $scope.show = function (id) {
-      $http
-        .get(apiUrl + "/mail/details/", {
-          params: { id: id },
-          withCredentials: true,
-        })
-        .then(function (response) {
-          console.log(response.data);
-          $scope.emailDetails = response.data;
-          console.log(id);
+      sharedDataService.setId(id)
+      $state.go('dashboard.Email')
           let data = {
             id: id,
           };
@@ -377,10 +366,6 @@ myApp.controller("dashboardController", [
             .catch(function (error) {
               console.log(error);
             });
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
     };
     $scope.addLabels = function () {
       let data = {
@@ -488,7 +473,7 @@ myApp.controller("dashboardController", [
         }
     }
   },
-]);
+);
 myApp.directive("fileModel", [
   "$parse",
   function ($parse) {

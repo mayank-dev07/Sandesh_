@@ -1,7 +1,4 @@
-myApp.controller("recPhoneController", [
-  "$scope",
-  "$state",
-  "sharedDataFactory",
+myApp.controller("recPhoneController", 
   function ($scope, $state, sharedDataFactory) {
     $scope.recPhoneSkipped = () => {
       $state.go("registration.submit");
@@ -15,4 +12,4 @@ myApp.controller("recPhoneController", [
       $state.go("registration.submit");
     };
   },
-]);
+);
