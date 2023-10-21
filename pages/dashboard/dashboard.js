@@ -94,7 +94,7 @@ myApp.controller("dashboardController",
           console.log(error);
         });
     }
-    $scope.sendLabel = function (id) {
+    $scope.sendLabel = function (id , index) {
       $http
         .get(apiUrl + "/mail/childlabel/", {
           withCredentials: true,
@@ -408,68 +408,70 @@ myApp.controller("dashboardController",
       const data = $scope.parentLabel.find((label) => label.id == id);
       console.log(data);
       if(data){
-        Swal.fire({
-          title: data.value,
-          html: '<input id="name" type="text" class="swal2-input" placeholder="edit name" >',
-          focusConfirm: false,
-          preConfirm: () => {
-            const name = Swal.getPopup().querySelector("#name").value;
-            return{name:name}
-          },
-        })
-          .then((result) => {
-            if(result.isConfirmed){
-              let name = result.value.name;
-              let edit={
-                name:name,
-                id:id
-              }
-              console.log(edit)
-              $http.put(apiUrl + '/mail/updatelabel/',edit,{
-                withCredentials:true
-              })
-              .then(function(response){
-                console.log(response)
-                showlabel();
-              })
-              .catch(function(error){
-                console.log(error)
-              })
-            }
-          })
+        $scope.edit = data.value
+        // Swal.fire({
+        //   title: data.value,
+        //   html: '<input id="name" type="text" class="swal2-input" placeholder="edit name" >',
+        //   focusConfirm: false,
+        //   preConfirm: () => {
+        //     const name = Swal.getPopup().querySelector("#name").value;
+        //     return{name:name}
+        //   },
+        // })
+        //   .then((result) => {
+        //     if(result.isConfirmed){
+        //       let name = result.value.name;
+        //       let edit={
+        //         name:name,
+        //         id:id
+        //       }
+        //       console.log(edit)
+        //       $http.put(apiUrl + '/mail/updatelabel/',edit,{
+        //         withCredentials:true
+        //       })
+        //       .then(function(response){
+        //         console.log(response)
+        //         showlabel();
+        //       })
+        //       .catch(function(error){
+        //         console.log(error)
+        //       })
+            // }
+          // })
         }
         else{
           const data = $scope.childLabel.find((label) => label.id == id);
         console.log(data);
-        Swal.fire({
-          title: data.value,
-          html: '<input id="name" type="text" class="swal2-input" placeholder="edit name">',
-          focusConfirm: false,
-          preConfirm: () => {
-            const name = Swal.getPopup().querySelector("#name").value;
-            return{name:name}
-          },
-        })
-          .then((result) => {
-            if(result.isConfirmed){
-              let name = result.value.name;
-              let edit={
-                name:name,
-                id:id
-              }
-              console.log(edit)
-              $http.put(apiUrl + '/mail/updatelabel/',edit,{
-                withCredentials:true
-              })
-              .then(function(response){
-                console.log(response)
-                showlabel();
-              })
-              .catch(function(error){
-                console.log(error)
-              })
-            }
-          })
+        $scope.edit = data.value
+        // Swal.fire({
+        //   title: data.value,
+        //   html: '<input id="name" type="text" class="swal2-input" placeholder="edit name">',
+        //   focusConfirm: false,
+        //   preConfirm: () => {
+        //     const name = Swal.getPopup().querySelector("#name").value;
+        //     return{name:name}
+        //   },
+        // })
+        //   .then((result) => {
+        //     if(result.isConfirmed){
+        //       let name = result.value.name;
+        //       let edit={
+        //         name:name,
+        //         id:id
+        //       }
+        //       console.log(edit)
+        //       $http.put(apiUrl + '/mail/updatelabel/',edit,{
+        //         withCredentials:true
+        //       })
+        //       .then(function(response){
+        //         console.log(response)
+        //         showlabel();
+        //       })
+        //       .catch(function(error){
+        //         console.log(error)
+        //       })
+        //     }
+        //   })
         }
     }
   },

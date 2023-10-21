@@ -116,20 +116,21 @@
         </ul>
         <div class="d-flex justify-content-evenly align-items-center">
           <i
-              class="bi bi-plus"
-              style="font-size: 22px"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal3"
-              ng-click="labels()"></i>
+            class="bi bi-plus"
+            style="font-size: 22px"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal3"
+            ng-click="labels()"></i>
           <span ng-show="showDiv">
             <span style="font-size: 16px">Add Labels</span>
           </span>
         </div>
-        <div class="accordion accordion mt-3" id="accordionFlushExample" ng-show="showDiv">
+        <div
+          class="accordion accordion mt-3"
+          id="accordionFlushExample"
+          ng-show="showDiv">
           <div class="accordion-item" ng-repeat="label in parentLabel">
-            <h2
-              class="accordion-header d-flex"
-              ng-click="sendLabel(label.id)">
+            <h2 class="accordion-header d-flex" ng-click="sendLabel(label.id)">
               <button
                 class="accordion-button collapsed navbar"
                 type="button"
@@ -141,14 +142,24 @@
               </button>
               <div class="navbar">
                 <div class="dropdown">
-                    <i
-                      class="bi bi-three-dots-vertical"
-                      data-bs-toggle="dropdown"
-                      style="font-size: 18px">
-                    </i>
-                  <ul class="dropdown-menu" style="background-color: #f6f8fc;">
-                    <li class="d-flex justify-content-center align-items-center navbar" ng-click="deleteLabel(label.id)">Delete Label</li>
-                    <li class="d-flex justify-content-center align-items-center navbar" ng-click="EditLabels(label.id)">Edit Label</li>
+                  <i
+                    class="bi bi-three-dots-vertical"
+                    data-bs-toggle="dropdown"
+                    style="font-size: 18px">
+                  </i>
+                  <ul class="dropdown-menu" style="background-color: #f6f8fc">
+                    <li
+                      class="d-flex justify-content-center align-items-center navbar"
+                      ng-click="deleteLabel(label.id)">
+                      Delete Label
+                    </li>
+                    <li
+                      class="d-flex justify-content-center align-items-center navbar"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal4"
+                      ng-click="EditLabels(label.id)">
+                      Edit Label
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -167,18 +178,73 @@
                     data-bs-toggle="dropdown"
                     style="font-size: 18px">
                   </i>
-                <ul class="dropdown-menu" style="background-color: #f6f8fc;">
-                  <li class="d-flex justify-content-center align-items-center navbar" ng-click="deleteLabel(child.id)">Delete Label</li>
-                  <li class="d-flex justify-content-center align-items-center navbar" ng-click="EditLabels(child.id)">Edit Label</li>
-                </ul>
-              </div>
+                  <ul class="dropdown-menu" style="background-color: #f6f8fc">
+                    <li
+                      class="d-flex justify-content-center align-items-center navbar"
+                      ng-click="deleteLabel(child.id)">
+                      Delete Label
+                    </li>
+                    <li
+                      class="d-flex justify-content-center align-items-center navbar"
+                      ng-click="EditLabels(child.id)"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal4">
+                      Edit Label
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
+    
+    
+    <div
+      class="modal fade"
+      id="exampleModal4"
+      tabindex="-1"
+      aria-labelledby="exampleModal4Label"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <form action="" ng-submit="addLabels()">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModal4Label">Edit label</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <label for="label">Please enter a label name:</label>
+              <input
+                type="text"
+                id="label"
+                class="form-control"
+                required
+                ng-model="edit" />
+              <label for="nest" class="mt-2">Nest label under</label>
+              <select
+                class="form-select"
+                id="nest"
+                ng-model="select"
+                placeholder="select"
+                ng-options="nest.id as nest.value for nest in parentLabel">
+                <option value="" disabled>Select labels</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                Add
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <div class="d-flex col-md-11">
       <div ui-view class="col-md-12 overflow-scroll">
         <table class="table table-hover">
@@ -210,10 +276,7 @@
                         <i class="bi bi-star-fill" style="color: #f7ca4b"></i>
                       </div>
                     </div>
-                    <div
-                      class="d-flex"
-                      ng-click="show(mail.id)"
-                      >
+                    <div class="d-flex" ng-click="show(mail.id)">
                       <div>{{mail.sendername}}</div>
                       <div class="d-flex ms-4">
                         <div class="px-2">{{ mail.subject}} -</div>
@@ -422,6 +485,13 @@
       </div>
       <div class="modal-footer navbar">
         <div class="d-flex col-md-12 justify-content-evenly">
+          <!-- <div
+            class="col-md-4 d-flex justify-content-evenly align-items-center bg-white border rounded-pill p-2"
+            data-bs-dismiss="modal"
+            ng-click="add()">
+            <i class="bi bi-plus-circle"></i>
+            <div class="">Add account</div>
+          </div> -->
           <div
             class="col-md-4 d-flex justify-content-evenly align-items-center bg-white border rounded-pill"
             data-bs-dismiss="modal"
@@ -478,3 +548,4 @@
     </div>
   </div>
 </div>
+

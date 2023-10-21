@@ -50,3 +50,7 @@
     border-radius: 15px;
     background-color: #d3e3fd !important
 }
+
+.labelColor:hover{
+    background-color: #dee0e3 
+}
