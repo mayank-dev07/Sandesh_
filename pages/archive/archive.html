@@ -2,7 +2,7 @@
     <table class="table table-hover">
       <tbody>
         <tr
-          ng-repeat="archive in archives"
+          ng-repeat="archive in archives | filter: { subject:searchname }"
           ng-class="{ 'table-primary': archive.read}"
           ng-mouseover="row = archive.id"
           ng-mouseleave="row = -1">

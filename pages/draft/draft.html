@@ -2,7 +2,7 @@
   <table class="table table-hover">
     <tbody>
       <tr
-        ng-repeat="draft in drafts"
+        ng-repeat="draft in drafts | filter: { subject:searchname }"
         ng-class="{ 'table-primary': draft.read}"
         ng-mouseover="row = draft.id"
         ng-mouseleave="row = -1">

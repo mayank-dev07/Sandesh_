@@ -3,7 +3,7 @@ rows="3">
   <table class="table table-hover">
     <tbody>
       <tr
-        ng-repeat="sent in sents"
+        ng-repeat="sent in sents | filter: { receiver:searchname }"
         ng-class="{ 'table-primary': sent.read}"
         ng-mouseover="row = sent.id"
         ng-mouseleave="row = -1">

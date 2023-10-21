@@ -2,8 +2,8 @@
   <table class="table table-hover">
     <tbody>
       <tr
-        ng-repeat="star in starred"
-        ng-class="{ 'table-primary': star.read}"
+        ng-repeat="star in starred | filter: { sendername:searchname }"
+        ng-class="{ 'table-primary': star.read }"
         ng-mouseover="row = star.id"
         ng-mouseleave="row = -1">
         <td class="">

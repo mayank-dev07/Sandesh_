@@ -29,6 +29,7 @@
               id="inputField"
               class="form-control border-0 p-2 search-form no-focus-border"
               placeholder="Search mail"
+              ng-model="searchname"
               ng-focus="Focus()"
               ng-blur="Blur()" />
             <i class="p-2 bi bi-sliders2" id="slidersIcon"></i>
@@ -114,17 +115,77 @@
           </li>
         </ul>
         <div class="d-flex justify-content-evenly align-items-center">
-          <span style="font-size: 18px;">Labels</span>
-      <span ng-show="showDiv"><i class="bi bi-plus px-2" style="font-size: 22px;" ng-click="labels()"></i></span>
-    </div>
+          <span style="font-size: 18px">Labels</span>
+          <span ng-show="showDiv"
+            ><i
+              class="bi bi-plus px-2"
+              style="font-size: 22px"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal3"
+              ng-click="labels()"></i
+          ></span>
+        </div>
+        <div class="accordion accordion mt-3" id="accordionFlushExample">
+          <div class="accordion-item" ng-repeat="label in parentLabel">
+            <h2
+              class="accordion-header d-flex"
+              ng-click="sendLabel(label.id,$index)">
+              <button
+                class="accordion-button collapsed navbar"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne{{$index}}"
+                aria-expanded="false"
+                aria-controls="flush-collapseOne">
+                {{label.value}}
+              </button>
+              <div class="navbar">
+                <div class="dropdown">
+                    <i
+                      class="bi bi-three-dots-vertical"
+                      data-bs-toggle="dropdown"
+                      style="font-size: 18px">
+                    </i>
+                  <ul class="dropdown-menu" style="background-color: #f6f8fc;">
+                    <li class="d-flex justify-content-center align-items-center navbar" ng-click="deleteLabel(label.id)">Delete Label</li>
+                    <li class="d-flex justify-content-center align-items-center navbar" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal4">Edit Label</li>
+                  </ul>
+                </div>
+              </div>
+            </h2>
+            <div
+              id="flush-collapseOne{{$index}}"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionFlushExample">
+              <div
+                class="accordion-body navbar d-flex justify-content-between"
+                ng-repeat="child in childLabel">
+                <span> {{child.value}} </span>
+                <div class="dropdown">
+                  <i
+                    class="bi bi-three-dots-vertical"
+                    data-bs-toggle="dropdown"
+                    style="font-size: 18px">
+                  </i>
+                <ul class="dropdown-menu" style="background-color: #f6f8fc;">
+                  <li class="d-flex justify-content-center align-items-center navbar" ng-click="deleteLabel(label.id)">Delete Label</li>
+                  <li class="d-flex justify-content-center align-items-center navbar">Edit Label</li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="d-flex col-md-11">
       <div ui-view class="col-md-12 overflow-scroll">
         <table class="table table-hover">
           <tbody>
             <tr
-              ng-repeat="mail in Mails "
+              ng-repeat="mail in Mails | filter: { sendername: searchname }  "
               ng-class="{ 'table-primary': mail.read}"
               ng-mouseover="row = mail.id"
               ng-mouseleave="row = -1">
@@ -191,16 +252,16 @@
             </tr>
           </tbody>
         </table>
-        </div>
       </div>
     </div>
-    <!-- <div class="col-md-8 d-flex vh-100">
+  </div>
+  <!-- <div class="col-md-8 d-flex vh-100">
       <div class="side-panel">
         lkmkokm
       </div>
       </div> -->
-  </div>
 </div>
+
 <div
   class="offcanvas offcanvas-end"
   data-bs-scroll="true"
@@ -257,18 +318,15 @@
           rows="8"
           style="border-style: none"></textarea>
       </div>
-      <!-- <div ng-repeat="file in $scope.files">
-       {{file.name}}
-      </div> -->
+      <div ng-repeat="file in files">Attached file:- {{file.name}}</div>
 
-      <div>
+      <div class="">
         <div class="d-flex justify-content-between align-items-center">
-          <div class="d-flex">
+          <div class="d-flex position-absolute bottom-0 start-0">
             <button
               class="btn btn-primary rounded-pill"
               style="background-color: #0b57d0"
-              type="submit"
-              >
+              type="submit">
               send
             </button>
             <div>
@@ -279,10 +337,12 @@
                 data-bs-target="#exampleModal1"></i>
             </div>
           </div>
-          <i
-            class="bi bi-trash3"
-            style="font-size: 20px"
-            ng-click="deleteMail()"></i>
+          <div class="d-flex position-absolute bottom-0 end-0">
+            <i
+              class="bi bi-trash3"
+              style="font-size: 20px"
+              ng-click="deleteMail()"></i>
+          </div>
         </div>
       </div>
     </form>
@@ -315,7 +375,6 @@
               type="file"
               id="formFile"
               file-model="myFile"
-              placeholder="atashgd"
               required />
           </div>
           <!-- <button class="btn btn-outline-primary" type="button" ng-click="add()">Add</button> -->
@@ -327,7 +386,12 @@
         </div>
         <div class="modal-footer">
           <div class="d-flex">
-            <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Send</button>
+            <button
+              type="submit"
+              class="btn btn-outline-primary"
+              data-bs-dismiss="modal">
+              Send
+            </button>
           </div>
         </div>
       </form>
@@ -429,6 +493,88 @@
         </button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal3"
+  tabindex="-1"
+  aria-labelledby="exampleModal3Label"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form action="" ng-submit="addLabels()">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModal3Label">New label</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="label">Please enter a new label name:</label>
+          <input
+            type="text"
+            id="label"
+            class="form-control"
+            required
+            ng-model="label" />
+          <label for="nest" class="mt-2">Nest label under</label>
+          <select
+            class="form-select"
+            id="nest"
+            ng-model="nest"
+            ng-options="nest.id as nest.value for nest in parentLabel">
+            <option value="" disabled>Select labels</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal4"
+  tabindex="-1"
+  aria-labelledby="exampleModal4Label"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form action="" ng-submit="EditLabels()">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModal4Label">Edit label</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="label">Edit label name:</label>
+          <input
+            type="text"
+            id="label"
+            class="form-control"
+            required
+            ng-model="label"
+            placeholder="{{label.value}}"
+             />
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+            Add
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

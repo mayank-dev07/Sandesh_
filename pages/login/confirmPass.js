@@ -26,7 +26,7 @@ myApp.controller("confirmPassController", [
         .put(apiUrl + "/users/changepassword/", show)
         .then((response) => {
           console.log(response);
-          $state.go('login.pass')
+          $state.go('login')
         })
         .catch((error) => {
           console.log(error);

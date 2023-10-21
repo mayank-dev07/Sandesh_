@@ -4,6 +4,12 @@ myApp.controller("dashboardController", [
   "$location",
   "$rootScope",
   function ($scope, $http, $location, $rootScope) {
+    $scope.leftPanel = [];
+    $scope.Profile = [];
+    $scope.file = "";
+    $scope.files = [];
+    $scope.multiple = [];
+
     $http
       .get(apiUrl + "/users/authentication/", {
         withCredentials: true,
@@ -47,26 +53,17 @@ myApp.controller("dashboardController", [
       panel.isHover = false;
     };
 
-    // let selectAll = false; 
-
-    // $scope.selectAll = function (){
-    //   angular.forEach($scope.Mails,function(all){
-    //     console.log(all.select)
-    //     all.select = true;
-    //     selectAll = false; 
-    //   })
-    // }
-
-    // $scope.unSelectAll = function (){
-    //   angular.forEach($scope.Mails,function(all){
-    //     console.log(all.select)
-    //     all.select = false;
-    //     selectAll = true; 
-    //   })
-    // }
-
-    $scope.leftPanel = [];
-    $scope.Profile = [];
+    $http
+      .get(apiUrl + "/users/userdetails/", {
+        withCredentials: true,
+      })
+      .then(function (response) {
+        console.log(response.data);
+        $scope.Profile = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     $http
       .get(apiUrl + "/left_panel/", {
@@ -86,6 +83,35 @@ myApp.controller("dashboardController", [
         console.log(error);
       });
 
+    showlabel();
+
+    function showlabel() {
+      $http
+        .get(apiUrl + "/mail/parentlabel/", {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response.data);
+          $scope.parentLabel = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    $scope.sendLabel = function(id){
+      $http.get(apiUrl + '/mail/childlabel/',{
+        withCredentials:true,
+        params:{id:id}
+      })
+      .then(function (response) {
+              console.log(response.data);
+              $scope.childLabel = response.data;
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+    }
+
     $scope.sendMail = function () {
       var email = $scope.email;
       var subject = $scope.subject;
@@ -93,7 +119,7 @@ myApp.controller("dashboardController", [
 
       var formData = new FormData();
       console.log($scope.files);
-      for(let i=0;i<$scope.files.length;i++){
+      for (let i = 0; i < $scope.files.length; i++) {
         formData.append("file", $scope.files[i]);
       }
       formData.append("email", email);
@@ -117,28 +143,24 @@ myApp.controller("dashboardController", [
           $scope.file = "";
           $scope.files.pop();
           $scope.multiple = [];
-          console.log($scope.files)
+          console.log($scope.files);
         })
         .catch(function (error) {
           console.log(error);
         });
     };
 
-    $scope.file = "";
-    $scope.files = [];
-    $scope.multiple = [];
-
     $scope.submitFile = function () {
       $scope.file = $scope.myFile;
-      if($scope.file !== ""){
-      $scope.files.push($scope.file);
-      console.log($scope.files);
-      $scope.multiple.push({
-       file: $scope.file,
-      });
-      console.log($scope.multiple);
-      $scope.myFile = ""
-    }
+      if ($scope.file !== "") {
+        $scope.files.push($scope.file);
+        console.log($scope.files);
+        $scope.multiple.push({
+          file: $scope.file,
+        });
+        console.log($scope.multiple);
+        $scope.myFile = "";
+      }
     };
     // $scope.add = function(){
     //   console.log(file)
@@ -147,18 +169,6 @@ myApp.controller("dashboardController", [
     //   ) {
     // }
     // }
-
-    $http
-      .get(apiUrl + "/users/userdetails/", {
-        withCredentials: true,
-      })
-      .then(function (response) {
-        console.log(response.data);
-        $scope.Profile = response.data;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
 
     $scope.draftMail = function () {
       var email = $scope.email;
@@ -212,11 +222,11 @@ myApp.controller("dashboardController", [
         .then(function (response) {
           console.log(response.data);
           $scope.Mails = response.data;
-          if($scope.Mails.length == 0){
+          if ($scope.Mails.length == 0) {
             Swal.fire({
-              icon: 'error',
-              title: 'No mails to show',
-            })
+              icon: "error",
+              title: "No mails to show",
+            });
           }
         })
         .catch(function (error) {
@@ -265,22 +275,23 @@ myApp.controller("dashboardController", [
       $scope.showDiv = !$scope.showDiv;
     };
 
-    $scope.Archive = function(id){
+    $scope.Archive = function (id) {
       console.log(id);
       let data = {
-        id:id
-      }
-      $http.put(apiUrl + '/mail/archive/',data,{
-        withCredentials:true
-      })
-      .then(function(response){
-        console.log(response)
-        showMails($scope, $http);
-      })
-      .catch(function(error){
-        console.log(error)
-      })
-    }
+        id: id,
+      };
+      $http
+        .put(apiUrl + "/mail/archive/", data, {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          showMails($scope, $http);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
 
     $scope.delete = function (id) {
       console.log(id);
@@ -378,6 +389,42 @@ myApp.controller("dashboardController", [
           console.log(error);
         });
     };
+    $scope.addLabels = function () {
+      let data = {
+        name: $scope.label,
+        id: $scope.nest,
+      };
+      if (!data.id) {
+        data.id = "";
+      }
+      $http
+        .post(apiUrl + "/mail/addlabel/", data, {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          showlabel();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+    $scope.deleteLabel = function(id){
+      let data = {
+        id: id
+      }
+      $http.put(apiUrl + '/mail/deletelabel/',data,{
+        withCredentials:true
+      })
+      .then(function(response){
+        console.log(response)
+        showlabel();
+
+      })
+      .catch(function(error){
+        console.log(error)
+      })
+    }
   },
 ]);
 myApp.directive("fileModel", [
