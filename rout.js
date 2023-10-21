@@ -109,7 +109,7 @@ myApp.factory("sharedDataFactory", function () {
       return sharedData;
     },
     setData: function (newData) {
-      angular.extend(sharedData, newData);
+      angular.extend(sharedData,newData);
     },
   };
 });

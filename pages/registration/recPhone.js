@@ -11,13 +11,13 @@ myApp.controller("recPhoneController", [
         phoneno: $scope.phoneno,
       }
       console.log(data)
-      Swal.fire(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-      )
-      // sharedDataFactory.setData(data);
-      // $state.go("registration.submit");
+      // Swal.fire(
+      //   'Good job!',
+      //   'You clicked the button!',
+      //   'success'
+      // )
+      sharedDataFactory.setData(data);
+      $state.go("registration.submit");
     };
   },
 ]);

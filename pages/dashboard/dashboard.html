@@ -115,21 +115,21 @@
           </li>
         </ul>
         <div class="d-flex justify-content-evenly align-items-center">
-          <span style="font-size: 18px">Labels</span>
-          <span ng-show="showDiv"
-            ><i
-              class="bi bi-plus px-2"
+          <i
+              class="bi bi-plus"
               style="font-size: 22px"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal3"
-              ng-click="labels()"></i
-          ></span>
+              ng-click="labels()"></i>
+          <span ng-show="showDiv">
+            <span style="font-size: 16px">Add Labels</span>
+          </span>
         </div>
-        <div class="accordion accordion mt-3" id="accordionFlushExample">
+        <div class="accordion accordion mt-3" id="accordionFlushExample" ng-show="showDiv">
           <div class="accordion-item" ng-repeat="label in parentLabel">
             <h2
               class="accordion-header d-flex"
-              ng-click="sendLabel(label.id,$index)">
+              ng-click="sendLabel(label.id)">
               <button
                 class="accordion-button collapsed navbar"
                 type="button"
@@ -189,7 +189,9 @@
               ng-mouseover="row = mail.id"
               ng-mouseleave="row = -1">
               <td>
-                <div class="d-flex justify-content-between px-2">
+                <div class="d-flex justify-content-between px-2"  ng-click="show(mail.id)"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal2">
                   <div class="d-flex justify-content-center">
                     <div id="square-icons" ng-click="select(mail.id)">
                       <div ng-if="!mail.select">
@@ -212,9 +214,7 @@
                     </div>
                     <div
                       class="d-flex"
-                      ng-click="show(mail.id)"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal2">
+                     >
                       <div>{{mail.sendername}}</div>
                       <div class="d-flex ms-4">
                         <div class="px-2">{{ mail.subject}} -</div>
@@ -490,7 +490,6 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

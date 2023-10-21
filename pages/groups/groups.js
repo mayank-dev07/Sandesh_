@@ -29,5 +29,22 @@ myApp.controller("groupsMailController", [
         user: $scope.selectedUsers
       }
       console.log(data)
-    }
+      if(data.user.length != 0){
+        $http.post(apiUrl + '/admin/addbulkusers/',data,{
+          withCredentials:true
+        })
+        .then(function(response){
+          console.log(response) 
+        })
+        .catch(function(error){
+          console.log(error)
+        })
+      }
+      else{
+        Swal.fire({
+          icon: 'error',
+          title: "add users in the group",
+        })
+      }
+  }
   }])

@@ -179,7 +179,7 @@ myApp.controller("dashboardController", [
 
       $http
         .post(apiUrl + "/mail/draft/", formData, {
-          transformRequest: angular.identity,
+          // transformRequest: angular.identity,
           headers: { "Content-Type": undefined },
           withCredentials: true,
         })
