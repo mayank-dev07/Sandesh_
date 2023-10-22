@@ -51,6 +51,15 @@
     background-color: #d3e3fd !important
 }
 
-.labelColor:hover{
+.label:hover{
     background-color: #dee0e3 
 }
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown>.dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+      pointer-events: none;
+  }

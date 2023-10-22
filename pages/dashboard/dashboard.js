@@ -95,6 +95,7 @@ myApp.controller("dashboardController",
         });
     }
     $scope.sendLabel = function (id , index) {
+      console.log(id)
       $http
         .get(apiUrl + "/mail/childlabel/", {
           withCredentials: true,
@@ -209,7 +210,7 @@ myApp.controller("dashboardController",
           withCredentials: true,
         })
         .then(function (response) {
-          console.log(response.data[0].body);
+          console.log(response.data);
           $scope.Mails = response.data;
           if ($scope.Mails.length == 0) {
             // Swal.fire({

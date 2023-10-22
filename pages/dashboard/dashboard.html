@@ -1,5 +1,5 @@
 <div class="overflow-hidden">
-  <nav class="navbar navbar-expand-lg col-md-12 d-flex">
+  <nav class="navbar navbar-expand-lg col-md-12 d-flex position-fixed">
     <div class="col-md-2">
       <div class="d-flex">
         <i
@@ -69,8 +69,8 @@
     </div>
   </nav>
 
-  <div class="col-md-12 d-flex">
-    <div class="d-flex vh-100">
+  <div class="col-md-12 d-flex mt-5">
+    <div class="d-flex vh-100 mt-2" >
       <div class="side-panel">
         <button
           class="btn m-2 normal
@@ -114,6 +114,7 @@
             </div>
           </li>
         </ul>
+
         <div class="d-flex justify-content-evenly align-items-center">
           <i
             class="bi bi-plus"
@@ -125,128 +126,111 @@
             <span style="font-size: 16px">Add Labels</span>
           </span>
         </div>
+
         <div
-          class="accordion accordion mt-3"
-          id="accordionFlushExample"
-          ng-show="showDiv">
-          <div class="accordion-item" ng-repeat="label in parentLabel">
-            <h2 class="accordion-header d-flex" ng-click="sendLabel(label.id)">
-              <button
-                class="accordion-button collapsed navbar"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne{{$index}}"
-                aria-expanded="false"
-                aria-controls="flush-collapseOne">
-                {{label.value}}
-              </button>
-              <div class="navbar">
-                <div class="dropdown">
-                  <i
-                    class="bi bi-three-dots-vertical"
-                    data-bs-toggle="dropdown"
-                    style="font-size: 18px">
-                  </i>
-                  <ul class="dropdown-menu" style="background-color: #f6f8fc">
-                    <li
-                      class="d-flex justify-content-center align-items-center navbar"
+        class="mt-3"
+        ng-show="showDiv">
+        <div ng-repeat="label in parentLabel">
+          <div class="col-md-10 d-flex justify-content-between" ng-click="sendLabel(label.id)">
+            <ul class="col-md-12" style="list-style: none;">
+              <li>
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <div>
+
+                    </div>
+                    <div>
+                      {{label.value}}
+                    </div>
+                  </div>
+                  <div>
+                    <div class="dropdown">
+                      <i
+                      id="dropdownMenuButton"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      class="bi bi-three-dots-vertical"
+                      style="font-size: 18px">
+                    </i>
+                    <ul class="dropdown-menu navbars" aria-labelledby="dropdownMenuButton">
+                      <li
+                      class="px-4"
                       ng-click="deleteLabel(label.id)">
                       Delete Label
                     </li>
                     <li
-                      class="d-flex justify-content-center align-items-center navbar"
+                      class="px-4"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal4"
                       ng-click="EditLabels(label.id)">
                       Edit Label
-                    </li>
-                  </ul>
+                    </li> </ul>
+                  </div>
                 </div>
-              </div>
-            </h2>
-            <div
-              id="flush-collapseOne{{$index}}"
-              class="accordion-collapse collapse"
-              data-bs-parent="#accordionFlushExample">
-              <div
-                class="accordion-body navbar d-flex justify-content-between"
-                ng-repeat="child in childLabel">
-                <span> {{child.value}} </span>
-                <div class="dropdown">
-                  <i
-                    class="bi bi-three-dots-vertical"
-                    data-bs-toggle="dropdown"
-                    style="font-size: 18px">
-                  </i>
-                  <ul class="dropdown-menu" style="background-color: #f6f8fc">
-                    <li
-                      class="d-flex justify-content-center align-items-center navbar"
+               </div>
+                <ul ng-repeat="child in childLabel" style="list-style: none;">
+                  <li ng-if="label.id == child.parent">
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        {{child.value}}
+                      </div>
+                      <div>
+                        <div class="dropdown">
+                          <i
+                          id="dropdownMenuButton"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          class="bi bi-three-dots-vertical"
+                          style="font-size: 18px">
+                        </i>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <li
+                      class="px-4"
                       ng-click="deleteLabel(child.id)">
                       Delete Label
                     </li>
                     <li
-                      class="d-flex justify-content-center align-items-center navbar"
-                      ng-click="EditLabels(child.id)"
+                      class="px-4"
                       data-bs-toggle="modal"
-                      data-bs-target="#exampleModal4">
+                      data-bs-target="#exampleModal4"
+                      ng-click="EditLabels(child.id)">
                       Edit Label
                     </li>
-                  </ul>
-                </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div class="navbar">
+              <div class="dropdown">
+                <ul class="dropdown-menu" style="background-color: #f6f8fc">
+                  <li
+                    class="d-flex justify-content-center align-items-center navbar"
+                    ng-click="deleteLabel(label.id)">
+                    Delete Label
+                  </li>
+                  <li
+                    class="d-flex justify-content-center align-items-center navbar"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal4"
+                    ng-click="EditLabels(label.id)">
+                    Edit Label
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    
-    
-    <div
-      class="modal fade"
-      id="exampleModal4"
-      tabindex="-1"
-      aria-labelledby="exampleModal4Label"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <form action="" ng-submit="addLabels()">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModal4Label">Edit label</h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <label for="label">Please enter a label name:</label>
-              <input
-                type="text"
-                id="label"
-                class="form-control"
-                required
-                ng-model="edit" />
-              <label for="nest" class="mt-2">Nest label under</label>
-              <select
-                class="form-select"
-                id="nest"
-                ng-model="select"
-                placeholder="select"
-                ng-options="nest.id as nest.value for nest in parentLabel">
-                <option value="" disabled>Select labels</option>
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
-                Add
-              </button>
-            </div>
-          </form>
-        </div>
+      
       </div>
     </div>
-    <div class="d-flex col-md-11">
-      <div ui-view class="col-md-12 overflow-scroll">
+
+   
+    <div class="d-flex col-md-11 mt-1" style="background-color: #f6f8fc;">
+      <div ui-view class="col-md-12 vh-100 overflow-scroll">
         <table class="table table-hover">
           <tbody>
             <tr
@@ -548,4 +532,52 @@
     </div>
   </div>
 </div>
-
+<div
+class="modal fade"
+id="exampleModal4"
+tabindex="-1"
+aria-labelledby="exampleModal4Label"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <form action="" ng-submit="addLabels()">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModal4Label">
+          Edit label
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="label">Please enter a label name:</label>
+        <input
+          type="text"
+          id="label"
+          class="form-control"
+          required
+          ng-model="edit" />
+        <label for="nest" class="mt-2">Nest label under</label>
+        <select
+          class="form-select"
+          id="nest"
+          ng-model="select"
+          placeholder="select"
+          ng-options="nest.id as nest.value for nest in parentLabel">
+          <option value="" disabled>Select labels</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          data-bs-dismiss="modal">
+          Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

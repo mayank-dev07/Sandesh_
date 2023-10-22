@@ -1,6 +1,7 @@
-<div class="overflow-scroll vh-100">
-  <form action="" ng-submit="createGroup()">
-    <div class="d-flex ms-4 mb-4 mt-4">
+<div class="overflow-scroll vh-100 ">
+  <div class="d-flex justify-content-evenly col-md-12 ">
+    <form action="" ng-submit="createGroup()" class="col-md-9">
+      <div class="d-flex ms-4 mb-4 mt-4">
       <div class="d-flex col-md-7">
         <label for="email" class="form-label"></label>
         <input
@@ -13,9 +14,23 @@
         <button class="btn border" type="submit">Create group</button>
       </div>
     </div>
-  </form>
-  <table class="table table-hover">
-    <tbody>
+  </form> 
+  <div class=" col-md-2 p-2 d-flex justify-content-center align-items-center">
+    <button class="btn border p-3" type="btn" ng-click="viewGroup()">View groups</button>
+  </div>
+</div>
+  <div class="container-fluid mb-5 d-flex justify-content-evenly">
+    <div class="row d-flex justify-content-center col-md-11">
+    <div class="card col-md-2" ng-repeat="user in selectedUsers">
+      <div class="card-body d-flex justify-content-evenly">
+        <span class="card-title">{{user.email}}</span>
+        <i class="bi bi-x-lg" ng-click="remove(user.id)"></i>
+      </div>
+    </div>
+    </div>
+    </div>
+    <table class="table table-hover">
+      <tbody>
       <tr>
         <th>S.no</th>
         <th>User Name</th>
@@ -38,7 +53,7 @@
         </td>
         <td>
           <div>
-            <button class="btn btn-outline-secondary" ng-click="addUser(user.id)">Add to group</button>
+            <button class="btn btn-outline-secondary" ng-click="addUser(user.id, user.email)">Add to group</button>
           </div>
         </td>
       </tr>
