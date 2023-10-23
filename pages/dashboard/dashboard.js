@@ -115,6 +115,12 @@ myApp.controller(
       console.log($scope.email)
       let multiple = []
       email = $scope.email;
+      if(!email){
+        Swal.fire({
+          icon: 'error',
+          title: 'Enter valid email',
+        })
+      }
       let arr = [];
       arr = email.split(',')
       console.log(arr)
@@ -171,6 +177,12 @@ myApp.controller(
         });
         console.log($scope.multiple);
         $scope.myFile = "";
+      }
+      else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Add a file!',
+        })
       }
     };
 

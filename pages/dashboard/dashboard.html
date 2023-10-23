@@ -1,5 +1,5 @@
 <div class="overflow-hidden">
-  <nav class="navbar navbar-expand-lg col-md-12 d-flex position-fixed">
+  <nav class="navbar navbar-expand-lg col-md-12 d-flex position-fixed ">
     <div class="col-md-2">
       <div class="d-flex">
         <i
@@ -12,7 +12,7 @@
           class="img-fluid" />
       </div>
     </div>
-    <div class="col-md-10 d-flex justify-content-between">
+    <div class="col col-md-10 d-flex justify-content-between">
       <div class="col-md-5">
         <form class="d-flex">
           <button
@@ -36,8 +36,6 @@
           </button>
         </form>
       </div>
-
-      <div class="col-md-4"></div>
       <div class="col-md-1">
         <div class="d-flex justify-content-evenly align-items-center">
           <div>
@@ -50,10 +48,15 @@
           </div>
           <div>
             <div class="dropdown">
-              <i
+              <a href="https://support.google.com/mail/answer/6562?hl=en&co=GENIE.Platform%3DDesktop"
+              style="text-decoration: none"
+              class="text-black">
+
+                <i
                 class="bi bi-gear"
                 style="font-size: 20px"
-                data-bs-toggle="dropdown"></i>
+                ></i>
+              </a>
               <ul class="dropdown-menu col-md-1"></ul>
             </div>
           </div>
@@ -69,7 +72,7 @@
     </div>
   </nav>
 
-  <div class="col-md-12 d-flex mt-5">
+  <div class="col-md-12 d-flex mt-5" style="background-color: #f6f8fc;">
     <div class="d-flex vh-100 mt-2" >
       <div class="side-panel">
         <button
@@ -224,13 +227,12 @@
           </div>
         </div>
       </div>
-      
       </div>
     </div>
 
    
-    <div class="d-flex col-md-11 mt-1" style="background-color: #f6f8fc;">
-      <div ui-view class="col-md-12 vh-100 overflow-scroll">
+    <!-- <div class="d-flex col-md-11 mt-1" > -->
+      <div ui-view class="col-md-11 mt-1 vh-100 overflow-scroll" style="background-color: #f6f8fc;">
         <table class="table table-hover">
           <tbody>
             <tr
@@ -300,11 +302,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="col-md-8 d-flex vh-100">
-      <div class="side-panel">
-        lkmkokm
-      </div>
-      </div> -->
 </div>
 
 <div
@@ -373,7 +370,7 @@
               class="btn btn-primary rounded-pill"
               style="background-color: #0b57d0"
               type="submit">
-              send
+              Attach
             </button>
             <div>
               <i
@@ -559,15 +556,6 @@ aria-hidden="true">
           class="form-control"
           required
           ng-model="edit" />
-        <label for="nest" class="mt-2">Nest label under</label>
-        <select
-          class="form-select"
-          id="nest"
-          ng-model="select"
-          placeholder="select"
-          ng-options="nest.id as nest.value for nest in parentLabel">
-          <option value="" disabled>Select labels</option>
-        </select>
       </div>
       <div class="modal-footer">
         <button

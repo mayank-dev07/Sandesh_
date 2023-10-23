@@ -1,43 +1,42 @@
 <div class="container-fluid m-5" >
     <div>
-        <!-- <i class="bi bi-arrow-left-circle" style="font-size: 20px;" ng-click="back()"></i> -->
     </div>
-  <div ng-repeat="details in emailDetails" class="mt-4">
+  <div  class="mt-4">
 <div style="font-size: 20px;" class="d-flex fw-bold">
     <p>
-        {{details.subject}}
+        {{subject}}
     </p>
 </div>
 
     <div class="d-flex col-md-10 justify-content-between align-items-center">
         <div class="d-flex">
             <i class="bi bi-person-circle px-3" style="font-size: 30px;"></i>
-            <h4>{{ details.sendername }}</h4>
+            <h4>{{ sendername }}</h4>
         </div>
         <div>
-            <p>{{details.time}}</p>
+            <p>{{time}}</p>
         </div>
     </div>
     <div>
         <div
-        ng-if="details.image"
+        ng-if="image"
         class="d-flex justify-content-center align-items-center mt-5">
         <img
-        src="https://10.21.82.60:8000/mail/media/{{ details.image }}"
+        src="https://10.21.82.60:8000/mail/media/{{ image }}"
         alt="" />
     </div>
-    <div class="d-flex justify-content-center align-items-center mt-5">
-      {{ details.body}}
+    <div class="d-flex  mt-5">
+      <p ng-bind-html="body" style="font-size: 18px;"></p>
     </div>
       <div
         class="d-flex col-md-5 mt-5">
-        <div class="card" ng-if="details.file">
+        <div class="card" ng-if="file">
           <div class="card-body">
             <a
-              ng-href="https://10.21.82.60:8000/mail/media/{{details.file}}"
+              ng-href="https://10.21.82.60:8000/mail/media/{{file}}"
               download="file"
               ng-click="download()"
-              >{{details.file}}</a
+              >{{file}}</a
             >
           </div>
         </div>
