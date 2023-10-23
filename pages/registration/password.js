@@ -16,6 +16,13 @@ myApp.controller("passwordController", [
         password: $scope.password,
         confirmpassword: $scope.confirmpassword,
       };
+      // if (!$scope.password) {
+      //   Swal.fire({
+      //     icon: "error",
+      //     title: "Enter valid password!",
+      //     text: "Password Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters",
+      //   });
+      // }
       if ($scope.password == $scope.confirmpassword) {
         console.log(data);
         sharedDataFactory.setData(data);
@@ -24,7 +31,7 @@ myApp.controller("passwordController", [
         Swal.fire({
           icon: "error",
           title: "Enter valid password!",
-          text: "Password Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters",
+          text: "Password didn't match",
         });
       }
     };

@@ -1,4 +1,4 @@
-myApp.controller("groupsMailController", function ($http, $scope,$state) {
+myApp.controller("groupsMailController", function ($http, $scope, $state) {
   $scope.selectedUsers = [];
   $http
     .get(apiUrl + "/admin/users/", {
@@ -21,22 +21,29 @@ myApp.controller("groupsMailController", function ($http, $scope,$state) {
     console.log($scope.selectedUsers.length);
     if ($scope.selectedUsers.length >= 0) {
       const arr = $scope.selectedUsers.find((element) => element.id == user.id);
-      if(arr){
-            console.log("tyui");
-        }
-       else {
+      if (arr) {
+        console.log("tyui");
+      } else {
         $scope.selectedUsers.push(user);
       }
     }
     console.log($scope.selectedUsers);
   };
 
-  $scope.remove = function(id){
-    console.log(id)
-    console.log($scope.selectedUsers)
-    $scope.selectedUsers = $scope.selectedUsers.filter((element) => element.id !== id)
-    console.log($scope.selectedUsers)
-  }
+  $scope.remove = function (id) {
+    console.log(id);
+    console.log($scope.selectedUsers);
+    $scope.selectedUsers = $scope.selectedUsers.filter(
+      (element) => element.id !== id
+    );
+    console.log($scope.selectedUsers);
+  };
+  
+  $scope.view = function () {
+    $state.go('dashboard.view')
+    console.log("uybi");
+  };
+
 
   $scope.createGroup = function () {
     let data = {
@@ -52,7 +59,7 @@ myApp.controller("groupsMailController", function ($http, $scope,$state) {
         .then(function (response) {
           console.log(response);
           $scope.selectedUsers = [];
-          $scope.email = ""
+          $scope.email = "";
         })
         .catch(function (error) {
           console.log(error);
@@ -63,9 +70,6 @@ myApp.controller("groupsMailController", function ($http, $scope,$state) {
         title: "Add at least one user in the group",
       });
     }
-    
-    $scope.viewGroup = ()=>{
-      $state.go('groups.view')
-    }
+
   };
 });

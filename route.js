@@ -95,6 +95,11 @@ myApp.config([
         templateUrl: "/pages/Email/Email.html",
         controller: "EmailMailController",
       })
+      .state("dashboard.view", {
+        url: "/view",
+        templateUrl: "/pages/view/view.html",
+        controller: "viewMailController",
+      })
       .state("dashboard.archive", {
         url: "/archive",
         templateUrl: "/pages/archive/archive.html",

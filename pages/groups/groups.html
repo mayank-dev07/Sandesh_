@@ -1,8 +1,8 @@
 <div class="overflow-scroll vh-100 ">
-  <div class="d-flex justify-content-evenly col-md-12 ">
-    <form action="" ng-submit="createGroup()" class="col-md-9">
-      <div class="d-flex ms-4 mb-4 mt-4">
-      <div class="d-flex col-md-7">
+  <div class="d-flex justify-content-evenly mb-3" >
+    <form action="" ng-submit="createGroup()" class="col-md-10">
+      <div class=" mt-4">
+      <div class="d-flex col-md-9">
         <label for="email" class="form-label"></label>
         <input
         type="email"
@@ -11,12 +11,14 @@
         ng-model="email"
         placeholder="Email for the group"
         required />
-        <button class="btn border" type="submit">Create group</button>
+        <div class="d-flex justify-content-center align-items-center">
+          <button class="btn border" type="submit">Create group</button>
+        </div>
       </div>
     </div>
   </form> 
-  <div class=" col-md-2 p-2 d-flex justify-content-center align-items-center">
-    <button class="btn border p-3" type="btn" ng-click="viewGroup()">View groups</button>
+  <div class="col-md-2 d-flex justify-content-center align-items-center">
+    <button class="btn border p-3" ng-click="view()">View groups</button>
   </div>
 </div>
   <div class="container-fluid mb-5 d-flex justify-content-evenly">

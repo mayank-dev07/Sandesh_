@@ -1,0 +1,48 @@
+<div class="overflow-scroll vh-100">
+  <div class="d-flex justify-content-evenly col-md-12">
+    <div class="col-md-2 p-2 d-flex justify-content-center align-items-center">
+      <button class="btn border p-3" type="btn" ng-click="createGroup()">
+        Create group
+      </button>
+    </div>
+  </div>
+  <div>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item" ng-repeat="user in users">
+        <h2 class="accordion-header" ng-click="getUser(user.id)">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne{{$index}}"
+            aria-expanded="false"
+            aria-controls="flush-collapseOne">
+            {{user.group}}
+          </button>
+        </h2>
+        <div
+          id="flush-collapseOne{{$index}}"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body" ng-repeat="use in people">
+            <div class="d-flex">
+              <div class="col-md-1">{{$index +1}}</div>
+              <div class="col-md-3 d-flex">
+                Member Name:- &nbsp; &nbsp;
+                <p>{{use.first_name}}</p>
+                <p>{{use.last_name}}</p>
+              </div>
+              <div class="col-md-7 d-flex">
+                Member Email:-&nbsp; &nbsp;
+                <p>{{use.email}}</p>
+              </div>
+              <div>
+                <button class="btn btn-outline-danger" ng-click="remove(use.id,user.id)">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
