@@ -112,26 +112,26 @@ myApp.controller(
     };
 
     $scope.sendMail = function () {
-      console.log($scope.email)
-      let multiple = []
+      console.log($scope.email);
+      let multiple = [];
       email = $scope.email;
-      if(!email){
+      if (!email) {
         Swal.fire({
-          icon: 'error',
-          title: 'Enter valid email',
-        })
+          icon: "error",
+          title: "Enter valid email",
+        });
       }
       let arr = [];
-      arr = email.split(',')
-      console.log(arr)
-      for(let i=0;i<arr.length;i++){
-        let data ={
-          email : arr[i]
-        }
-        multiple.push(data)
+      arr = email.split(",");
+      console.log(arr);
+      for (let i = 0; i < arr.length; i++) {
+        let data = {
+          email: arr[i],
+        };
+        multiple.push(data);
       }
-      console.log(multiple)
-      
+      console.log(multiple);
+
       var subject = $scope.subject;
       var body = $scope.text;
 
@@ -161,6 +161,7 @@ myApp.controller(
           $scope.files = [];
           $scope.multiple = [];
           console.log($scope.files);
+          $rootScope.$broadcast("mailSent");
         })
         .catch(function (error) {
           console.log(error);
@@ -177,43 +178,68 @@ myApp.controller(
         });
         console.log($scope.multiple);
         $scope.myFile = "";
-      }
-      else{
+      } else {
         Swal.fire({
-          icon: 'error',
-          title: 'Add a file!',
-        })
+          icon: "error",
+          title: "Add a file!",
+        });
       }
     };
 
     $scope.draftMail = function () {
-      var email = $scope.email;
+      console.log($scope.email);
+      let multiple = [];
+      email = $scope.email;
+      if (!email) {
+        Swal.fire({
+          icon: "error",
+          title: "Enter valid email",
+        });
+      }
+      let arr = [];
+      arr = email.split(",");
+      console.log(arr);
+      for (let i = 0; i < arr.length; i++) {
+        let data = {
+          email: arr[i],
+        };
+        multiple.push(data);
+      }
+      console.log(multiple);
+
       var subject = $scope.subject;
       var body = $scope.text;
 
-      if (email || subject || body) {
-        var formData = new FormData();
-        formData.append("email", email);
-        formData.append("subject", subject);
-        formData.append("body", body);
-
-        console.log(formData);
-
-        $http
-          .post(apiUrl + "/mail/draft/", formData, {
-            headers: { "Content-Type": undefined },
-            withCredentials: true,
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        $scope.email = "";
-        $scope.subject = "";
-        $scope.text = "";
+      var formData = new FormData();
+      console.log($scope.files);
+      for (let i = 0; i < $scope.files.length; i++) {
+        formData.append("file", $scope.files[i]);
       }
+      formData.append("emails", JSON.stringify(multiple));
+      formData.append("subject", subject);
+      formData.append("body", body);
+
+      console.log(formData);
+
+      $http
+        .post(apiUrl + "/mail/draft/", formData, {
+          headers: { "Content-Type": undefined },
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          Swal.fire(response.data.message, "success");
+          $scope.email = "";
+          $scope.subject = "";
+          $scope.text = "";
+          $scope.file = "";
+          $scope.files = [];
+          $scope.multiple = [];
+          console.log($scope.files);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
 
     $scope.deleteMail = () => {
@@ -231,7 +257,7 @@ myApp.controller(
 
     function showMails($scope, $http) {
       $http
-        .get(apiUrl + "/mail/show/", {
+        .get(apiUrl + "/mail/inbox/", {
           withCredentials: true,
         })
         .then(function (response) {
@@ -249,13 +275,14 @@ myApp.controller(
         });
     }
 
-    $scope.starred = function (id) {
+    $scope.starred = function (id, self) {
       console.log(id);
       var data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/starred/", data, {
+        .put(apiUrl + "/mail/starreds/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -267,12 +294,14 @@ myApp.controller(
         });
     };
 
-    $scope.select = function (id) {
+    $scope.select = function (id, self) {
+      console.log(id);
       var data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/select/", data, {
+        .put(apiUrl + "/mail/selects/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -290,13 +319,14 @@ myApp.controller(
       $scope.showDiv = !$scope.showDiv;
     };
 
-    $scope.Archive = function (id) {
+    $scope.Archive = function (id, self) {
       console.log(id);
       let data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/archive/", data, {
+        .put(apiUrl + "/mail/archivemail/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -308,13 +338,14 @@ myApp.controller(
         });
     };
 
-    $scope.delete = function (id) {
+    $scope.delete = function (id, self) {
       console.log(id);
       let data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/delete/", data, {
+        .put(apiUrl + "/mail/deletemail/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -326,13 +357,14 @@ myApp.controller(
         });
     };
 
-    $scope.read = function (id) {
+    $scope.read = function (id, self) {
       console.log(id);
       let data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/read/", data, {
+        .put(apiUrl + "/mail/readmail/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -344,13 +376,14 @@ myApp.controller(
         });
     };
 
-    $scope.unread = function (id) {
+    $scope.unread = function (id, self) {
       console.log(id);
       let data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/unread/", data, {
+        .put(apiUrl + "/mail/unreadmail/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -375,14 +408,16 @@ myApp.controller(
           console.log(error);
         });
     };
-    $scope.show = function (id) {
+    $scope.show = function (id, self) {
       sharedDataService.setId(id);
+      console.log(self);
       $state.go("dashboard.Email");
       let data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/read/", data, {
+        .put(apiUrl + "/mail/readmail/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -441,6 +476,41 @@ myApp.controller(
         $scope.edit = data.value;
       }
     };
+
+    let data = {};
+
+    $scope.modalParameters = function (id, self) {
+      data = {
+        id: id,
+        self: self,
+      };
+      console.log(data);
+    };
+
+    $scope.Snooze = function () {
+      var Time = new Date($scope.time);
+      (data.date = formatDate($scope.date)),
+        (data.time = Time.toLocaleTimeString()),
+        console.log(data);
+      $http
+        .get(apiUrl + "/mail/snooze", data, {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+
+    function formatDate(dob) {
+      var date = new Date(dob);
+      var year = date.getFullYear();
+      var month = String(date.getMonth() + 1).padStart(2, "0");
+      var day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
   }
 );
 myApp.directive("fileModel", [

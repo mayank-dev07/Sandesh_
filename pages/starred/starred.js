@@ -1,14 +1,15 @@
 myApp.controller("starredMailController", function ($http, $scope, $rootScope,sharedDataService,$state) {
   function starredMail($http, $scope) {
+    $scope.starred = []
     $http
-      .get(apiUrl + "/mail/starredemail/", {
+      .get(apiUrl + "/mail/starredemails/", {
         withCredentials: true,
       })
       .then(function (response) {
-        console.log(response.data);
-        $scope.starred = response.data[0]
-          .concat(response.data[1])
-          .concat(response.data[2]);
+        $scope.starred = response.data
+        console.log($scope.starred);
+        //   .concat(response.data[1])
+        //   .concat(response.data[2]);
         if ($scope.starred.length == 0) {
           Swal.fire({
             icon: "error",
@@ -23,13 +24,13 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
 
   starredMail($http, $scope);
 
-  $scope.select = function (id) {
-    console.log(id);
+  $scope.select = function (id,self) {
     var data = {
       id: id,
+      self:self
     };
     $http
-      .put(apiUrl + "/mail/starred/", data, {
+      .put(apiUrl + "/mail/starreds/", data, {
         withCredentials: true,
       })
       .then(function (response) {
@@ -42,12 +43,13 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
       });
   };
 
-  $scope.click = function (id) {
+  $scope.click = function (id,self) {
     var data = {
       id: id,
+      self:self
     };
     $http
-      .put(apiUrl + "/mail/select/", data, {
+      .put(apiUrl + "/mail/selects/", data, {
         withCredentials: true,
       })
       .then(function (response) {
@@ -58,13 +60,13 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
         console.log(error);
       });
   };
-  $scope.delete = function (id) {
-    console.log(id);
-    let data = {
+  $scope.delete = function (id,self) {
+    var data = {
       id: id,
+      self:self
     };
     $http
-      .put(apiUrl + "/mail/delete/", data, {
+      .put(apiUrl + "/mail/deletemail/", data, {
         withCredentials: true,
       })
       .then(function (response) {
@@ -75,13 +77,13 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
         console.log(error);
       });
   };
-  $scope.Archive = function (id) {
-    console.log(id);
-    let data = {
+  $scope.Archive =function (id,self) {
+    var data = {
       id: id,
+      self:self
     };
     $http
-      .put(apiUrl + "/mail/archive/", data, {
+      .put(apiUrl + "/mail/archivemail/", data, {
         withCredentials: true,
       })
       .then(function (response) {
@@ -92,13 +94,13 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
       });
   };
 
-  $scope.read = function (id) {
-    console.log(id);
-    let data = {
+  $scope.read = function (id,self) {
+    var data = {
       id: id,
+      self:self
     };
     $http
-      .put(apiUrl + "/mail/read/", data, {
+      .put(apiUrl + "/mail/readmail/", data, {
         withCredentials: true,
       })
       .then(function (response) {
@@ -110,13 +112,13 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
       });
   };
 
-  $scope.unread = function (id) {
-    console.log(id);
-    let data = {
+  $scope.unread = function (id,self) {
+    var data = {
       id: id,
+      self:self
     };
     $http
-      .put(apiUrl + "/mail/unread/", data, {
+      .put(apiUrl + "/mail/unreadmail/", data, {
         withCredentials: true,
       })
       .then(function (response) {
@@ -134,7 +136,7 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
           id: id,
         };
         $http
-          .put(apiUrl + "/mail/read/", data, {
+          .put(apiUrl + "/mail/readmail/", data, {
             withCredentials: true,
           })
           .then(function (response) {

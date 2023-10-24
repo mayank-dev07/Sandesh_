@@ -7,7 +7,7 @@ myApp.controller("archiveMailController",
           })
           .then(function (response) {
             console.log(response.data);
-            $scope.archives = response.data[0].concat(response.data[1].concat(response.data[2]));
+            $scope.archives = response.data;
             if($scope.archives.length == 0){
                 Swal.fire({
                   icon: 'error',
@@ -28,7 +28,7 @@ myApp.controller("archiveMailController",
           id: id,
         };
         $http
-          .put(apiUrl + "/mail/starred/", data, {
+          .put(apiUrl + "/mail/starreds/", data, {
             withCredentials: true,
           })
           .then(function (response) {
@@ -45,7 +45,7 @@ myApp.controller("archiveMailController",
           id: id,
         };
         $http
-          .put(apiUrl + "/mail/select/", data, {
+          .put(apiUrl + "/mail/selects/", data, {
             withCredentials: true,
           })
           .then(function (response) {
@@ -61,7 +61,7 @@ myApp.controller("archiveMailController",
           let data={
             id :id
           }
-          $http.put(apiUrl + "/mail/delete/",data,{
+          $http.put(apiUrl + "/mail/deletemail/",data,{
             withCredentials:true
           })
           .then(function(response){
@@ -77,7 +77,7 @@ myApp.controller("archiveMailController",
             let data = {
                 id : id
             }
-            $http.put(apiUrl + '/mail/unarchive/',data,{
+            $http.put(apiUrl + '/mail/unarchivemail/',data,{
                 withCredentials:true
             })
             .then(function(response){
@@ -94,7 +94,7 @@ myApp.controller("archiveMailController",
           let data={
             id :id
           }
-          $http.put(apiUrl + "/mail/read/",data,{
+          $http.put(apiUrl + "/mail/readmail/",data,{
             withCredentials:true
           })
           .then(function(response){
@@ -111,7 +111,7 @@ myApp.controller("archiveMailController",
           let data={
             id :id
           }
-          $http.put(apiUrl + "/mail/unread/",data,{
+          $http.put(apiUrl + "/mail/unreadmail/",data,{
             withCredentials:true
           })
           .then(function(response){
@@ -130,7 +130,7 @@ myApp.controller("archiveMailController",
                 id: id,
               };
               $http
-                .put(apiUrl + "/mail/read/", data, {
+                .put(apiUrl + "/mail/readmail/", data, {
                   withCredentials: true,
                 })
                 .then(function (response) {

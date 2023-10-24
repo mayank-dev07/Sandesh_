@@ -3,61 +3,66 @@
       <tbody>
         <tr
           ng-repeat="archive in archives | filter: { subject:searchname }"
-          ng-class="{ 'table-primary': archive.read}"
-          ng-mouseover="row = archive.id"
+          ng-class="{ 'table-primary': archive.details.read}"
+          ng-mouseover="row = archive.sender.id"
           ng-mouseleave="row = -1">
           <td class="">
             <div class="d-flex justify-content-between px-2">
               <div class="d-flex justify-content-center">
-                <div id="square-icons" ng-click="click(archive.id)">
-                  <div ng-if="!archive.select">
+                <div id="square-icons" ng-click="click(archive.sender.id)">
+                  <div ng-if="!archive.details.select">
                     <i class="bi bi-square"></i>
                   </div>
-                  <div ng-if="archive.select">
+                  <div ng-if="archive.details.select">
                     <i class="bi bi-check-square"></i>
                   </div>
                 </div>
-                <div id="star-icons" class="px-3" ng-click="select(archive.id)">
-                  <div ng-if="!archive.starred">
+                <div id="star-icons" class="px-3" ng-click="select(archive.sender.id)">
+                  <div ng-if="!archive.details.starred">
                     <i class="bi bi-star"></i>
                   </div>
-                  <div ng-if="archive.starred">
+                  <div ng-if="archive.details.starred">
                     <i class="bi bi-star-fill" style="color: #f7ca4b"></i>
                   </div>
                 </div>
                 <div
                   class="d-flex"
-                  ng-click="show(archive.id)">
-  
-                  <div ng-if="archive.subject != 'undefined'">
-                    <div class="px-2">{{ archive.subject}} -</div>
+                  ng-click="show(archive.sender.id)">
+                  <div ng-if="archive.sender.draft == false">
+                    <p>{{archive.sender.sendername}}</p>
                   </div>
-                  <div ng-if="archive.subject == 'undefined'">
+                  <div ng-if="archive.sender.draft">
+                    <p style="color: red">Draft</p>
+                  </div>
+                  <div ng-if="archive.sender.subject != 'undefined'">
+                    <div class="px-2">{{archive.sender.subject}} -</div>
+                  </div>
+                  <div ng-if="archive.sender.subject == 'undefined'">
                     <div class="px-2">(no-subject) -</div>
                   </div>
-                  <div ng-if="archive.body != 'undefined'">
+                  <div ng-if="archive.sender.body != 'undefined'">
                     <p class="display-6" style="font-size: 16px">
-                      {{archive.body}}
+                      {{archive.sender.body}}
                     </p>
                   </div>
-                  <div ng-if="archive.body == 'undefined'">
+                  <div ng-if="archive.sender.body == 'undefined'">
                     <p class="display-6" style="font-size: 16px">no-body</p>
                   </div>
                 </div>
               </div>
               <div
                 class="d-flex justify-content-evenly align-items-center me-5"
-                ng-show="row == archive.id || archive.select">
-                <div class="px-2" ng-click="unArchive(archive.id)">
+                ng-show="row == archive.sender.id || archive.details.select">
+                <div class="px-2" ng-click="unArchive(archive.sender.id)">
                     <i class="bi bi-archive-fill"></i>
                   </div>
-                <div class="px-2" ng-click="delete(archive.id)">
+                <div class="px-2" ng-click="delete(archive.sender.id)">
                   <i class="bi bi-trash"></i>
                 </div>
-                <div class="px-2" ng-click="read(archive.id)" ng-if="!archive.read">
+                <div class="px-2" ng-click="read(archive.sender.id)" ng-if="!archive.details.read">
                   <i class="bi bi-envelope-open"></i>
                 </div>
-                <div class="px-2" ng-click="unread(archive.id)" ng-if="archive.read">
+                <div class="px-2" ng-click="unread(archive.sender.id)" ng-if="archive.details.read">
                   <i class="bi bi-envelope"></i>
                 </div>
               </div>

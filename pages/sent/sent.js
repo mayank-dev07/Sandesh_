@@ -1,8 +1,9 @@
-myApp.controller("sentMailController",
-  function ($http, $scope,sharedDataService,$state) {
+myApp.controller(
+  "sentMailController",
+  function ($http, $scope, sharedDataService, $state, $rootScope) {
     function sentMail($http, $scope) {
       $http
-        .get(apiUrl + "/mail/sent/", {
+        .get(apiUrl + "/mail/sentemails/", {
           withCredentials: true,
         })
         .then(function (response) {
@@ -20,15 +21,20 @@ myApp.controller("sentMailController",
         });
     }
 
+    $rootScope.$on("mailSent", function () {
+      sentMail($http, $scope);
+    });
+
     sentMail($http, $scope);
 
-    $scope.select = function (id) {
+    $scope.select = function (id, self) {
       console.log(id);
       var data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/starred/", data, {
+        .put(apiUrl + "/mail/starreds/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -40,12 +46,14 @@ myApp.controller("sentMailController",
         });
     };
 
-    $scope.click = function (id) {
+    $scope.click = function (id, self) {
+      console.log(id);
       var data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/select/", data, {
+        .put(apiUrl + "/mail/selects/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -56,13 +64,14 @@ myApp.controller("sentMailController",
           console.log(error);
         });
     };
-    $scope.delete = function (id) {
+    $scope.delete = function (id, self) {
       console.log(id);
-      let data = {
+      var data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/delete/", data, {
+        .put(apiUrl + "/mail/deletemail/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -74,13 +83,14 @@ myApp.controller("sentMailController",
         });
     };
 
-    $scope.Archive = function (id) {
+    $scope.Archive = function (id, self) {
       console.log(id);
-      let data = {
+      var data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/archive/", data, {
+        .put(apiUrl + "/mail/archivemail/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -92,13 +102,14 @@ myApp.controller("sentMailController",
         });
     };
 
-    $scope.read = function (id) {
+    $scope.read = function (id, self) {
       console.log(id);
-      let data = {
+      var data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/read/", data, {
+        .put(apiUrl + "/mail/readmail/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -110,13 +121,14 @@ myApp.controller("sentMailController",
         });
     };
 
-    $scope.unread = function (id) {
+    $scope.unread = function (id, self) {
       console.log(id);
-      let data = {
+      var data = {
         id: id,
+        self: self,
       };
       $http
-        .put(apiUrl + "/mail/unread/", data, {
+        .put(apiUrl + "/mail/unreadmail/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -128,23 +140,22 @@ myApp.controller("sentMailController",
         });
     };
     $scope.show = function (id) {
-      sharedDataService.setId(id)
-      $state.go('dashboard.Email')
-          let data = {
-            id: id,
-          };
-          $http
-            .put(apiUrl + "/mail/read/", data, {
-              withCredentials: true,
-            })
-            .then(function (response) {
-              console.log(response);
-              sentMail($http, $scope);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        
+      sharedDataService.setId(id);
+      $state.go("dashboard.Email");
+      let data = {
+        id: id,
+      };
+      $http
+        .put(apiUrl + "/mail/readmail/", data, {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          sentMail($http, $scope);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
-  },
+  }
 );

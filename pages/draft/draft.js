@@ -2,7 +2,7 @@ myApp.controller("draftMailController",
   function ($http, $scope,sharedDataService,$state) {
     function draftMail($http, $scope) {
       $http
-        .get(apiUrl + "/mail/draftemail/", {
+        .get(apiUrl + "/mail/draftemails/", {
           withCredentials: true,
         })
         .then(function (response) {
@@ -22,13 +22,14 @@ myApp.controller("draftMailController",
 
     draftMail($http, $scope);
 
-    $scope.select = function (id) {
+    $scope.select = function (id,self) {
       console.log(id);
       var data = {
         id: id,
+        self: self
       };
       $http
-        .put(apiUrl + "/mail/starred/", data, {
+        .put(apiUrl + "/mail/starreds/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -40,12 +41,14 @@ myApp.controller("draftMailController",
         });
     };
 
-    $scope.click = function (id) {
+    $scope.click = function (id,self) {
+      console.log(id);
       var data = {
         id: id,
+        self: self
       };
       $http
-        .put(apiUrl + "/mail/select/", data, {
+        .put(apiUrl + "/mail/selects/", data, {
           withCredentials: true,
         })
         .then(function (response) {
@@ -56,12 +59,13 @@ myApp.controller("draftMailController",
           console.log(error);
         });
     };
-    $scope.delete = function(id){
-        console.log(id)
-        let data={
-          id :id
-        }
-        $http.put(apiUrl + "/mail/delete/",data,{
+    $scope.delete = function (id,self) {
+      console.log(id);
+      var data = {
+        id: id,
+        self: self
+      };
+        $http.put(apiUrl + "/mail/deletemail/",data,{
           withCredentials:true
         })
         .then(function(response){
@@ -72,12 +76,13 @@ myApp.controller("draftMailController",
           console.log(error)
         })
       }
-      $scope.Archive = function(id){
+      $scope.Archive = function (id,self) {
         console.log(id);
-        let data = {
-          id:id
-        }
-        $http.put(apiUrl + '/mail/archive/',data,{
+        var data = {
+          id: id,
+          self: self
+        };
+        $http.put(apiUrl + '/mail/archivemail/',data,{
           withCredentials:true
         })
         .then(function(response){
@@ -89,12 +94,13 @@ myApp.controller("draftMailController",
         })
       }
   
-      $scope.read = function(id){
-        console.log(id)
-        let data={
-          id :id
-        }
-        $http.put(apiUrl + "/mail/read/",data,{
+      $scope.read = function (id,self) {
+        console.log(id);
+        var data = {
+          id: id,
+          self: self
+        };
+        $http.put(apiUrl + "/mail/readmail/",data,{
           withCredentials:true
         })
         .then(function(response){
@@ -106,12 +112,13 @@ myApp.controller("draftMailController",
         })
       }
   
-      $scope.unread = function(id){
-        console.log(id)
-        let data={
-          id :id
-        }
-        $http.put(apiUrl + "/mail/unread/",data,{
+      $scope.unread = function (id,self) {
+        console.log(id);
+        var data = {
+          id: id,
+          self: self
+        };
+        $http.put(apiUrl + "/mail/unreadmail/",data,{
           withCredentials:true
         })
         .then(function(response){
@@ -129,7 +136,7 @@ myApp.controller("draftMailController",
               id: id,
             };
             $http
-              .put(apiUrl + "/mail/read/", data, {
+              .put(apiUrl + "/mail/readmail/", data, {
                 withCredentials: true,
               })
               .then(function (response) {

@@ -2,59 +2,59 @@
   <table class="table table-hover">
     <tbody>
       <tr
-        ng-repeat="star in starred | filter: { sendername:searchname }"
-        ng-class="{ 'table-primary': star.read }"
-        ng-mouseover="row = star.id"
+        ng-repeat="star in starred "
+        ng-class="{ 'table-primary': star.details.read }"
+        ng-mouseover="row = star.sender.id"
         ng-mouseleave="row = -1">
         <td class="">
           <div class="d-flex justify-content-between px-2">
             <div class="d-flex justify-content-center">
-              <div id="square-icons" ng-click="click(star.id)">
-                <div ng-if="!star.select">
+              <div id="square-icons" ng-click="click(star.sender.id,star.details.self)">
+                <div ng-if="!star.details.select">
                   <i class="bi bi-square"></i>
                 </div>
-                <div ng-if="star.select">
+                <div ng-if="star.details.select">
                   <i class="bi bi-check-square"></i>
                 </div>
               </div>
-              <div id="star-icons" class="px-3" ng-click="select(star.id)">
-                <div ng-if="!star.starred">
+              <div id="star-icons" class="px-3" ng-click="select(star.sender.id,star.details.self)">
+                <div ng-if="!star.details.starred">
                   <i class="bi bi-star"></i>
                 </div>
-                <div ng-if="star.starred">
+                <div ng-if="star.details.starred">
                   <i class="bi bi-star-fill" style="color: #f7ca4b"></i>
                 </div>
               </div>
               <div class="d-flex"
-              ng-click="show(star.id)">
-              <div ng-if="star.draft == false">
-                <p>{{star.sendername}}</p>
+              ng-click="show(star.sender.id)">
+              <div ng-if="star.sender.draft == false">
+                <p>{{star.sender.sendername}}</p>
               </div>
-              <div ng-if="star.draft">
+              <div ng-if="star.sender.draft">
                 <p style="color: red">Draft</p>
               </div>
-              <div ng-if="star.sent">
+              <div ng-if="star.sender.sent">
                 <p>(me)</p>
               </div>
               <div class="d-flex ms-4">
-                <div class="px-2">{{ star.subject}} -</div>
-                <p class="display-6" style="font-size: 16px">{{star.body}}</p>
+                <div class="px-2">{{ star.sender.subject}} -</div>
+                <p class="display-6" style="font-size: 16px">{{star.sender.body}}</p>
               </div>
             </div>
             </div>
             <div
               class="d-flex justify-content-evenly align-items-center me-5"
-              ng-show="row == star.id || star.select">
-              <div class="px-2" ng-click="Archive(star.id)">
+              ng-show="row == star.sender.id || star.details.select">
+              <div class="px-2" ng-click="Archive(star.sender.id,star.details.self)">
                 <i class="bi bi-archive"></i>
               </div>
-              <div class="px-2" ng-click="delete(star.id)">
+              <div class="px-2" ng-click="delete(star.sender.id,star.details.self)">
                 <i class="bi bi-trash"></i>
               </div>
-              <div class="px-2" ng-click="read(star.id)" ng-if="!star.read">
+              <div class="px-2" ng-click="read(star.sender.id,star.details.self)" ng-if="!star.details.read">
                 <i class="bi bi-envelope-open"></i>
               </div>
-              <div class="px-2" ng-click="unread(star.id)" ng-if="star.read">
+              <div class="px-2" ng-click="unread(star.sender.id,star.details.self)" ng-if="star.details.read">
                 <i class="bi bi-envelope"></i>
               </div>
             </div>

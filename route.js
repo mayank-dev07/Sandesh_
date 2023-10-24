@@ -110,7 +110,7 @@ myApp.config([
   },
 ]);
 
-const apiUrl = "https://10.21.82.60:8000";
+const apiUrl = "https://ca8d-103-72-7-14.ngrok-free.app";
 
 myApp.factory("sharedDataFactory", function () {
   var sharedData = {};

@@ -4,64 +4,64 @@ rows="3">
     <tbody>
       <tr
         ng-repeat="sent in sents | filter: { receiver:searchname }"
-        ng-class="{ 'table-primary': sent.read}"
-        ng-mouseover="row = sent.id"
+        ng-class="{ 'table-primary': sent.details.read}"
+        ng-mouseover="row = sent.sender.id"
         ng-mouseleave="row = -1">
         <td class="">
           <div class="d-flex justify-content-between px-2">
             <div class="d-flex justify-content-center">
-              <div id="square-icons" ng-click="click(sent.id)">
-                <div ng-if="!sent.select">
+              <div id="square-icons" ng-click="click(sent.sender.id,sent.details.self)">
+                <div ng-if="!sent.details.select">
                   <i class="bi bi-square"></i>
                 </div>
-                <div ng-if="sent.select">
+                <div ng-if="sent.details.select">
                   <i class="bi bi-check-square"></i>
                 </div>
               </div>
-              <div id="star-icons" class="px-3" ng-click="select(sent.id)">
-                <div ng-if="!sent.starred">
+              <div id="star-icons" class="px-3" ng-click="select(sent.sender.id,sent.details.self)">
+                <div ng-if="!sent.details.starred">
                   <i class="bi bi-star"></i>
                 </div>
-                <div ng-if="sent.starred">
+                <div ng-if="sent.details.starred">
                   <i class="bi bi-star-fill" style="color: #f7ca4b"></i>
                 </div>
               </div>
               <div class="d-flex"
-              ng-click="show(sent.id)"
+              ng-click="show(sent.sender.id)"
                >
               <div class="px-2" ng-if="sent.receiver != 'undefined'">
-                {{sent.receiver}}
+                {{sent.reciver.receiver}}
               </div>
               <div class="px-2" ng-if="sent.receiver == 'undefined'">
                 no-mail
               </div>
               <div class="d-flex ms-4">
-                  <div ng-if="sent.subject != 'undefined'">
-                      <div class="px-2">{{ sent.subject}} -</div>
+                  <div ng-if="sent.sender.subject != 'undefined'">
+                      <div class="px-2">{{sent.sender.subject}} -</div>
                     </div>
-                    <div ng-if="sent.subject == 'undefined'">
+                    <div ng-if="sent.sender.subject == 'undefined'">
                         <div class="px-2">(no-subject) -</div>
                     </div>
-                    <div ng-if="sent.body != 'undefined'">
-                        <p class="display-6" style="font-size: 16px">{{sent.body}}</p>
+                    <div ng-if="sent.sender.body != 'undefined'">
+                        <p class="display-6" style="font-size: 16px">{{sent.sender.body}}</p>
                     </div>
-                    <div ng-if="sent.body == 'undefined'">
+                    <div ng-if="sent.sender.body == 'undefined'">
                         <p class="display-6" style="font-size: 16px">no-body</p>
                     </div>
               </div>
               </div>
             </div>
-            <div class="d-flex justify-content-evenly align-items-center me-5" ng-show="row == sent.id || sent.select"> 
-              <div class="px-2" ng-click="Archive(sent.id)">
+            <div class="d-flex justify-content-evenly align-items-center me-5" ng-show="row == sent.sender.id || sent.details.select"> 
+              <div class="px-2" ng-click="Archive(sent.sender.id,sent.details.self)">
                 <i class="bi bi-archive"></i>
               </div>
-                <div class="px-2" ng-click="delete(sent.id)">
+                <div class="px-2" ng-click="delete(sent.sender.id,sent.details.self)">
                   <i class="bi bi-trash"></i>
                 </div>
-                <div class="px-2" ng-click="read(sent.id)" ng-if="!sent.read">
+                <div class="px-2" ng-click="read(sent.sender.id,sent.details.self)" ng-if="!sent.details.read">
                   <i class="bi bi-envelope-open"></i>
                 </div>
-                <div class="px-2" ng-click="unread(sent.id)" ng-if="sent.read">
+                <div class="px-2" ng-click="unread(sent.sender.id,sent.details.self)" ng-if="sent.details.read">
                   <i class="bi bi-envelope"></i>
                 </div>
               </div>

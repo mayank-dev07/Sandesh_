@@ -1,0 +1,74 @@
+<div class="overflow-scroll "
+rows="3">
+  <table class="table table-hover">
+    <tbody>
+      <tr
+        ng-repeat="snooze in snoozes | filter: { receiver:searchname }"
+        ng-class="{ 'table-primary': snooze.details.read}"
+        ng-mouseover="row = snooze.sender.id"
+        ng-mouseleave="row = -1">
+        <td class="">
+          <div class="d-flex justify-content-between px-2">
+            <div class="d-flex justify-content-center">
+              <div id="square-icons" ng-click="click(snooze.sender.id,snooze.details.self)">
+                <div ng-if="!snooze.details.select">
+                  <i class="bi bi-square"></i>
+                </div>
+                <div ng-if="snooze.details.select">
+                  <i class="bi bi-check-square"></i>
+                </div>
+              </div>
+              <div id="star-icons" class="px-3" ng-click="select(snooze.sender.id,snooze.details.self)">
+                <div ng-if="!snooze.details.starred">
+                  <i class="bi bi-star"></i>
+                </div>
+                <div ng-if="snooze.details.starred">
+                  <i class="bi bi-star-fill" style="color: #f7ca4b"></i>
+                </div>
+              </div>
+              <div class="d-flex"
+              ng-click="show(snooze.sender.id)"
+               >
+              <div class="px-2" ng-if="snooze.receiver != 'undefined'">
+                {{snooze.reciver.receiver}}
+              </div>
+              <div class="px-2" ng-if="snooze.receiver == 'undefined'">
+                no-mail
+              </div>
+              <div class="d-flex ms-4">
+                  <div ng-if="snooze.sender.subject != 'undefined'">
+                      <div class="px-2">{{snooze.sender.subject}} -</div>
+                    </div>
+                    <div ng-if="snooze.sender.subject == 'undefined'">
+                        <div class="px-2">(no-subject) -</div>
+                    </div>
+                    <div ng-if="snooze.sender.body != 'undefined'">
+                        <p class="display-6" style="font-size: 16px">{{snooze.sender.body}}</p>
+                    </div>
+                    <div ng-if="snooze.sender.body == 'undefined'">
+                        <p class="display-6" style="font-size: 16px">no-body</p>
+                    </div>
+              </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-evenly align-items-center me-5" ng-show="row == snooze.sender.id || snooze.details.select"> 
+              <div class="px-2" ng-click="Archive(snooze.sender.id,snooze.details.self)">
+                <i class="bi bi-archive"></i>
+              </div>
+                <div class="px-2" ng-click="delete(snooze.sender.id,snooze.details.self)">
+                  <i class="bi bi-trash"></i>
+                </div>
+                <div class="px-2" ng-click="read(snooze.sender.id,snooze.details.self)" ng-if="!snooze.details.read">
+                  <i class="bi bi-envelope-open"></i>
+                </div>
+                <div class="px-2" ng-click="unread(snooze.sender.id,snooze.details.self)" ng-if="snooze.details.read">
+                  <i class="bi bi-envelope"></i>
+                </div>
+              </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

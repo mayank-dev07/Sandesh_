@@ -3,64 +3,64 @@
     <tbody>
       <tr
         ng-repeat="draft in drafts | filter: { subject:searchname }"
-        ng-class="{ 'table-primary': draft.read}"
-        ng-mouseover="row = draft.id"
+        ng-class="{ 'table-primary': draft.details.read}"
+        ng-mouseover="row = draft.sender.id"
         ng-mouseleave="row = -1">
         <td class="">
           <div class="d-flex justify-content-between px-2">
             <div class="d-flex justify-content-center">
-              <div id="square-icons" ng-click="click(draft.id)">
-                <div ng-if="!draft.select">
+              <div id="square-icons" ng-click="click(draft.sender.id,draft.details.self)">
+                <div ng-if="!draft.details.select">
                   <i class="bi bi-square"></i>
                 </div>
-                <div ng-if="draft.select">
+                <div ng-if="draft.details.select">
                   <i class="bi bi-check-square"></i>
                 </div>
               </div>
-              <div id="star-icons" class="px-3" ng-click="select(draft.id)">
-                <div ng-if="!draft.starred">
+              <div id="star-icons" class="px-3" ng-click="select(draft.sender.id,draft.details.self)">
+                <div ng-if="!draft.details.starred">
                   <i class="bi bi-star"></i>
                 </div>
-                <div ng-if="draft.starred">
+                <div ng-if="draft.details.starred">
                   <i class="bi bi-star-fill" style="color: #f7ca4b"></i>
                 </div>
               </div>
               <div
                 class="d-flex"
-                ng-click="show(draft.id)">
+                ng-click="show(draft.sender.id)">
                 <div>
                   <p style="color: red">Draft</p>
                 </div>
 
-                <div ng-if="draft.subject != 'undefined'">
-                  <div class="px-2">{{ draft.subject}} -</div>
+                <div ng-if="draft.sender.subject != 'undefined'">
+                  <div class="px-2">{{draft.sender.subject}} -</div>
                 </div>
-                <div ng-if="draft.subject == 'undefined'">
+                <div ng-if="draft.sender.subject == 'undefined'">
                   <div class="px-2">(no-subject) -</div>
                 </div>
-                <div ng-if="draft.body != 'undefined'">
+                <div ng-if="draft.sender.body != 'undefined'">
                   <p class="display-6" style="font-size: 16px">
-                    {{draft.body}}
+                    {{draft.sender.body}}
                   </p>
                 </div>
-                <div ng-if="draft.body == 'undefined'">
+                <div ng-if="draft.sender.body == 'undefined'">
                   <p class="display-6" style="font-size: 16px">no-body</p>
                 </div>
               </div>
             </div>
             <div
               class="d-flex justify-content-evenly align-items-center me-5"
-              ng-show="row == draft.id || draft.select">
-              <div class="px-2" ng-click="Archive(draft.id)">
+              ng-show="row == draft.sender.id || draft.details.select">
+              <div class="px-2" ng-click="Archive(draft.sender.id,draft.details.self)">
                 <i class="bi bi-archive"></i>
               </div>
-              <div class="px-2" ng-click="delete(draft.id)">
+              <div class="px-2" ng-click="delete(draft.sender.id,draft.details.self)">
                 <i class="bi bi-trash"></i>
               </div>
-              <div class="px-2" ng-click="read(draft.id)" ng-if="!draft.read">
+              <div class="px-2" ng-click="read(draft.sender.id,draft.details.self)" ng-if="!draft.details.read">
                 <i class="bi bi-envelope-open"></i>
               </div>
-              <div class="px-2" ng-click="unread(draft.id)" ng-if="draft.read">
+              <div class="px-2" ng-click="unread(draft.sender.id,draft.details.self)" ng-if="draft.details.read">
                 <i class="bi bi-envelope"></i>
               </div>
             </div>

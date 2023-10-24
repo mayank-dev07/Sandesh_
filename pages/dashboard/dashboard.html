@@ -1,306 +1,307 @@
-<div class="overflow-hidden">
-  <nav class="navbar navbar-expand-lg col-md-12 d-flex position-fixed ">
-    <div class="col-md-2">
-      <div class="d-flex">
-        <i
-          class="bi bi-list px-3"
-          style="font-size: 22px"
-          ng-click="toggleDiv()"></i>
-        <img
-          src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png"
-          alt=""
-          class="img-fluid" />
-      </div>
-    </div>
-    <div class="col col-md-10 d-flex justify-content-between">
-      <div class="col-md-5">
-        <form class="d-flex">
-          <button
-            class="col-md-12 
-            border-0
-            rounded-pill
-            d-flex 
-            align-items-center 
-            search-form 
-            {{ bgColor }} 
-            {{ border }}">
-            <i class="p-2 bi bi-search" id="searchIcon"></i>
-            <input
-              id="inputField"
-              class="form-control border-0 p-2 search-form no-focus-border"
-              placeholder="Search mail"
-              ng-model="searchname"
-              ng-focus="Focus()"
-              ng-blur="Blur()" />
-            <i class="p-2 bi bi-sliders2" id="slidersIcon"></i>
-          </button>
-        </form>
-      </div>
-      <div class="col-md-1">
-        <div class="d-flex justify-content-evenly align-items-center">
-          <div>
-            <a
-              href="https://support.google.com/mail/answer/9238280?hl=en&sjid=12750361572797075547-AP#null"
-              style="text-decoration: none"
-              class="text-black"
-              ><i class="bi bi-question-circle" style="font-size: 20px"></i
-            ></a>
-          </div>
-          <div>
-            <div class="dropdown">
-              <a href="https://support.google.com/mail/answer/6562?hl=en&co=GENIE.Platform%3DDesktop"
-              style="text-decoration: none"
-              class="text-black">
-
-                <i
-                class="bi bi-gear"
-                style="font-size: 20px"
-                ></i>
-              </a>
-              <ul class="dropdown-menu col-md-1"></ul>
-            </div>
-          </div>
-          <div>
-            <i
-              class="bi bi-person-circle"
-              style="font-size: 24px"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <div class="col-md-12 d-flex mt-5" style="background-color: #f6f8fc;">
-    <div class="d-flex vh-100 mt-2" >
-      <div class="side-panel">
-        <button
-          class="btn m-2 normal
-        {{shadow}}
-        {{normal}}"
-          ng-mouseover="hoverIn()"
-          ng-mouseleave="hoverOut()"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasScrolling"
-          aria-controls="offcanvasScrolling">
-          <i class="bi bi-pencil px-2"></i>
-          <span ng-show="showDiv">Compose</span>
-        </button>
-        <ul style="list-style: none" class="p-3">
-          <li
-            ng-repeat="panel in leftPanel"
-            class="mb-2 px-2"
-            ng-mouseover="hover(panel)"
-            ng-mouseleave="leave(panel)"
-            ng-click="click(panel)"
-            ng-class="{ 'click':panel.isClicked , 'hover': panel.isHover }">
-            <div class="d-flex">
-              <div>
-                <a ui-sref="{{panel.url_link}}" style="text-decoration: none">
-                  <i
-                    class="{{ panel.icons }} text-black"
-                    style="font-size: 16px"></i>
-                </a>
-              </div>
-              <div>
-                <a ui-sref="{{panel.url_link}}" style="text-decoration: none">
-                  <span
-                    ng-show="showDiv"
-                    style="font-size: 16px"
-                    class="ms-4 text-black">
-                    {{ panel.panel_heading }}
-                    <span class="ms-5">{{ panel.count}}</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </li>
-        </ul>
-
-        <div class="d-flex justify-content-evenly align-items-center">
+<div class="overflow-hidden vh-100">
+  <div class="row">
+    <nav class="navbar navbar-expand-lg col-md-12 d-flex ">
+      <div class="col-md-2">
+        <div class="d-flex">
           <i
-            class="bi bi-plus"
+            class="bi bi-list px-3"
             style="font-size: 22px"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal3"
-            ng-click="labels()"></i>
-          <span ng-show="showDiv">
-            <span style="font-size: 16px">Add Labels</span>
-          </span>
+            ng-click="toggleDiv()"></i>
+          <img
+            src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png"
+            alt=""
+            class="img-fluid" />
         </div>
-
-        <div
-        class="mt-3"
-        ng-show="showDiv">
-        <div ng-repeat="label in parentLabel">
-          <div class="col-md-10 d-flex justify-content-between" ng-click="sendLabel(label.id)">
-            <ul class="col-md-12" style="list-style: none;">
-              <li>
-                <div class="d-flex justify-content-between">
-                  <div>
+      </div>
+      <div class="col col-md-10 d-flex justify-content-between">
+        <div class="col-md-5">
+          <form class="d-flex">
+            <button
+              class="col-md-12 
+              border-0
+              rounded-pill
+              d-flex 
+              align-items-center 
+              search-form 
+              {{ bgColor }} 
+              {{ border }}">
+              <i class="p-2 bi bi-search" id="searchIcon"></i>
+              <input
+                id="inputField"
+                class="form-control border-0 p-2 search-form no-focus-border"
+                placeholder="Search mail"
+                ng-model="searchname"
+                ng-focus="Focus()"
+                ng-blur="Blur()" />
+              <i class="p-2 bi bi-sliders2" id="slidersIcon"></i>
+            </button>
+          </form>
+        </div>
+        <div class="col-md-1">
+          <div class="d-flex justify-content-evenly align-items-center">
+            <div>
+              <a
+                href="https://support.google.com/mail/answer/9238280?hl=en&sjid=12750361572797075547-AP#null"
+                style="text-decoration: none"
+                class="text-black"
+                ><i class="bi bi-question-circle" style="font-size: 20px"></i
+              ></a>
+            </div>
+            <div>
+              <div class="dropdown">
+                <a href="https://support.google.com/mail/answer/6562?hl=en&co=GENIE.Platform%3DDesktop"
+                style="text-decoration: none"
+                class="text-black">
+  
+                  <i
+                  class="bi bi-gear"
+                  style="font-size: 20px"
+                  ></i>
+                </a>
+                <ul class="dropdown-menu col-md-1"></ul>
+              </div>
+            </div>
+            <div>
+              <i
+                class="bi bi-person-circle"
+                style="font-size: 24px"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="row g-2">
+    <div class="col-md-12 d-flex " style="background-color: #f6f8fc;">
+      <div class="d-flex" >
+        <div class="side-panel">
+          <button
+            class="btn m-2 normal
+          {{shadow}}
+          {{normal}}"
+            ng-mouseover="hoverIn()"
+            ng-mouseleave="hoverOut()"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasScrolling"
+            aria-controls="offcanvasScrolling">
+            <i class="bi bi-pencil px-2"></i>
+            <span ng-show="showDiv">Compose</span>
+          </button>
+          <ul style="list-style: none" class="p-3">
+            <li
+              ng-repeat="panel in leftPanel"
+              class="mb-2 px-2"
+              ng-mouseover="hover(panel)"
+              ng-mouseleave="leave(panel)"
+              ng-click="click(panel)"
+              ng-class="{ 'click':panel.isClicked , 'hover': panel.isHover }">
+              <div class="d-flex">
+                <div>
+                  <a ui-sref="{{panel.url_link}}" style="text-decoration: none">
+                    <i
+                      class="{{ panel.icons }} text-black"
+                      style="font-size: 16px"></i>
+                  </a>
+                </div>
+                <div>
+                  <a ui-sref="{{panel.url_link}}" style="text-decoration: none">
+                    <span
+                      ng-show="showDiv"
+                      style="font-size: 16px"
+                      class="ms-4 text-black">
+                      {{ panel.panel_heading }}
+                      <span class="ms-5">{{ panel.count}}</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+  
+          <div class="d-flex justify-content-evenly align-items-center">
+            <i
+              class="bi bi-plus"
+              style="font-size: 22px"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal3"
+              ng-click="labels()"></i>
+            <span ng-show="showDiv">
+              <span style="font-size: 16px">Add Labels</span>
+            </span>
+          </div>
+  
+          <div
+          class="mt-3"
+          ng-show="showDiv">
+          <div ng-repeat="label in parentLabel">
+            <div class="col-md-10 d-flex justify-content-between" ng-click="sendLabel(label.id)">
+              <ul class="col-md-12" style="list-style: none;">
+                <li>
+                  <div class="d-flex justify-content-between">
                     <div>
-
+                      <div>
+                        {{label.value}}
+                      </div>
                     </div>
                     <div>
-                      {{label.value}}
+                      <div class="dropdown">
+                        <i
+                        id="dropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        class="bi bi-three-dots-vertical"
+                        style="font-size: 18px">
+                      </i>
+                      <ul class="dropdown-menu navbars" aria-labelledby="dropdownMenuButton">
+                        <li
+                        class="px-4"
+                        ng-click="deleteLabel(label.id)">
+                        Delete Label
+                      </li>
+                      <li
+                        class="px-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal4"
+                        ng-click="EditLabels(label.id)">
+                        Edit Label
+                      </li> </ul>
                     </div>
                   </div>
-                  <div>
-                    <div class="dropdown">
-                      <i
-                      id="dropdownMenuButton"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      class="bi bi-three-dots-vertical"
-                      style="font-size: 18px">
-                    </i>
-                    <ul class="dropdown-menu navbars" aria-labelledby="dropdownMenuButton">
+                 </div>
+                  <ul ng-repeat="child in childLabel" style="list-style: none;">
+                    <li ng-if="label.id == child.parent">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          {{child.value}}
+                        </div>
+                        <div>
+                          <div class="dropdown">
+                            <i
+                            id="dropdownMenuButton"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            class="bi bi-three-dots-vertical"
+                            style="font-size: 18px">
+                          </i>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li
+                        class="px-4"
+                        ng-click="deleteLabel(child.id)">
+                        Delete Label
+                      </li>
                       <li
-                      class="px-4"
+                        class="px-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal4"
+                        ng-click="EditLabels(child.id)">
+                        Edit Label
+                      </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <div class="navbar">
+                <div class="dropdown">
+                  <ul class="dropdown-menu" style="background-color: #f6f8fc">
+                    <li
+                      class="d-flex justify-content-center align-items-center navbar"
                       ng-click="deleteLabel(label.id)">
                       Delete Label
                     </li>
                     <li
-                      class="px-4"
+                      class="d-flex justify-content-center align-items-center navbar"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal4"
                       ng-click="EditLabels(label.id)">
                       Edit Label
-                    </li> </ul>
-                  </div>
+                    </li>
+                  </ul>
                 </div>
-               </div>
-                <ul ng-repeat="child in childLabel" style="list-style: none;">
-                  <li ng-if="label.id == child.parent">
-                    <div class="d-flex justify-content-between">
-                      <div>
-                        {{child.value}}
-                      </div>
-                      <div>
-                        <div class="dropdown">
-                          <i
-                          id="dropdownMenuButton"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                          class="bi bi-three-dots-vertical"
-                          style="font-size: 18px">
-                        </i>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <li
-                      class="px-4"
-                      ng-click="deleteLabel(child.id)">
-                      Delete Label
-                    </li>
-                    <li
-                      class="px-4"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal4"
-                      ng-click="EditLabels(child.id)">
-                      Edit Label
-                    </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <div class="navbar">
-              <div class="dropdown">
-                <ul class="dropdown-menu" style="background-color: #f6f8fc">
-                  <li
-                    class="d-flex justify-content-center align-items-center navbar"
-                    ng-click="deleteLabel(label.id)">
-                    Delete Label
-                  </li>
-                  <li
-                    class="d-flex justify-content-center align-items-center navbar"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal4"
-                    ng-click="EditLabels(label.id)">
-                    Edit Label
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
         </div>
+        </div>
       </div>
-      </div>
-    </div>
-
-   
-    <!-- <div class="d-flex col-md-11 mt-1" > -->
-      <div ui-view class="col-md-11 mt-1 vh-100 overflow-scroll" style="background-color: #f6f8fc;">
-        <table class="table table-hover">
-          <tbody>
-            <tr
-              ng-repeat="mail in Mails | filter: { sendername: searchname }  "
-              ng-class="{ 'table-primary': mail.read}"
-              ng-mouseover="row = mail.id"
-              ng-mouseleave="row = -1">
-              <td>
-                <div class="d-flex justify-content-between px-2">
-                  <div class="d-flex justify-content-center">
-                    <div id="square-icons" ng-click="select(mail.id)">
-                      <div ng-if="!mail.select">
-                        <i class="bi bi-square"></i>
+  
+    
+        <div ui-view class="col col-lg col-md-11 vh-100 overflow-scroll" style="background-color: #f6f8fc;">
+          <table class="table table-hover">
+            <tbody>
+              <tr
+                ng-repeat="mail in Mails | filter: { sendername: searchname }  "
+                ng-class="{ 'table-primary': mail.details.read}"
+                ng-mouseover="row = mail.sender.id"
+                ng-mouseleave="row = -1">
+                <td>
+                  <div class="d-flex justify-content-between px-2">
+                    <div class="d-flex justify-content-center">
+                      <div id="square-icons" ng-click="select(mail.sender.id, mail.details.self)">
+                        <div ng-if="!mail.details.select">
+                          <i class="bi bi-square"></i>
+                        </div>
+                        <div ng-if="mail.details.select">
+                          <i class="bi bi-check-square"></i>
+                        </div>
                       </div>
-                      <div ng-if="mail.select">
-                        <i class="bi bi-check-square"></i>
+                      <div
+                        id="star-icons"
+                        class="px-3"
+                        ng-click="starred(mail.sender.id, mail.details.self)">
+                        <div ng-if="!mail.details.starred">
+                          <i class="bi bi-star"></i>
+                        </div>
+                        <div ng-if="mail.details.starred">
+                          <i class="bi bi-star-fill" style="color: #f7ca4b"></i>
+                        </div>
+                      </div>
+                      <div class="d-flex" ng-click="show(mail.sender.id, mail.details.self)">
+                        <div>{{mail.sender.sendername}}</div>
+                        <div class="d-flex ms-4">
+                          <div class="px-2">{{ mail.sender.subject}} -</div>
+                          <p class="display-6" style="font-size: 16px">
+                            {{mail.sender.body | limitTo : 100}}
+                          </p>
+                        </div>
                       </div>
                     </div>
                     <div
-                      id="star-icons"
-                      class="px-3"
-                      ng-click="starred(mail.id)">
-                      <div ng-if="!mail.starred">
-                        <i class="bi bi-star"></i>
+                      class="d-flex justify-content-evenly align-items-center me-5"
+                      ng-if="row == mail.sender.id || mail.details.select">
+                      <div class="px-2">
+                        <i class="bi bi-alarm" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal5" ng-click="modalParameters(mail.sender.id,mail.details.self)"></i>
                       </div>
-                      <div ng-if="mail.starred">
-                        <i class="bi bi-star-fill" style="color: #f7ca4b"></i>
+                      <div class="px-2" ng-click="Archive(mail.sender.id,mail.details.self)">
+                        <i class="bi bi-archive"></i>
                       </div>
-                    </div>
-                    <div class="d-flex" ng-click="show(mail.id)">
-                      <div>{{mail.sendername}}</div>
-                      <div class="d-flex ms-4">
-                        <div class="px-2">{{ mail.subject}} -</div>
-                        <p class="display-6" style="font-size: 16px">
-                          {{mail.body | limitTo : 100}}
-                        </p>
+                      <div class="px-2" ng-click="delete(mail.sender.id, mail.details.self)">
+                        <i class="bi bi-trash"></i>
+                      </div>
+                      <div
+                        class="px-2"
+                        ng-click="read(mail.sender.id, mail.details.self)"
+                        ng-if="!mail.details.read">
+                        <i class="bi bi-envelope-open"></i>
+                      </div>
+                      <div
+                        class="px-2"
+                        ng-click="unread(mail.sender.id, mail.details.self)"
+                        ng-if="mail.details.read">
+                        <i class="bi bi-envelope"></i>
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="d-flex justify-content-evenly align-items-center me-5"
-                    ng-if="row == mail.id || mail.select">
-                    <div class="px-2" ng-click="Archive(mail.id)">
-                      <i class="bi bi-archive"></i>
-                    </div>
-                    <div class="px-2" ng-click="delete(mail.id)">
-                      <i class="bi bi-trash"></i>
-                    </div>
-                    <div
-                      class="px-2"
-                      ng-click="read(mail.id)"
-                      ng-if="!mail.read">
-                      <i class="bi bi-envelope-open"></i>
-                    </div>
-                    <div
-                      class="px-2"
-                      ng-click="unread(mail.id)"
-                      ng-if="mail.read">
-                      <i class="bi bi-envelope"></i>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
   </div>
 </div>
 
@@ -370,7 +371,7 @@
               class="btn btn-primary rounded-pill"
               style="background-color: #0b57d0"
               type="submit">
-              Attach
+              Send
             </button>
             <div>
               <i
@@ -432,7 +433,7 @@
               type="submit"
               class="btn btn-outline-primary"
               data-bs-dismiss="modal">
-              Send
+              Attach
             </button>
           </div>
         </div>
@@ -440,6 +441,7 @@
     </div>
   </div>
 </div>
+
 <div
   class="modal fade"
   id="exampleModal"
@@ -529,6 +531,7 @@
     </div>
   </div>
 </div>
+
 <div
 class="modal fade"
 id="exampleModal4"
@@ -557,6 +560,54 @@ aria-hidden="true">
           required
           ng-model="edit" />
       </div>
+      <div class="modal-footer">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          data-bs-dismiss="modal">
+          Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+<div
+class="modal fade"
+id="exampleModal5"
+tabindex="-1"
+aria-labelledby="exampleModal5Label"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <form action="" ng-submit="Snooze()">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModal5Label">
+          Snooze untill
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <label for="label">Date</label>
+          <input
+          type="date"
+          id="label"
+          class="form-control"
+          required
+          ng-model="date" />
+          <label for="label">Time</label>
+          <input
+          type="time"
+          id="label"
+          class="form-control"
+          required
+          ng-model="time" />
+        </div>
       <div class="modal-footer">
         <button
           type="submit"
