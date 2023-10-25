@@ -27,7 +27,11 @@
               </div>
               <div
                 class="d-flex"
-                ng-click="show(draft.sender.id)">
+                data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasScrolling"
+            aria-controls="offcanvasScrolling"
+            ng-click="show(draft.sender.id)"
+                >
                 <div>
                   <p style="color: red">Draft</p>
                 </div>
@@ -70,3 +74,144 @@
     </tbody>
   </table>
 </div>
+
+
+<div
+  class="offcanvas offcanvas-end"
+  data-bs-scroll="true"
+  data-bs-backdrop="false"
+  tabindex="-1"
+  id="offcanvasScrolling"
+  aria-labelledby="offcanvasScrollingLabel"
+  style="height: 500px; width: 700px; bottom: 0px; top: auto">
+  <div class="offcanvas-header" style="background-color: aliceblue">
+    <span class="offcanvas-title" id="offcanvasScrollingLabel"
+      >New Message</span
+    >
+    <button
+      type="button"
+      class="btn-close"
+      ng-click="draftMail()"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form ng-submit="sendMail()">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td class="col-md-1">To</td>
+            <td>
+              <input
+                required
+                style="border-style: none"
+                type="text"
+                ng-pattern="/\S+@\S+\.\S+/"
+                ng-model="receive"
+                class="form-control border-0 p-2 no-focus-border" />
+            </td>
+          </tr>
+          <tr>
+            <td>Subject</td>
+            <td>
+              <input
+                required
+                style="border-style: none"
+                type="text"
+                ng-model="send.subject"
+                class="form-control border-0 p-2 no-focus-border" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex">
+        <textarea
+          required
+          class="form-control border-0 p-2 no-focus-border"
+          ng-model="send.body"
+          id="exampleFormControlTextarea1"
+          rows="8"
+          style="border-style: none"></textarea>
+      </div>
+      <div ng-repeat="file in files">Attached file:- {{file.name}}</div>
+
+      <div class="">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex position-absolute bottom-0 start-0">
+            <button
+              class="btn btn-primary rounded-pill"
+              style="background-color: #0b57d0"
+              type="submit">
+              Send
+            </button>
+            <div>
+              <i
+                class="bi bi-paperclip"
+                style="font-size: 25px"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal1"></i>
+            </div>
+          </div>
+          <div class="d-flex position-absolute bottom-0 end-0">
+            <i
+              class="bi bi-trash3"
+              style="font-size: 20px"
+              ng-click="deleteMail()"></i>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div
+  class="modal"
+  id="exampleModal1"
+  tabindex="-1"
+  aria-labelledby="exampleModal1Label"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form action="" enctype="multipart/form-data" ng-submit="submitFiles()">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModal1Label">Attach files</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="formFile" class="form-label"></label>
+            <input
+              class="form-control"
+              accept="image/jpeg,image.png,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              type="file"
+              id="formFile"
+              file-model="myFile"
+              required />
+          </div>
+        </div>
+        <div
+          ng-repeat="i in multiple"
+          class="d-flex justify-content-center align-items-center">
+          <div class="mb-3">{{i.file.name}}</div>
+        </div>
+        <div class="modal-footer">
+          <div class="d-flex">
+            <button
+              type="submit"
+              class="btn btn-outline-primary"
+              data-bs-dismiss="modal">
+              Attach
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+

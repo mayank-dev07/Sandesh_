@@ -100,6 +100,11 @@ myApp.config([
         templateUrl: "/pages/view/view.html",
         controller: "viewMailController",
       })
+      .state("dashboard.snooze", {
+        url: "/snooze",
+        templateUrl: "/pages/snooze/snooze.html",
+        controller: "snoozeMailController",
+      })
       .state("dashboard.archive", {
         url: "/archive",
         templateUrl: "/pages/archive/archive.html",
@@ -110,7 +115,7 @@ myApp.config([
   },
 ]);
 
-const apiUrl = "https://ca8d-103-72-7-14.ngrok-free.app";
+const apiUrl = "https://10.21.82.84:8000";
 
 myApp.factory("sharedDataFactory", function () {
   var sharedData = {};

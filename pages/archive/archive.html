@@ -9,7 +9,7 @@
           <td class="">
             <div class="d-flex justify-content-between px-2">
               <div class="d-flex justify-content-center">
-                <div id="square-icons" ng-click="click(archive.sender.id)">
+                <div id="square-icons" ng-click="click(archive.sender.id, archive.details.self)" class="px-3">
                   <div ng-if="!archive.details.select">
                     <i class="bi bi-square"></i>
                   </div>
@@ -17,14 +17,14 @@
                     <i class="bi bi-check-square"></i>
                   </div>
                 </div>
-                <div id="star-icons" class="px-3" ng-click="select(archive.sender.id)">
+                <!-- <div id="star-icons" class="px-3" ng-click="select(archive.sender.id)">
                   <div ng-if="!archive.details.starred">
                     <i class="bi bi-star"></i>
                   </div>
                   <div ng-if="archive.details.starred">
                     <i class="bi bi-star-fill" style="color: #f7ca4b"></i>
                   </div>
-                </div>
+                </div> -->
                 <div
                   class="d-flex"
                   ng-click="show(archive.sender.id)">
@@ -53,16 +53,16 @@
               <div
                 class="d-flex justify-content-evenly align-items-center me-5"
                 ng-show="row == archive.sender.id || archive.details.select">
-                <div class="px-2" ng-click="unArchive(archive.sender.id)">
+                <div class="px-2" ng-click="unArchive(archive.sender.id, archive.details.self)">
                     <i class="bi bi-archive-fill"></i>
                   </div>
-                <div class="px-2" ng-click="delete(archive.sender.id)">
+                <div class="px-2" ng-click="delete(archive.sender.id, archive.details.self)">
                   <i class="bi bi-trash"></i>
                 </div>
-                <div class="px-2" ng-click="read(archive.sender.id)" ng-if="!archive.details.read">
+                <div class="px-2" ng-click="read(archive.sender.id, archive.details.self)" ng-if="!archive.details.read">
                   <i class="bi bi-envelope-open"></i>
                 </div>
-                <div class="px-2" ng-click="unread(archive.sender.id)" ng-if="archive.details.read">
+                <div class="px-2" ng-click="unread(archive.sender.id, archive.details.self)" ng-if="archive.details.read">
                   <i class="bi bi-envelope"></i>
                 </div>
               </div>

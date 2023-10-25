@@ -111,19 +111,28 @@ myApp.controller(
         });
     };
 
+    function validateEmailList(raw) {
+      var emails = raw.split(",");
+      var valid = true;
+      var regex =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      for (var i = 0; i < emails.length; i++) {
+        if (emails[i] === "" || !regex.test(emails[i].replace(/\s/g, ""))) {
+          valid = false;
+        }
+      }
+      return valid;
+    }
+
     $scope.sendMail = function () {
+      console.log(validateEmailList($scope.email));
       console.log($scope.email);
       let multiple = [];
       email = $scope.email;
-      if (!email) {
-        Swal.fire({
-          icon: "error",
-          title: "Enter valid email",
-        });
-      }
-      let arr = [];
-      arr = email.split(",");
-      console.log(arr);
+      if (validateEmailList($scope.email)) {
+        let arr = [];
+        arr = email.split(",");
+        console.log(arr);
       for (let i = 0; i < arr.length; i++) {
         let data = {
           email: arr[i],
@@ -131,10 +140,10 @@ myApp.controller(
         multiple.push(data);
       }
       console.log(multiple);
-
+      
       var subject = $scope.subject;
       var body = $scope.text;
-
+      
       var formData = new FormData();
       console.log($scope.files);
       for (let i = 0; i < $scope.files.length; i++) {
@@ -143,11 +152,11 @@ myApp.controller(
       formData.append("emails", JSON.stringify(multiple));
       formData.append("subject", subject);
       formData.append("body", body);
-
+      
       console.log(formData);
-
+      
       $http
-        .post(apiUrl + "/mail/mails/", formData, {
+      .post(apiUrl + "/mail/mails/", formData, {
           headers: { "Content-Type": undefined },
           withCredentials: true,
         })
@@ -166,8 +175,15 @@ myApp.controller(
         .catch(function (error) {
           console.log(error);
         });
+      }
+      else{
+          Swal.fire({
+          icon: "error",
+          title: "Enter valid email",
+        });
+      }
     };
-
+    
     $scope.submitFile = function () {
       $scope.file = $scope.myFile;
       if ($scope.file !== "") {
@@ -185,61 +201,64 @@ myApp.controller(
         });
       }
     };
-
+    
     $scope.draftMail = function () {
       console.log($scope.email);
       let multiple = [];
-      email = $scope.email;
-      if (!email) {
-        Swal.fire({
-          icon: "error",
-          title: "Enter valid email",
-        });
-      }
-      let arr = [];
-      arr = email.split(",");
-      console.log(arr);
-      for (let i = 0; i < arr.length; i++) {
-        let data = {
-          email: arr[i],
-        };
-        multiple.push(data);
-      }
-      console.log(multiple);
-
+      let email = $scope.email;
       var subject = $scope.subject;
       var body = $scope.text;
 
-      var formData = new FormData();
-      console.log($scope.files);
-      for (let i = 0; i < $scope.files.length; i++) {
-        formData.append("file", $scope.files[i]);
+      if (email == undefined && subject == undefined && body == undefined) {
+        console.log("no draft");
       }
-      formData.append("emails", JSON.stringify(multiple));
-      formData.append("subject", subject);
-      formData.append("body", body);
+      if (email == "" || subject == "" || body == "") {
+        console.log("no drafts");
+      }
+      if (!email) {
+        console.log("enter valid email");
+      } else {
+        let arr = [];
+        arr = email.split(",");
+        console.log(arr);
+        for (let i = 0; i < arr.length; i++) {
+          let data = {
+            email: arr[i],
+          };
+          multiple.push(data);
+        }
+        console.log(multiple);
+        var formData = new FormData();
+        console.log($scope.files);
+        for (let i = 0; i < $scope.files.length; i++) {
+          formData.append("file", $scope.files[i]);
+        }
+        formData.append("emails", JSON.stringify(multiple));
+        formData.append("subject", subject);
+        formData.append("body", body);
 
-      console.log(formData);
+        console.log(formData);
 
-      $http
-        .post(apiUrl + "/mail/draft/", formData, {
-          headers: { "Content-Type": undefined },
-          withCredentials: true,
-        })
-        .then(function (response) {
-          console.log(response);
-          Swal.fire(response.data.message, "success");
-          $scope.email = "";
-          $scope.subject = "";
-          $scope.text = "";
-          $scope.file = "";
-          $scope.files = [];
-          $scope.multiple = [];
-          console.log($scope.files);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        $http
+          .post(apiUrl + "/mail/draft/", formData, {
+            headers: { "Content-Type": undefined },
+            withCredentials: true,
+          })
+          .then(function (response) {
+            console.log(response);
+            Swal.fire(response.data.message, "success");
+            $scope.email = "";
+            $scope.subject = "";
+            $scope.text = "";
+            $scope.file = "";
+            $scope.files = [];
+            $scope.multiple = [];
+            console.log($scope.files);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     };
 
     $scope.deleteMail = () => {
@@ -479,6 +498,14 @@ myApp.controller(
 
     let data = {};
 
+    $scope.getCurrentDate = function () {
+      var currentDate = new Date();
+      var year = currentDate.getFullYear();
+      var month = String(currentDate.getMonth() + 1).padStart(2, "0");
+      var day = String(currentDate.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    };
+
     $scope.modalParameters = function (id, self) {
       data = {
         id: id,
@@ -487,21 +514,36 @@ myApp.controller(
       console.log(data);
     };
 
+    let time;
+    let t;
+
+    function getTwentyFourHourTime(T) {
+      var d = new Date("1/1/2023 " + T);
+      return d.getHours() + ":" + d.getMinutes();
+    }
+
     $scope.Snooze = function () {
       var Time = new Date($scope.time);
       (data.date = formatDate($scope.date)),
-        (data.time = Time.toLocaleTimeString()),
-        console.log(data);
+        (time = getTwentyFourHourTime(Time.toLocaleTimeString("it-IT"))),
+        (t = time.split(":"));
+      console.log(t);
+      data.hour = t[0];
+      data.min = t[1];
+      console.log(data);
       $http
-        .get(apiUrl + "/mail/snooze", data, {
+        .put(apiUrl + "/mail/snoozed/", data, {
           withCredentials: true,
         })
         .then(function (response) {
           console.log(response);
+          showMails($scope, $http);
         })
         .catch(function (error) {
           console.log(error);
         });
+      $scope.time = "";
+      $scope.date = "";
     };
 
     function formatDate(dob) {

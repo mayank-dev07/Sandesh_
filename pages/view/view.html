@@ -10,7 +10,8 @@
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item" ng-repeat="user in users">
         <h2 class="accordion-header" ng-click="getUser(user.id)">
-          <button
+          <div class="d-flex justify-content-between ">
+            <button
             class="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
@@ -20,6 +21,10 @@
             {{user.group}}
           </button>
         </h2>
+        <div>
+          <button type="btn" class="btn btn-outline-primary" ng-click="edit()">Edit</button>
+        </div>
+      </div>
         <div
           id="flush-collapseOne{{$index}}"
           class="accordion-collapse collapse"

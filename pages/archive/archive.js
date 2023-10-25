@@ -22,10 +22,11 @@ myApp.controller("archiveMailController",
   
       archiveMail($http, $scope);
   
-      $scope.select = function (id) {
+      $scope.select = function (id,self) {
         console.log(id);
         var data = {
           id: id,
+          self:self
         };
         $http
           .put(apiUrl + "/mail/starreds/", data, {
@@ -40,9 +41,11 @@ myApp.controller("archiveMailController",
           });
       };
   
-      $scope.click = function (id) {
+      $scope.click = function (id,self) {
+        console.log(id);
         var data = {
           id: id,
+          self:self
         };
         $http
           .put(apiUrl + "/mail/selects/", data, {
@@ -56,11 +59,12 @@ myApp.controller("archiveMailController",
             console.log(error);
           });
       };
-      $scope.delete = function(id){
-          console.log(id)
-          let data={
-            id :id
-          }
+      $scope.delete = function (id,self) {
+        console.log(id);
+        var data = {
+          id: id,
+          self:self
+        };
           $http.put(apiUrl + "/mail/deletemail/",data,{
             withCredentials:true
           })
@@ -89,11 +93,12 @@ myApp.controller("archiveMailController",
             })
         }
     
-        $scope.read = function(id){
-          console.log(id)
-          let data={
-            id :id
-          }
+        $scope.read = function (id,self) {
+          console.log(id);
+          var data = {
+            id: id,
+            self:self
+          };
           $http.put(apiUrl + "/mail/readmail/",data,{
             withCredentials:true
           })
@@ -106,11 +111,12 @@ myApp.controller("archiveMailController",
           })
         }
     
-        $scope.unread = function(id){
-          console.log(id)
-          let data={
-            id :id
-          }
+        $scope.unread = function (id,self) {
+          console.log(id);
+          var data = {
+            id: id,
+            self:self
+          };
           $http.put(apiUrl + "/mail/unreadmail/",data,{
             withCredentials:true
           })

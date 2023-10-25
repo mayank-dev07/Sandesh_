@@ -106,7 +106,7 @@
                   </a>
                 </div>
                 <div>
-                  <a ui-sref="{{panel.url_link}}" style="text-decoration: none">
+                  <a ui-sref="{{panel.url_link}}" style="text-decoration: none;">
                     <span
                       ng-show="showDiv"
                       style="font-size: 16px"
@@ -335,7 +335,6 @@
                 required
                 style="border-style: none"
                 type="text"
-                ng-pattern="/\S+@\S+\.\S+/"
                 ng-model="email"
                 class="form-control border-0 p-2 no-focus-border" />
             </td>
@@ -391,7 +390,6 @@
       </div>
     </form>
   </div>
-  <link rel="stylesheet" href="/pages/dashboard/dashboard.css" />
 </div>
 
 <div
@@ -416,6 +414,7 @@
             <label for="formFile" class="form-label"></label>
             <input
               class="form-control"
+              accept="image/jpeg,image.png,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
               type="file"
               id="formFile"
               file-model="myFile"
@@ -599,7 +598,8 @@ aria-hidden="true">
           id="label"
           class="form-control"
           required
-          ng-model="date" />
+          ng-model="date" 
+          min="{{ getCurrentDate() }}"/>
           <label for="label">Time</label>
           <input
           type="time"
@@ -620,3 +620,5 @@ aria-hidden="true">
   </div>
 </div>
 </div>
+
+<link rel="stylesheet" href="/pages/dashboard/dashboard.css" />

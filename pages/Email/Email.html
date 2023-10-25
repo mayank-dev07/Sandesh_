@@ -18,24 +18,18 @@
         </div>
     </div>
     <div>
-        <div
-        ng-if="image"
-        class="d-flex justify-content-center align-items-center mt-5">
-        <img
-        src="https://10.21.82.60:8000/mail/media/{{ image }}"
-        alt="" />
-    </div>
     <div class="d-flex  mt-5">
       <p ng-bind-html="body" style="font-size: 18px;"></p>
     </div>
       <div
         class="d-flex col-md-5 mt-5">
-        <div class="card" ng-if="file">
+        <div class="card" ng-repeat="file in files">
           <div class="card-body">
             <a
-              ng-href="https://10.21.82.60:8000/mail/media/{{file}}"
+              ng-href="https://10.21.82.84:8000/mail/media/file/{{ file }}"
               download="file"
               ng-click="download()"
+              target="_blank"
               >{{file}}</a
             >
           </div>

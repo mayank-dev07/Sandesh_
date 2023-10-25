@@ -9,13 +9,16 @@ myApp.controller(
         withCredentials: true,
       })
       .then(function (response) {
-        console.log(response.data[0].sender);
+        console.log(response.data );
+        console.log(response.data[0].files);
+        $scope.files = response.data[0].files
         $scope.body = response.data[0].sender.body;
         $scope.body = $scope.body.replace(/(\r\n|\r|\n)/g, "<br>");
         $scope.subject = response.data[0].sender.subject;
         $scope.sendername = response.data[0].sender.sendername;
         var date = new Date(response.data[0].sender.time);
-        $scope.time = date.toString();
+        $scope.time = date.toString().split("GMT")[0];
+        console.log($scope.time)
         $scope.file = response.data[0].file;
         $scope.image = response.data[0].image;
 

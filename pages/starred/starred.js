@@ -8,8 +8,6 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
       .then(function (response) {
         $scope.starred = response.data
         console.log($scope.starred);
-        //   .concat(response.data[1])
-        //   .concat(response.data[2]);
         if ($scope.starred.length == 0) {
           Swal.fire({
             icon: "error",
