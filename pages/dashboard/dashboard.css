@@ -62,3 +62,10 @@
   .dropdown.dropdown-toggle:active {
       pointer-events: none;
   }
+/* 
+  @media screen and (min-width: 200px) {
+    .ol{
+      width: 10%;
+
+    }
+  } */

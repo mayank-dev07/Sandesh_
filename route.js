@@ -115,7 +115,7 @@ myApp.config([
   },
 ]);
 
-const apiUrl = "https://10.21.82.84:8000";
+const apiUrl = "https://10.21.84.204:8000";
 
 myApp.factory("sharedDataFactory", function () {
   var sharedData = {};

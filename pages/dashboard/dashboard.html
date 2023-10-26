@@ -1,7 +1,13 @@
 <div class="overflow-hidden vh-100">
+  <div ng-if = "loader"> 
+    <div class="d-flex justify-content-center vh-100 align-items-center">
+      <div class="spinner-border" role="status">
+      </div>
+    </div>
+  </div>
   <div class="row">
-    <nav class="navbar navbar-expand-lg col-md-12 d-flex ">
-      <div class="col-md-2">
+    <nav class="navbar navbar-expand-lg d-flex ">
+      <div class="col-sm">
         <div class="d-flex">
           <i
             class="bi bi-list px-3"
@@ -73,10 +79,10 @@
       </div>
     </nav>
   </div>
-  <div class="row g-2">
-    <div class="col-md-12 d-flex " style="background-color: #f6f8fc;">
-      <div class="d-flex" >
-        <div class="side-panel">
+  <div class="row ">
+    <div class="col d-flex " style="background-color: #f6f8fc;">
+      <!-- <div class="d-flex"> -->
+        <div class="side-panel ">
           <button
             class="btn m-2 normal
           {{shadow}}
@@ -227,7 +233,7 @@
           </div>
         </div>
         </div>
-      </div>
+      <!-- </div> -->
   
     
         <div ui-view class="col col-lg col-md-11 vh-100 overflow-scroll" style="background-color: #f6f8fc;">

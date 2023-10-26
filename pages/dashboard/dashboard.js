@@ -6,7 +6,7 @@ myApp.controller(
     $scope.file = "";
     $scope.files = [];
     $scope.multiple = [];
-
+    $scope.loader = true;
     $http
       .get(apiUrl + "/users/authentication/", {
         withCredentials: true,
@@ -282,6 +282,7 @@ myApp.controller(
         .then(function (response) {
           console.log(response.data);
           $scope.Mails = response.data;
+          $scope.loader = false;
           if ($scope.Mails.length == 0) {
             // Swal.fire({
             //   icon: "error",

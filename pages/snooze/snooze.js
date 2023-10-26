@@ -1,4 +1,5 @@
 myApp.controller("snoozeMailController", function ($scope, $http,$rootScope) {
+  $scope.loader = true;
     function snoozeMail($http, $scope) {
         $scope.snoozes = []
         $http
@@ -8,6 +9,7 @@ myApp.controller("snoozeMailController", function ($scope, $http,$rootScope) {
           .then(function (response) {
             $scope.snoozes = response.data
             console.log($scope.snoozes);
+            $scope.loader = false;
             if ($scope.snoozes.length == 0) {
               Swal.fire({
                 icon: "error",

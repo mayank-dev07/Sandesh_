@@ -40,7 +40,7 @@
         <th>Add to group</th>
       </tr>
       <tr
-        ng-repeat="user in users | filter: { subject:searchname }"
+        ng-repeat="user in users | filter: { email:searchname }"
         ng-class="{ 'table-primary': user.read}"
         ng-mouseover="row = user.id"
         ng-mouseleave="row = -1">
@@ -62,3 +62,4 @@
     </tbody>
   </table>
 </div>
+

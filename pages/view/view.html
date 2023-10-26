@@ -10,7 +10,11 @@
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <div class="accordion-item" ng-repeat="user in users">
         <h2 class="accordion-header" ng-click="getUser(user.id)">
-          <div class="d-flex justify-content-between ">
+          <div class="d-flex">
+            <div class="col-md-1 ms-4">
+              <button class="btn btn-outline-secondary" data-bs-toggle="modal"
+              data-bs-target="#exampleModal1">Add user</button>
+            </div>
             <button
             class="accordion-button collapsed"
             type="button"
@@ -20,11 +24,8 @@
             aria-controls="flush-collapseOne">
             {{user.group}}
           </button>
-        </h2>
-        <div>
-          <button type="btn" class="btn btn-outline-primary" ng-click="edit()">Edit</button>
         </div>
-      </div>
+        </h2>
         <div
           id="flush-collapseOne{{$index}}"
           class="accordion-collapse collapse"
@@ -44,10 +45,55 @@
               <div>
                 <button class="btn btn-outline-danger" ng-click="remove(use.id,user.id)">Remove</button>
               </div>
-            </div>
+              </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div
+  class="modal"
+  id="exampleModal1"
+  tabindex="-1"
+  aria-labelledby="exampleModal1Label"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form action="" enctype="multipart/form-data" ng-submit="addNewUsers()">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModal1Label">Enter new user</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="formFile" class="form-label"></label>
+            <input
+              class="form-control"
+              type="text"
+              id="formFile"
+              ng-model="mail"
+              required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="d-flex">
+            <button
+              type="submit"
+              class="btn btn-outline-primary"
+              data-bs-dismiss="modal">
+              Add
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

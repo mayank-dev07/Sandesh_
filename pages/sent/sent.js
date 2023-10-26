@@ -1,6 +1,7 @@
 myApp.controller(
   "sentMailController",
   function ($http, $scope, sharedDataService, $state, $rootScope) {
+    $scope.loader = true;
     function sentMail($http, $scope) {
       $http
         .get(apiUrl + "/mail/sentemails/", {
@@ -9,6 +10,7 @@ myApp.controller(
         .then(function (response) {
           console.log(response.data);
           $scope.sents = response.data;
+          $scope.loader = false;
           if ($scope.sents.length == 0) {
             Swal.fire({
               icon: "error",
@@ -139,11 +141,12 @@ myApp.controller(
           console.log(error);
         });
     };
-    $scope.show = function (id) {
+    $scope.show = function (id,self) {
       sharedDataService.setId(id);
       $state.go("dashboard.Email");
       let data = {
         id: id,
+        self:self
       };
       $http
         .put(apiUrl + "/mail/readmail/", data, {

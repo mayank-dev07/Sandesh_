@@ -1,6 +1,7 @@
 myApp.controller(
   "draftMailController",
   function ($http, $scope, sharedDataService, $state) {
+    $scope.loader = true;
     function draftMail($http, $scope) {
       $http
         .get(apiUrl + "/mail/draftemails/", {
@@ -9,6 +10,7 @@ myApp.controller(
         .then(function (response) {
           console.log(response.data);
           $scope.drafts = response.data;
+          $scope.loader = false;
           if ($scope.drafts.length == 0) {
             Swal.fire({
               icon: "error",

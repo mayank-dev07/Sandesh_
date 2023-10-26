@@ -1,5 +1,6 @@
 myApp.controller("starredMailController", function ($http, $scope, $rootScope,sharedDataService,$state) {
   function starredMail($http, $scope) {
+    $scope.loader = true;
     $scope.starred = []
     $http
       .get(apiUrl + "/mail/starredemails/", {
@@ -8,6 +9,7 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
       .then(function (response) {
         $scope.starred = response.data
         console.log($scope.starred);
+        $scope.loader = false;
         if ($scope.starred.length == 0) {
           Swal.fire({
             icon: "error",

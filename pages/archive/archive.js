@@ -1,5 +1,6 @@
 myApp.controller("archiveMailController",
     function ($http, $scope,sharedDataService,$state) {
+      $scope.loader = true;
       function archiveMail($http, $scope) {
         $http
           .get(apiUrl + "/mail/archiveemail/", {
@@ -8,6 +9,7 @@ myApp.controller("archiveMailController",
           .then(function (response) {
             console.log(response.data);
             $scope.archives = response.data;
+            $scope.loader = false;
             if($scope.archives.length == 0){
                 Swal.fire({
                   icon: 'error',

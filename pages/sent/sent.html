@@ -1,5 +1,10 @@
-<div class="overflow-scroll "
-rows="3">
+<div class="overflow-scroll vh-100">
+  <div ng-if = "loader"> 
+    <div class="d-flex justify-content-center vh-100 align-items-center">
+      <div class="spinner-border" role="status">
+      </div>
+    </div>
+  </div>
   <table class="table table-hover">
     <tbody>
       <tr
@@ -27,7 +32,7 @@ rows="3">
                 </div>
               </div>
               <div class="d-flex"
-              ng-click="show(sent.sender.id)"
+              ng-click="show(sent.sender.id,sent.details.self)"
                >
               <div class="px-2" ng-if="sent.receiver != 'undefined'">
                 {{sent.reciver.receiver}}
