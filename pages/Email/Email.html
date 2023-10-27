@@ -1,5 +1,6 @@
 <div class="container-fluid m-5" >
     <div>
+      <i class="bi bi-arrow-left-circle" ng-click="back()" style="font-size: 20px;">&nbsp;&nbsp;Back</i>
     </div>
   <div  class="mt-4">
 <div style="font-size: 20px;" class="d-flex fw-bold">
@@ -21,12 +22,17 @@
     <div class="d-flex  mt-5">
       <p ng-bind-html="body" style="font-size: 18px;"></p>
     </div>
+    <div class="d-flex justify-content-center align-items-center" ng-repeat="img in image">
+      <div class="card col-md-5">
+        <img src="https://10.21.84.204:8000/mail/media/{{ img }}" alt="" sizes="" srcset="" class="img-thumbnail">
+      </div>
+    </div>
       <div
         class="d-flex col-md-5 mt-5">
         <div class="card" ng-repeat="file in files">
           <div class="card-body">
             <a
-              ng-href="https://10.21.82.84:8000/mail/media/file/{{ file }}"
+              ng-href="https://10.21.84.204:8000/mail/media/{{ file }}"
               download="file"
               ng-click="download()"
               target="_blank"

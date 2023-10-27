@@ -136,10 +136,11 @@ myApp.controller(
           console.log(error);
         });
     };
-    $scope.show = function (id) {
+    $scope.show = function (id,self) {
       sharedDataService.setId(id);
       let data = {
         id: id,
+        self:self
       };
       $http
         .put(apiUrl + "/mail/readmail/", data, {

@@ -12,8 +12,12 @@
         <h2 class="accordion-header" ng-click="getUser(user.id)">
           <div class="d-flex">
             <div class="col-md-1 ms-4">
-              <button class="btn btn-outline-secondary" data-bs-toggle="modal"
-              data-bs-target="#exampleModal1">Add user</button>
+              <button
+                class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal1">
+                Add user
+              </button>
             </div>
             <button
             class="accordion-button collapsed"
@@ -24,7 +28,14 @@
             aria-controls="flush-collapseOne">
             {{user.group}}
           </button>
-        </div>
+          <div class="col-md-1 ms-4">
+            <button
+              class="btn btn-outline-secondary"
+              ng-click="removeGroup(user.id)">
+              Delete Group
+            </button>
+          </div>
+          </div>
         </h2>
         <div
           id="flush-collapseOne{{$index}}"
@@ -43,17 +54,19 @@
                 <p>{{use.email}}</p>
               </div>
               <div>
-                <button class="btn btn-outline-danger" ng-click="remove(use.id,user.id)">Remove</button>
+                <button
+                  class="btn btn-outline-danger"
+                  ng-click="remove(use.id,user.id)">
+                  Remove user
+                </button>
               </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
 
 <div
   class="modal"
@@ -65,7 +78,9 @@
     <div class="modal-content">
       <form action="" enctype="multipart/form-data" ng-submit="addNewUsers()">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModal1Label">Enter new user</h1>
+          <h1 class="modal-title fs-5" id="exampleModal1Label">
+            Enter new user
+          </h1>
           <button
             type="button"
             class="btn-close"
@@ -80,6 +95,7 @@
               type="text"
               id="formFile"
               ng-model="mail"
+              placeholder="Enter a valid user email"
               required />
           </div>
         </div>

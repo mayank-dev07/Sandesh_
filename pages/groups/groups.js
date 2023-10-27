@@ -62,7 +62,11 @@ myApp.controller("groupsMailController", function ($http, $scope, $state) {
           $scope.email = "";
         })
         .catch(function (error) {
-          console.log(error);
+          console.log(error); 
+          Swal.fire({
+            icon: 'error',
+            text: error.data.message,
+          })
         });
     } else {
       Swal.fire({

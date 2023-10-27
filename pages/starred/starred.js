@@ -129,11 +129,12 @@ myApp.controller("starredMailController", function ($http, $scope, $rootScope,sh
         console.log(error);
       });
   };
-  $scope.show = function (id) {
+  $scope.show = function (id,self) {
     sharedDataService.setId(id)
     $state.go('dashboard.Email')
         let data = {
           id: id,
+          self:self
         };
         $http
           .put(apiUrl + "/mail/readmail/", data, {

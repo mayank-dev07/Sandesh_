@@ -130,12 +130,13 @@ myApp.controller("archiveMailController",
             console.log(error)
           })
         }
-        $scope.show = function (id) {
+        $scope.show = function (id,self) {
           sharedDataService.setId(id)
           $state.go('dashboard.Email')
               console.log(id);
               let data = {
                 id: id,
+                self:self
               };
               $http
                 .put(apiUrl + "/mail/readmail/", data, {

@@ -34,9 +34,18 @@ myApp.controller("registrationController", [
         firstname: $scope.user.firstname,
         lastname: $scope.user.lastname,
       };
-      console.log(newData);
-      sharedDataFactory.setData(newData);
-      $state.go("registration.dob");
+      if($scope.user.firstname == "" || $scope.user.lastname == "" )
+      {
+        Swal.fire({
+          icon: 'error',
+          text: "enter valid name",
+        })
+      }
+      else{
+        console.log(newData);
+        sharedDataFactory.setData(newData);
+        $state.go("registration.dob");
+      }
     };
   },
 ]);
