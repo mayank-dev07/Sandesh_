@@ -91,7 +91,7 @@ myApp.controller("snoozeMailController", function ($scope, $http,$rootScope) {
             if(response.status == 200){
               new Noty({
                 theme: 'relax',
-                type: 'success',
+                type: 'info',
                 layout: 'topRight',
                 timeout: 2000,
                 text: response.data.message

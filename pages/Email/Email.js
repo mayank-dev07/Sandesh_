@@ -77,10 +77,11 @@ myApp.controller(
     $scope.back = function () {
       $window.history.back();
     };
+
     $scope.download = function(file){
       const link = document.createElement('a');
     link.setAttribute('target', '_blank');
-    link.setAttribute('href', 'https://10.21.80.161:8000/mail/media/' + file);
+    link.setAttribute('href', 'https://10.21.83.250:8000/mail/media/' + file);
     link.setAttribute('download', file);
     document.body.appendChild(link);
     link.click();

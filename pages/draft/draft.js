@@ -92,13 +92,13 @@ myApp.controller(
         })
         .then(function (response) {
           console.log(response);
-          if(response.status == 200){
+          if (response.status == 200) {
             new Noty({
-              theme: 'relax',
-              type: 'success',
-              layout: 'topRight',
+              theme: "relax",
+              type: "info",
+              layout: "topRight",
               timeout: 2000,
-              text: response.data.message
+              text: response.data.message,
             }).show();
           }
           draftMail($http, $scope);
@@ -145,11 +145,11 @@ myApp.controller(
           console.log(error);
         });
     };
-    $scope.show = function (id,self) {
+    $scope.show = function (id, self) {
       sharedDataService.setId(id);
       let data = {
         id: id,
-        self:self
+        self: self,
       };
       $http
         .put(apiUrl + "/mail/readmail/", data, {
@@ -182,8 +182,18 @@ myApp.controller(
       let id = sharedDataService.getId();
       console.log($scope.receive);
       let multiple = [];
-      email = $scope.receive;
-      console.log(email)
+      if(angular.isArray($scope.receive)){
+        for (let i = 0; i <$scope.receive.length; i++) {
+          let data = {
+            email: $scope.receive[i],
+          };
+          multiple.push(data);
+        }
+      }
+      else{  
+        email = $scope.receive.split(',');
+        console.log($scope.receive.split(','))
+        console.log(email);
       if (!email) {
         Swal.fire({
           icon: "error",
@@ -196,37 +206,34 @@ myApp.controller(
         };
         multiple.push(data);
       }
+    }
       console.log(multiple);
       id = id;
-      console.log($scope.send.body)
+      console.log($scope.send.body);
       let body = $scope.send.subject;
       let subject = $scope.send.body;
-      let formData = new FormData()
+      let formData = new FormData();
       console.log($scope.files);
       for (let i = 0; i < $scope.files.length; i++) {
         formData.append("file", $scope.files[i]);
       }
-      formData.append("id",id)
-      formData.append("mail",JSON.stringify(multiple))
-      formData.append("body",body)
-      formData.append("subject",subject)
-      console.log(formData)
+      formData.append("id", id);
+      formData.append("emails", JSON.stringify(multiple));
+      formData.append("body", body);
+      formData.append("subject", subject);
+      console.log(formData);
 
-      let data ={
-        id:id,
-        body:$scope.send.body
-      }
-      console.log(data)
-
-      $http.post(apiUrl + "/mail/draftedit/",formData,{
-        withCredentials:true
-      })
-      .then(function(response){
-        console.log(response)
-      })
-      .catch(function(error){
-        console.log(error)
-      })
+      $http
+        .post(apiUrl + "/mail/draftedit/", formData, {
+          headers: { "Content-Type": undefined },
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
       $scope.receive = "";
       $scope.send.subject = "";
@@ -234,7 +241,7 @@ myApp.controller(
       $scope.file = "";
       $scope.files = [];
       $scope.multiple = [];
-      console.log($scope.files);  
+      console.log($scope.files);
     };
 
     $scope.submitFiles = function () {
@@ -286,16 +293,16 @@ myApp.controller(
         })
         .then(function (response) {
           console.log(response);
-          if(response.status == 200){
+          if (response.status == 200) {
             new Noty({
-              theme: 'relax',
-              type: 'success',
-              layout: 'topRight',
+              theme: "relax",
+              type: "success",
+              layout: "topRight",
               timeout: 2000,
-              text: response.data.message
-          }).show();
+              text: response.data.message,
+            }).show();
           }
-          draftMail($http,$scope);
+          draftMail($http, $scope);
         })
         .catch(function (error) {
           console.log(error);

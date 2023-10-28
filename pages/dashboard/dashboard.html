@@ -14,7 +14,7 @@
             style="font-size: 22px"
             ng-click="toggleDiv()"></i>
           <img
-            src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png"
+            src="/images/2336fc5253d66329d27b49344a795a5d.png"
             alt=""
             class="img-fluid" />
         </div>
@@ -238,7 +238,7 @@
           <table class="table table-hover">
             <tbody>
               <tr
-                ng-repeat="mail in Mails | filter: { sendername: searchname }  "
+                ng-repeat="mail in Mails"
                 ng-class="{ 'table-primary': mail.details.read}"
                 ng-mouseover="row = mail.sender.id"
                 ng-mouseleave="row = -1">
