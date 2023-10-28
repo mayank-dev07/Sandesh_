@@ -100,6 +100,11 @@ myApp.config([
         templateUrl: "/pages/view/view.html",
         controller: "viewMailController",
       })
+      .state("dashboard.trash", {
+        url: "/trash",
+        templateUrl: "/pages/trash/trash.html",
+        controller: "trashMailController",
+      })
       .state("dashboard.snooze", {
         url: "/snooze",
         templateUrl: "/pages/snooze/snooze.html",

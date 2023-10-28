@@ -203,8 +203,8 @@ myApp.controller(
           multiple.push(data);
         }
       } else {
-        email = $scope.receive.split(",");
         console.log($scope.receive.split(","));
+        email = $scope.receive.split(",");
         console.log(email);
         if (!email) {
           Swal.fire({
