@@ -92,6 +92,15 @@ myApp.controller(
         })
         .then(function (response) {
           console.log(response);
+          if(response.status == 200){
+            new Noty({
+              theme: 'relax',
+              type: 'success',
+              layout: 'topRight',
+              timeout: 2000,
+              text: response.data.message
+            }).show();
+          }
           draftMail($http, $scope);
         })
         .catch(function (error) {
@@ -169,7 +178,7 @@ myApp.controller(
           console.log(error);
         });
     };
-    $scope.sendMail = function () {
+    $scope.editDraft = function () {
       let id = sharedDataService.getId();
       console.log($scope.receive);
       let multiple = [];
@@ -189,6 +198,7 @@ myApp.controller(
       }
       console.log(multiple);
       id = id;
+      console.log($scope.send.body)
       let body = $scope.send.subject;
       let subject = $scope.send.body;
       let formData = new FormData()
@@ -201,6 +211,22 @@ myApp.controller(
       formData.append("body",body)
       formData.append("subject",subject)
       console.log(formData)
+
+      let data ={
+        id:id,
+        body:$scope.send.body
+      }
+      console.log(data)
+
+      $http.post(apiUrl + "/mail/draftedit/",formData,{
+        withCredentials:true
+      })
+      .then(function(response){
+        console.log(response)
+      })
+      .catch(function(error){
+        console.log(error)
+      })
 
       $scope.receive = "";
       $scope.send.subject = "";
@@ -228,5 +254,61 @@ myApp.controller(
         });
       }
     };
+
+    $scope.modalParameters = function (id, self) {
+      data = {
+        id: id,
+        self: self,
+      };
+      console.log(data);
+    };
+
+    let time;
+    let t;
+
+    function getTwentyFourHourTime(T) {
+      var d = new Date("1/1/2023 " + T);
+      return d.getHours() + ":" + d.getMinutes();
+    }
+
+    $scope.Snooze = function () {
+      var Time = new Date($scope.time);
+      (data.date = formatDate($scope.date)),
+        (time = getTwentyFourHourTime(Time.toLocaleTimeString("it-IT"))),
+        (t = time.split(":"));
+      console.log(t);
+      data.hour = t[0];
+      data.min = t[1];
+      console.log(data);
+      $http
+        .put(apiUrl + "/mail/snoozed/", data, {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          if(response.status == 200){
+            new Noty({
+              theme: 'relax',
+              type: 'success',
+              layout: 'topRight',
+              timeout: 2000,
+              text: response.data.message
+          }).show();
+          }
+          draftMail($http,$scope);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      $scope.time = "";
+      $scope.date = "";
+    };
+    function formatDate(dob) {
+      var date = new Date(dob);
+      var year = date.getFullYear();
+      var month = String(date.getMonth() + 1).padStart(2, "0");
+      var day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
   }
 );

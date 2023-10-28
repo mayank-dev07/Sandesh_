@@ -34,8 +34,8 @@
               <div
                 class="d-flex"
                 data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasScrolling"
-            aria-controls="offcanvasScrolling"
+            data-bs-target="#offcanvasScrolling1"
+            aria-controls="offcanvasScrolling1"
             ng-click="show(draft.sender.id,draft.details.self)"
                 >
                 <div>
@@ -61,6 +61,10 @@
             <div
               class="d-flex justify-content-evenly align-items-center me-5"
               ng-show="row == draft.sender.id || draft.details.select">
+              <div class="px-2">
+                <i class="bi bi-alarm" data-bs-toggle="modal"
+                data-bs-target="#exampleModal5" ng-click="modalParameters(draft.sender.id,draft.details.self)"></i>
+              </div>
               <div class="px-2" ng-click="Archive(draft.sender.id,draft.details.self)">
                 <i class="bi bi-archive"></i>
               </div>
@@ -87,11 +91,11 @@
   data-bs-scroll="true"
   data-bs-backdrop="false"
   tabindex="-1"
-  id="offcanvasScrolling"
-  aria-labelledby="offcanvasScrollingLabel"
+  id="offcanvasScrolling1"
+  aria-labelledby="offcanvasScrolling1Label"
   style="height: 500px; width: 700px; bottom: 0px; top: auto">
   <div class="offcanvas-header" style="background-color: aliceblue">
-    <span class="offcanvas-title" id="offcanvasScrollingLabel"
+    <span class="offcanvas-title" id="offcanvasScrolling1Label"
       >New Message</span
     >
     <button
@@ -102,7 +106,7 @@
       aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <form ng-submit="sendMail()">
+    <form ng-submit="editDraft()">
       <table class="table">
         <tbody>
           <tr>
@@ -193,7 +197,7 @@
             <label for="formFile" class="form-label"></label>
             <input
               class="form-control"
-              accept="image/jpeg,image.png,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              accept="image/jpeg,image.png,.doc,.docx,application/msword,application/pdf"
               type="file"
               id="formFile"
               file-model="myFile"
@@ -221,3 +225,51 @@
 </div>
 
 
+<div
+class="modal fade"
+id="exampleModal5"
+tabindex="-1"
+aria-labelledby="exampleModal5Label"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <form action="" ng-submit="Snooze()">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModal5Label">
+          Snooze untill
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <label for="label">Date</label>
+          <input
+          type="date"
+          id="label"
+          class="form-control"
+          required
+          ng-model="date" 
+          min="{{ getCurrentDate() }}"/>
+          <label for="label">Time</label>
+          <input
+          type="time"
+          id="label"
+          class="form-control"
+          required
+          ng-model="time" />
+        </div>
+      <div class="modal-footer">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          data-bs-dismiss="modal">
+          Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

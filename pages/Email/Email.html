@@ -24,20 +24,42 @@
     </div>
     <div class="d-flex justify-content-center align-items-center" ng-repeat="img in image">
       <div class="card col-md-5">
-        <img src="https://10.21.84.204:8000/mail/media/{{ img }}" alt="" sizes="" srcset="" class="img-thumbnail">
+        <img src="https://10.21.80.161:8000/mail/media/{{ img }}" alt="" sizes="" srcset="" class="img-thumbnail">
       </div>
     </div>
       <div
         class="d-flex col-md-5 mt-5">
-        <div class="card" ng-repeat="file in files">
-          <div class="card-body">
-            <a
-              ng-href="https://10.21.84.204:8000/mail/media/{{ file }}"
-              download="file"
-              ng-click="download()"
-              target="_blank"
-              >{{file}}</a
-            >
+        <div class="mb-5" ng-repeat="file in documents">
+          <div class="card-body d-flex align-items-center">
+            <img src="/images/1199004.png" alt="" style="height: 40px;">
+            <div
+            style="text-decoration: none;"
+            ng-click="download(file)"
+            >{{file}}</div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex col-md-5 mt-5">
+        <div class="mb-5" ng-repeat="file in WordDocs">
+          <div class="card-body d-flex align-items-center">
+            <img src="/images/sm_5b33460fe6357.jpg" alt="" style="height: 40px;">
+            <div
+            style="text-decoration: none;"
+            ng-click="download(file)"
+            >{{file}}</div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex col-md-5 mt-5">
+        <div class="mb-5" ng-repeat="file in excelSheets">
+          <div class="card-body d-flex align-items-center">
+            <img src="/images/Microsoft_Office_Excel_(2019–present).svg.png" alt="" style="height: 40px;">
+            <div
+            style="text-decoration: none;"
+            ng-click="download(file)"
+            >{{file}}</div>
           </div>
         </div>
       </div>

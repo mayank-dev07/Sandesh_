@@ -365,7 +365,12 @@
           rows="8"
           style="border-style: none"></textarea>
       </div>
-      <div ng-repeat="file in files">Attached file:- {{file.name}}</div>
+      
+      <div>
+        <div ng-repeat="file in files">
+          Attached file:- <span>{{file.name}}</span>
+        </div>
+      </div>
 
       <div class="">
         <div class="d-flex justify-content-between align-items-center">

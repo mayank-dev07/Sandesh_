@@ -2,6 +2,9 @@ myApp.controller(
   "EmailMailController",
   function ($scope, $http, sharedDataService, $window, $document) {
     $scope.image = [];
+    $scope.documents = [];
+    $scope.WordDocs = [];
+    $scope.excelSheets = [];
     let id = sharedDataService.getId();
     console.log(id);
     $http
@@ -16,7 +19,7 @@ myApp.controller(
         } else {
           console.log(response.data[0].files);
           $scope.files = response.data[0].files;
-          $scope.body = response.data[0].sender.body;
+          $scope.body = response.data[0].sender.body.replace(/\n/g, '<br/>');
           $scope.subject = response.data[0].sender.subject;
           $scope.sendername = response.data[0].sender.sendername;
           var date = new Date(response.data[0].sender.time);
@@ -31,10 +34,21 @@ myApp.controller(
           console.log(arr.length);
           for (let j = 0; j < arr.length; j++) {
             if (arr[j] === "jpg" || arr[j] === "jpeg") {
-              $scope.image.push($scope.files[j / 2]);
-              // $scope.files.pop($scope.files[j-1])
+              $scope.image.push($scope.files[(j-1)/2]);
+            }
+            if (arr[j] === "pdf"){
+              $scope.documents.push($scope.files[(j-1)/2])
+            }
+            if(arr[j] === "doc" || arr[j] === "docx" ){
+              $scope.WordDocs.push($scope.files[(j-1)/2])
+            }
+            if( arr[j] === "xml"){
+              $scope.excelSheets.push($scope.files[(j-1)/2])
             }
           }
+          console.log($scope.WordDocs)
+          console.log($scope.excelSheets)
+          console.log($scope.documents)
           console.log($scope.image);
         }
       })
@@ -63,5 +77,14 @@ myApp.controller(
     $scope.back = function () {
       $window.history.back();
     };
+    $scope.download = function(file){
+      const link = document.createElement('a');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', 'https://10.21.80.161:8000/mail/media/' + file);
+    link.setAttribute('download', file);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    }
   }
 );

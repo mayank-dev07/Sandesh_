@@ -200,6 +200,7 @@ myApp.controller(
           title: "Add a file!",
         });
       }
+      angular.element(document.getElementById('formFile')).val(null);
     };
     
     $scope.draftMail = function () {
@@ -351,6 +352,15 @@ myApp.controller(
         })
         .then(function (response) {
           console.log(response);
+          if(response.status == 200){
+            new Noty({
+              theme: 'relax',
+              type: 'success',
+              layout: 'topRight',
+              timeout: 2000,
+              text: response.data.message
+            }).show();
+          }
           showMails($scope, $http);
         })
         .catch(function (error) {
@@ -538,6 +548,15 @@ myApp.controller(
         })
         .then(function (response) {
           console.log(response);
+          if(response.status == 200){
+            new Noty({
+              theme: 'relax',
+              type: 'success',
+              layout: 'topRight',
+              timeout: 2000,
+              text: response.data.message
+            }).show();
+          }
           showMails($scope, $http);
         })
         .catch(function (error) {
