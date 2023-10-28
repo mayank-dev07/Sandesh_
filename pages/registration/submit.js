@@ -28,7 +28,7 @@ myApp.controller("submitController", [
           console.log(error);
           new Noty({
             theme: 'relax',
-            type: 'success',
+            type: 'error',
             layout: 'topRight',
             timeout: 2000,
             text: error.data.message
