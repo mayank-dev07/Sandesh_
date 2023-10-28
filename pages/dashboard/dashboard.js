@@ -11,7 +11,9 @@ myApp.controller(
       .get(apiUrl + "/users/authentication/", {
         withCredentials: true,
       })
-      .then(function (response) {})
+      .then(function (response) {
+        console.log(response)
+      })
       .catch(function (error) {
         if ((error.status = 401)) {
           $location.path("/login");
@@ -95,21 +97,21 @@ myApp.controller(
           console.log(error);
         });
     }
-    $scope.sendLabel = function (id, index) {
-      console.log(id);
-      $http
-        .get(apiUrl + "/mail/childlabel/", {
-          withCredentials: true,
-          params: { id: id },
-        })
-        .then(function (response) {
-          console.log(response.data);
-          $scope.childLabel = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    };
+    // $scope.sendLabel = function (id, index) {
+    //   console.log(id);
+    //   $http
+    //     .get(apiUrl + "/mail/childlabel/", {
+    //       withCredentials: true,
+    //       params: { id: id },
+    //     })
+    //     .then(function (response) {
+    //       console.log(response.data);
+    //       $scope.childLabel = response.data;
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // };
 
     function validateEmailList(raw) {
       var emails = raw.split(",");
@@ -133,57 +135,56 @@ myApp.controller(
         let arr = [];
         arr = email.split(",");
         console.log(arr);
-      for (let i = 0; i < arr.length; i++) {
-        let data = {
-          email: arr[i],
-        };
-        multiple.push(data);
-      }
-      console.log(multiple);
-      
-      var subject = $scope.subject;
-      var body = $scope.text;
-      
-      var formData = new FormData();
-      console.log($scope.files);
-      for (let i = 0; i < $scope.files.length; i++) {
-        formData.append("file", $scope.files[i]);
-      }
-      formData.append("emails", JSON.stringify(multiple));
-      formData.append("subject", subject);
-      formData.append("body", body);
-      
-      console.log(formData);
-      
-      $http
-      .post(apiUrl + "/mail/mails/", formData, {
-          headers: { "Content-Type": undefined },
-          withCredentials: true,
-        })
-        .then(function (response) {
-          console.log(response);
-          Swal.fire(response.data.message, "success");
-          $scope.email = "";
-          $scope.subject = "";
-          $scope.text = "";
-          $scope.file = "";
-          $scope.files = [];
-          $scope.multiple = [];
-          console.log($scope.files);
-          $rootScope.$broadcast("mailSent");
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }
-      else{
-          Swal.fire({
+        for (let i = 0; i < arr.length; i++) {
+          let data = {
+            email: arr[i],
+          };
+          multiple.push(data);
+        }
+        console.log(multiple);
+
+        var subject = $scope.subject;
+        var body = $scope.text;
+
+        var formData = new FormData();
+        console.log($scope.files);
+        for (let i = 0; i < $scope.files.length; i++) {
+          formData.append("file", $scope.files[i]);
+        }
+        formData.append("emails", JSON.stringify(multiple));
+        formData.append("subject", subject);
+        formData.append("body", body);
+
+        console.log(formData);
+
+        $http
+          .post(apiUrl + "/mail/mails/", formData, {
+            headers: { "Content-Type": undefined },
+            withCredentials: true,
+          })
+          .then(function (response) {
+            console.log(response);
+            Swal.fire(response.data.message, "success");
+            $scope.email = "";
+            $scope.subject = "";
+            $scope.text = "";
+            $scope.file = "";
+            $scope.files = [];
+            $scope.multiple = [];
+            console.log($scope.files);
+            $rootScope.$broadcast("mailSent");
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        Swal.fire({
           icon: "error",
           title: "Enter valid email",
         });
       }
     };
-    
+
     $scope.submitFile = function () {
       $scope.file = $scope.myFile;
       if ($scope.file !== "") {
@@ -200,9 +201,9 @@ myApp.controller(
           title: "Add a file!",
         });
       }
-      angular.element(document.getElementById('formFile')).val(null);
+      angular.element(document.getElementById("formFile")).val(null);
     };
-    
+
     $scope.draftMail = function () {
       console.log($scope.email);
       let multiple = [];
@@ -352,13 +353,13 @@ myApp.controller(
         })
         .then(function (response) {
           console.log(response);
-          if(response.status == 200){
+          if (response.status == 200) {
             new Noty({
-              theme: 'relax',
-              type: 'info',
-              layout: 'topRight',
+              theme: "relax",
+              type: "info",
+              layout: "topRight",
               timeout: 2000,
-              text: response.data.message
+              text: response.data.message,
             }).show();
           }
           showMails($scope, $http);
@@ -494,17 +495,42 @@ myApp.controller(
           console.log(error);
         });
     };
+
+    let Labelid = "";
     $scope.EditLabels = function (id) {
       console.log(id);
+      Labelid = id;
       const data = $scope.parentLabel.find((label) => label.id == id);
       console.log(data);
       if (data) {
         $scope.edit = data.value;
-      } else {
-        const data = $scope.childLabel.find((label) => label.id == id);
-        console.log(data);
-        $scope.edit = data.value;
       }
+    };
+
+    $scope.editLabels = function () {
+      let data = {
+        id: Labelid,
+        name: $scope.edit,
+      };
+      console.log(data);
+      $http
+        .put(apiUrl + "/mail/updatelabel/", data, {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          new Noty({
+            theme: "relax",
+            type: "info",
+            layout: "topRight",
+            timeout: 2000,
+            text: "label edited",
+          }).show();
+          showlabel();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
 
     let data = {};
@@ -548,13 +574,13 @@ myApp.controller(
         })
         .then(function (response) {
           console.log(response);
-          if(response.status == 200){
+          if (response.status == 200) {
             new Noty({
-              theme: 'relax',
-              type: 'success',
-              layout: 'topRight',
+              theme: "relax",
+              type: "success",
+              layout: "topRight",
               timeout: 2000,
-              text: response.data.message
+              text: response.data.message,
             }).show();
           }
           showMails($scope, $http);
@@ -573,6 +599,53 @@ myApp.controller(
       var day = String(date.getDate()).padStart(2, "0");
       return `${year}-${month}-${day}`;
     }
+
+    let Self = "";
+    let mailId = "";
+
+    $scope.addLabel = function (self, id) {
+      console.log(self);
+      Self = self;
+      mailId = id;
+      $http
+        .get(apiUrl + "/mail/alllabels/", {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          $scope.allLabels = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+
+    $scope.insertMail = function () {
+      let data = {
+        labelid: $scope.list,
+        self: Self,
+        mailid: mailId,
+      };
+      console.log(data);
+      $http
+        .put(apiUrl + "/mail/emaillabel/", data, {
+          withCredentials: true,
+        })
+        .then(function (response) {
+          console.log(response);
+          showMails($scope, $http);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
+
+    // $scope.openLabel = function(id){
+    //   console.log(id)
+    //   sharedDataService.setId(id)
+    //   $state.go('dashboard.label')
+    //   id = ""
+    // }
   }
 );
 myApp.directive("fileModel", [

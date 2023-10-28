@@ -14,7 +14,7 @@
             style="font-size: 22px"
             ng-click="toggleDiv()"></i>
           <img
-            src="/images/2336fc5253d66329d27b49344a795a5d.png"
+            src="/images/48e4f7280ea6775e7ea0fe11906e2037.png"
             alt=""
             class="img-fluid" />
         </div>
@@ -142,13 +142,13 @@
           class="mt-3"
           ng-show="showDiv">
           <div ng-repeat="label in parentLabel">
-            <div class="col-md-10 d-flex justify-content-between" ng-click="sendLabel(label.id)">
+            <div class="col-md-10 d-flex justify-content-between">
               <ul class="col-md-12" style="list-style: none;">
                 <li>
                   <div class="d-flex justify-content-between">
                     <div>
                       <div>
-                        {{label.value}}
+                        <span ng-click="openLabel(label.id)">{{label.value}}</span>
                       </div>
                     </div>
                     <div>
@@ -176,7 +176,7 @@
                     </div>
                   </div>
                  </div>
-                  <ul ng-repeat="child in childLabel" style="list-style: none;">
+                  <!-- <ul ng-repeat="child in childLabel" style="list-style: none;">
                     <li ng-if="label.id == child.parent">
                       <div class="d-flex justify-content-between">
                         <div>
@@ -208,7 +208,7 @@
                         </div>
                       </div>
                     </li>
-                  </ul>
+                  </ul> -->
                 </li>
               </ul>
               <div class="navbar">
@@ -298,8 +298,12 @@
                         ng-click="unread(mail.sender.id, mail.details.self)"
                         ng-if="mail.details.read">
                         <i class="bi bi-envelope"></i>
-                      </div>
                     </div>
+                      <!-- <div class="px-2"
+                      >
+                      <i class="bi bi-tag"  data-bs-toggle="modal"
+                      data-bs-target="#exampleModal6" ng-click=addLabel(mail.details.self,mail.sender.id)></i>
+                    </div> -->
                   </div>
                 </td>
               </tr>
@@ -521,14 +525,14 @@
             class="form-control"
             required
             ng-model="label" />
-          <label for="nest" class="mt-2">Nest label under</label>
+          <!-- <label for="nest" class="mt-2">Nest label under</label>
           <select
             class="form-select"
             id="nest"
             ng-model="nest"
             ng-options="nest.id as nest.value for nest in parentLabel">
             <option value="" disabled>Select labels</option>
-          </select>
+          </select> -->
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
@@ -548,7 +552,7 @@ aria-labelledby="exampleModal4Label"
 aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content">
-    <form action="" ng-submit="addLabels()">
+    <form action="" ng-submit="editLabels()">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModal4Label">
           Edit label
@@ -617,6 +621,49 @@ aria-hidden="true">
           required
           ng-model="time" />
         </div>
+      <div class="modal-footer">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          data-bs-dismiss="modal">
+          Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+
+
+<div
+class="modal fade"
+id="exampleModal6"
+tabindex="-1"
+aria-labelledby="exampleModal6Label"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <form action="" ng-submit="insertMail()">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModal6Label">
+          Add to label
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="label">Please enter a label name:</label>
+          <select
+            class="form-select"
+            id="list"
+            ng-model="list"
+            ng-options="list.id as list.value for list in allLabels">
+            <option value="" disabled>Select labels</option>
+          </select>
+      </div>
       <div class="modal-footer">
         <button
           type="submit"
