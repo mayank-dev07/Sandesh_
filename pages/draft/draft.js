@@ -145,12 +145,16 @@ myApp.controller(
           console.log(error);
         });
     };
+
+    $scope.DraftFile = [];
+
     $scope.show = function (id, self) {
       sharedDataService.setId(id);
       let data = {
         id: id,
         self: self,
       };
+
       $http
         .put(apiUrl + "/mail/readmail/", data, {
           withCredentials: true,
@@ -159,7 +163,7 @@ myApp.controller(
           console.log(response);
           draftMail($http, $scope);
           $http
-            .get(apiUrl + "/mail/emaildetails/", {
+            .get(apiUrl + "/mail/draftdetails/", {
               withCredentials: true,
               params: { id: id },
             })
@@ -167,8 +171,17 @@ myApp.controller(
               console.log(response.data);
               $scope.receive = response.data[0].reciever;
               $scope.send = response.data[0].sender;
+              $scope.draftFile = response.data[0].files;
               console.log($scope.receive);
               console.log($scope.send);
+              console.log($scope.draftFile);
+              for (let h = 0; h < $scope.draftFile.length; h++) {
+                let dF = {
+                  file: $scope.draftFile[h],
+                };
+                $scope.DraftFile.push(dF);
+              }
+              console.log($scope.DraftFile);
             })
             .catch(function (error) {
               console.log(error);
@@ -182,31 +195,30 @@ myApp.controller(
       let id = sharedDataService.getId();
       console.log($scope.receive);
       let multiple = [];
-      if(angular.isArray($scope.receive)){
-        for (let i = 0; i <$scope.receive.length; i++) {
+      if (angular.isArray($scope.receive)) {
+        for (let i = 0; i < $scope.receive.length; i++) {
           let data = {
             email: $scope.receive[i],
           };
           multiple.push(data);
         }
-      }
-      else{  
-        email = $scope.receive.split(',');
-        console.log($scope.receive.split(','))
+      } else {
+        email = $scope.receive.split(",");
+        console.log($scope.receive.split(","));
         console.log(email);
-      if (!email) {
-        Swal.fire({
-          icon: "error",
-          title: "Enter valid email",
-        });
+        if (!email) {
+          Swal.fire({
+            icon: "error",
+            title: "Enter valid email",
+          });
+        }
+        for (let i = 0; i < email.length; i++) {
+          let data = {
+            email: email[i],
+          };
+          multiple.push(data);
+        }
       }
-      for (let i = 0; i < email.length; i++) {
-        let data = {
-          email: email[i],
-        };
-        multiple.push(data);
-      }
-    }
       console.log(multiple);
       id = id;
       console.log($scope.send.body);
@@ -241,6 +253,8 @@ myApp.controller(
       $scope.file = "";
       $scope.files = [];
       $scope.multiple = [];
+      $scope.DraftFile = [];
+
       console.log($scope.files);
     };
 

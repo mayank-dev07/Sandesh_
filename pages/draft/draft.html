@@ -143,6 +143,9 @@
           rows="8"
           style="border-style: none"></textarea>
       </div>
+      <div ng-repeat="file in DraftFile">
+        Attached file:- {{file.file}}
+      </div>
       <div ng-repeat="file in files">Attached file:- {{file.name}}</div>
 
       <div class="">
